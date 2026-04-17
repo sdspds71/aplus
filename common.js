@@ -8,6 +8,7 @@ const MENU_STRUCTURE = [
     items: [
       { id: 'SCR_019', label: '로그인', icon: '🔐', path: 'SCR_019.html' },
       { id: 'SCR_020', label: '메인화면', icon: '🏠', path: 'SCR_020.html' },
+      { id: 'SCR_000', label: '시스템구성도', icon: '🗂️', path: 'SCR_000.html' },
     ]
   },
   {
