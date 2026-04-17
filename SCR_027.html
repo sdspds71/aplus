@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_027 일일 환수 목록 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>시책 일보</span><span>›</span><span>일일 환수 목록</span></div>
+      <div class="page-title">일일 환수 목록</div>
+      <div class="page-subtitle">환수가 산출된 내역과 산출금액을 표시합니다 (보험회사+마감년월 단위)</div>
+    </div>
+  </div>
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-field"><label>마감년월</label><input type="month" class="form-control" value="2026-04" style="width:150px;"></div>
+      <div class="search-field"><label>보험회사</label><select class="form-control" style="width:150px;"><option>전체</option><option>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option></select></div>
+      <div class="search-field"><label>&nbsp;</label><div class="flex gap-2"><button class="btn btn-primary">🔍 조회</button><button class="btn btn-outline">초기화</button></div></div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
+    <div class="card" style="padding:14px 18px;"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">환수 대상 건수</div><div style="font-size:22px;font-weight:700;color:var(--primary);">4개사</div></div>
+    <div class="card" style="padding:14px 18px;"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">합계 환수 예상액</div><div style="font-size:22px;font-weight:700;color:var(--danger);font-family:'IBM Plex Mono',monospace;">41,200,000</div></div>
+    <div class="card" style="padding:14px 18px;"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">최종 산출일시</div><div style="font-size:16px;font-weight:600;color:var(--text-secondary);font-family:'IBM Plex Mono',monospace;">2026-04-17 09:30</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">보험회사별 환수 목록</div><button class="btn btn-outline btn-sm">📥 엑셀 다운로드</button></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>No.</th><th>보험회사</th><th>마감년월</th><th class="text-right">환수 계약 건수</th><th class="text-right">환수 예상액 (원)</th><th>산출일시</th><th>처리</th></tr></thead>
+        <tbody>
+          <tr><td class="font-mono text-muted">1</td><td><span class="badge badge-primary">삼성생명</span></td><td class="font-mono">2026-04</td><td class="text-right font-mono">38건</td><td class="text-right font-mono" style="color:var(--danger);font-weight:600;">12,300,000</td><td class="text-muted text-sm">2026-04-17 09:30</td><td><button class="btn btn-ghost btn-sm" onclick="location.href='SCR_028.html'">상세</button></td></tr>
+          <tr><td class="font-mono text-muted">2</td><td><span class="badge badge-primary">한화생명</span></td><td class="font-mono">2026-04</td><td class="text-right font-mono">24건</td><td class="text-right font-mono" style="color:var(--danger);font-weight:600;">8,900,000</td><td class="text-muted text-sm">2026-04-16 18:00</td><td><button class="btn btn-ghost btn-sm" onclick="location.href='SCR_028.html'">상세</button></td></tr>
+          <tr><td class="font-mono text-muted">3</td><td><span class="badge badge-primary">교보생명</span></td><td class="font-mono">2026-04</td><td class="text-right font-mono">45건</td><td class="text-right font-mono" style="color:var(--danger);font-weight:600;">15,400,000</td><td class="text-muted text-sm">2026-04-16 18:00</td><td><button class="btn btn-ghost btn-sm" onclick="location.href='SCR_028.html'">상세</button></td></tr>
+          <tr><td class="font-mono text-muted">4</td><td><span class="badge badge-primary">NH농협생명</span></td><td class="font-mono">2026-04</td><td class="text-right font-mono">12건</td><td class="text-right font-mono" style="color:var(--danger);font-weight:600;">4,600,000</td><td class="text-muted text-sm">2026-04-15 09:00</td><td><button class="btn btn-ghost btn-sm" onclick="location.href='SCR_028.html'">상세</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="margin-top:12px;padding:10px 14px;background:#FDF2F8;border:1px solid #F8BBD9;border-radius:var(--radius);font-size:12px;color:var(--danger);">
+    ℹ️ 환수는 여러 시책에서 발생하므로 보험회사+마감년월 단위로 합산하여 표시됩니다.
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_027');</script>
+</body></html>

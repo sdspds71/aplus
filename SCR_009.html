@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_009 환수 상세정보 등록 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+<style>
+.reclaim-table th{background:#FEF2E8;color:#C0392B;}
+.reclaim-table td input{width:70px;height:26px;padding:0 6px;border:1px solid var(--border);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right;outline:none;}
+.reclaim-table td input:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><a href="SCR_008.html">환수기준 관리</a><span>›</span><span>환수 상세정보 등록</span></div>
+      <div class="page-title">환수 상세정보 등록</div>
+      <div class="page-subtitle">SCR_009 · 보험회사별 회차별 환수율을 등록합니다</div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-header"><div class="card-title">기본정보</div></div>
+    <div class="form-grid form-grid-3">
+      <div class="form-row"><label class="required">보험회사</label><select class="form-control"><option>삼성생명</option><option>한화생명</option><option>교보생명</option></select></div>
+      <div class="form-row"><label class="required">환수기준명</label><input type="text" class="form-control" value="삼성생명 표준 환수기준"></div>
+      <div class="form-row"><label>적용시작월</label><input type="month" class="form-control" value="2024-01"></div>
+      <div class="form-row"><label>적용종료월</label><input type="month" class="form-control" value="9999-12"></div>
+      <div class="form-row"><label class="required">시작 회차</label>
+        <div class="flex gap-2 items-center"><input type="number" class="form-control" value="2" style="width:80px;"> <span class="text-muted text-sm">회차</span></div>
+      </div>
+      <div class="form-row"><label class="required">종료 회차</label>
+        <div class="flex gap-2 items-center"><input type="number" class="form-control" value="24" style="width:80px;"> <span class="text-muted text-sm">회차</span>
+        <button class="btn btn-accent btn-sm" style="white-space:nowrap;">Grid 생성</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">회차별 환수율</div><span class="text-muted text-sm">시작/종료 회차 입력 후 'Grid 생성' 버튼을 클릭하세요. 단위: %</span></div>
+    <div class="table-wrap reclaim-table">
+      <table>
+        <thead><tr><th>회차</th><th>환수율 (%)</th><th>회차</th><th>환수율 (%)</th><th>회차</th><th>환수율 (%)</th><th>회차</th><th>환수율 (%)</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="font-mono text-center">2회</td><td class="text-center"><input type="text" value="100.0"></td>
+            <td class="font-mono text-center">3회</td><td class="text-center"><input type="text" value="100.0"></td>
+            <td class="font-mono text-center">4회</td><td class="text-center"><input type="text" value="90.0"></td>
+            <td class="font-mono text-center">5회</td><td class="text-center"><input type="text" value="80.0"></td>
+          </tr>
+          <tr>
+            <td class="font-mono text-center">6회</td><td class="text-center"><input type="text" value="70.0"></td>
+            <td class="font-mono text-center">7회</td><td class="text-center"><input type="text" value="60.0"></td>
+            <td class="font-mono text-center">8회</td><td class="text-center"><input type="text" value="50.0"></td>
+            <td class="font-mono text-center">9회</td><td class="text-center"><input type="text" value="40.0"></td>
+          </tr>
+          <tr>
+            <td class="font-mono text-center">10회</td><td class="text-center"><input type="text" value="30.0"></td>
+            <td class="font-mono text-center">11회</td><td class="text-center"><input type="text" value="20.0"></td>
+            <td class="font-mono text-center">12회</td><td class="text-center"><input type="text" value="10.0"></td>
+            <td class="font-mono text-center">13~24회</td><td class="text-center"><input type="text" value="0.0"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button class="btn btn-outline" onclick="location.href='SCR_008.html'">← 목록으로</button>
+    <div class="flex gap-2"><button class="btn btn-outline">취소</button><button class="btn btn-primary">저장</button></div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_008');</script>
+</body></html>

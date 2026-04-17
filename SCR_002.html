@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_002 원수사 시책 등록 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><a href="SCR_001.html">원수사 시책목록</a><span>›</span><span>원수사 시책 등록</span></div>
+      <div class="page-title">원수사 시책 등록</div>
+      <div class="page-subtitle">SCR_002 · 원수사 시책목록에서 등록 버튼 클릭 시 이 화면으로 이동합니다 (또는 팝업으로 표시)</div>
+    </div>
+    <div class="page-header-right">
+      <button class="btn btn-outline" onclick="location.href='SCR_001.html'">← 목록으로</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">기본정보</div></div>
+    <div class="form-grid form-grid-3" style="margin-bottom:20px;">
+      <div class="form-row"><label class="required">업적년월</label><input type="month" class="form-control" value="2026-04"></div>
+      <div class="form-row"><label class="required">보험회사</label>
+        <select class="form-control"><option value="">선택</option><option>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option><option>미래에셋생명</option></select>
+      </div>
+      <div class="form-row"><label class="required">시책명</label><input type="text" class="form-control" placeholder="시책명을 입력하세요"></div>
+    </div>
+
+    <div class="card-header" style="margin-top:8px;"><div class="card-title">시책 내용</div></div>
+    <div class="form-row" style="margin-bottom:16px;">
+      <label>본문</label>
+      <textarea class="form-control" rows="12" placeholder="시책 내용을 상세히 입력하세요
+
+예시:
+■ 적용대상: GA(법인보험대리점) 소속 설계사
+■ 적용상품: 종신보험, CI보험, 건강보험
+■ 지급기준: 월납환산 초회보험료 기준
+■ 지급시기: 익월 25일
+■ 지급대상: 정상유지 계약건에 한함 (2회차 이후)
+■ 환수기준: 별도 환수기준 참고"></textarea>
+    </div>
+
+    <div class="card-header" style="margin-top:8px;"><div class="card-title">첨부파일</div></div>
+    <div style="border:2px dashed var(--border);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;margin-bottom:8px;" onclick="alert('파일선택')">
+      <div style="font-size:32px;margin-bottom:8px;">📎</div>
+      <div style="font-size:14px;font-weight:600;color:var(--primary);margin-bottom:4px;">파일을 드래그하거나 클릭하여 업로드</div>
+      <div style="font-size:12px;color:var(--text-muted);">PDF, Excel, 이미지 등 · 파일당 최대 10MB · 최대 5개</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;">
+        <span>📄</span><span style="flex:1;">삼성생명_2604_GA시책기준.pdf</span>
+        <span class="text-muted text-sm">1.2MB</span>
+        <button class="btn btn-ghost btn-sm" style="color:var(--danger);">삭제</button>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;padding:10px 14px;background:var(--accent-light);border-radius:var(--radius);font-size:12px;color:var(--accent);">
+      ℹ️ 월초에 등록을 하면 이후 수정/삭제는 거의 없습니다. 등록 전 내용을 충분히 검토해 주세요.
+    </div>
+  </div>
+
+  <div class="flex justify-between mt-4">
+    <button class="btn btn-outline" onclick="location.href='SCR_001.html'">취소</button>
+    <div class="flex gap-2">
+      <button class="btn btn-outline">임시저장</button>
+      <button class="btn btn-primary" onclick="alert('저장 완료');location.href='SCR_001.html'">저장</button>
+    </div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_001');</script>
+</body></html>

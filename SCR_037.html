@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_037 결과 송신 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+.send-method-card {
+  border: 2px solid var(--border); border-radius: var(--radius-lg);
+  padding: 20px; cursor: pointer; transition: all .2s; text-align: center;
+}
+.send-method-card.selected { border-color: var(--accent); background: var(--accent-light); }
+.send-method-card:hover { border-color: var(--accent); }
+.send-icon { font-size: 32px; margin-bottom: 10px; }
+.send-title { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+.send-desc { font-size: 12px; color: var(--text-muted); }
+.log-item { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--border-light); font-size:13px; }
+.log-item:last-child { border-bottom:none; }
+.log-time { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-muted); white-space:nowrap; margin-top:2px; }
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>시책 마감</span><span>›</span><span>결과 송신</span></div>
+        <div class="page-title">결과 송신</div>
+        <div class="page-subtitle">마감이 완료된 시책결과를 수수료(SALES Plus) 시스템으로 전송합니다</div>
+      </div>
+    </div>
+
+    <!-- 마감 확인 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><div class="card-title">송신 대상 마감년월 선택</div></div>
+      <div class="flex gap-3 items-center">
+        <div class="search-field"><label>마감년월</label><input type="month" class="form-control" value="2026-03" style="width:150px;"></div>
+        <div class="search-field"><label>&nbsp;</label><button class="btn btn-primary">조회</button></div>
+      </div>
+    </div>
+
+    <!-- 마감 상태 확인 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><div class="card-title">2026년 03월 마감 상태</div></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+        <div style="padding:14px 18px;border-right:1px solid var(--border);">
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">마감 확정 여부</div>
+          <div><span class="badge badge-success" style="font-size:13px;">✅ 확정 완료</span></div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">2026-04-10 14:30</div>
+        </div>
+        <div style="padding:14px 18px;border-right:1px solid var(--border);">
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">지급 합계액</div>
+          <div style="font-size:16px;font-weight:700;color:var(--accent);font-family:'IBM Plex Mono',monospace;">298,700,000</div>
+        </div>
+        <div style="padding:14px 18px;border-right:1px solid var(--border);">
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">환수 합계액</div>
+          <div style="font-size:16px;font-weight:700;color:var(--danger);font-family:'IBM Plex Mono',monospace;">38,850,000</div>
+        </div>
+        <div style="padding:14px 18px;">
+          <div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">이전 송신 여부</div>
+          <div><span class="badge badge-muted">미송신</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 송신 방법 선택 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><div class="card-title">송신 방법 선택</div><span class="text-muted text-sm">※ FTP 전송 or 엑셀 다운로드 방식은 협의에 의해 결정</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
+        <div class="send-method-card selected" onclick="selectMethod(this, 'ftp')">
+          <div class="send-icon">📡</div>
+          <div class="send-title">FTP 자동 전송</div>
+          <div class="send-desc">SALES Plus 시스템으로 FTP를 통해 결과파일을 자동 전송합니다</div>
+          <div style="margin-top:10px;font-size:11px;color:var(--accent);font-weight:600;">▶ 협의 결정 필요</div>
+        </div>
+        <div class="send-method-card" onclick="selectMethod(this, 'excel')">
+          <div class="send-icon">📊</div>
+          <div class="send-title">엑셀 다운로드 → 수동 업로드</div>
+          <div class="send-desc">결과 엑셀파일을 다운로드하여 SALES Plus 시스템에 수동으로 업로드합니다</div>
+          <div style="margin-top:10px;font-size:11px;color:var(--text-muted);font-weight:600;">▶ 협의 결정 필요</div>
+        </div>
+      </div>
+
+      <!-- FTP 설정 (선택됐을 때) -->
+      <div id="ftp-config" style="padding:16px;background:#FAFCFF;border:1px solid var(--border);border-radius:var(--radius);">
+        <div style="font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:12px;">FTP 연결 정보</div>
+        <div class="form-grid form-grid-3">
+          <div class="form-row"><label>FTP 서버</label><input type="text" class="form-control" value="ftp.salesplus.co.kr" readonly style="background:#f8fafd;"></div>
+          <div class="form-row"><label>포트</label><input type="text" class="form-control" value="21" readonly style="background:#f8fafd;"></div>
+          <div class="form-row"><label>전송 경로</label><input type="text" class="form-control" value="/upload/sichek/" readonly style="background:#f8fafd;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 송신 실행 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><div class="card-title">송신 실행</div></div>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <button class="btn btn-primary btn-lg" onclick="if(confirm('2026년 03월 시책결과를 SALES Plus로 송신합니까?'))alert('송신 완료')">
+          📡 FTP 전송 실행
+        </button>
+        <button class="btn btn-outline btn-lg">📥 엑셀 다운로드</button>
+        <div style="font-size:12px;color:var(--text-muted);">마감 확정된 데이터만 송신 가능합니다</div>
+      </div>
+    </div>
+
+    <!-- 송신 이력 -->
+    <div class="card">
+      <div class="card-header"><div class="card-title">송신 이력</div></div>
+      <div>
+        <div class="log-item">
+          <div class="log-time">2026-03-10<br>15:22</div>
+          <div>
+            <span class="badge badge-success" style="margin-bottom:4px;">FTP 전송 성공</span>
+            <div>2026년 02월 마감결과 → SALES Plus FTP 전송 완료 (지급: 281,100,000원 / 환수: 29,200,000원)</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">처리자: 박동수 · 파일: SICHEK_202602_RESULT.xlsx</div>
+          </div>
+        </div>
+        <div class="log-item">
+          <div class="log-time">2026-02-10<br>14:55</div>
+          <div>
+            <span class="badge badge-success" style="margin-bottom:4px;">FTP 전송 성공</span>
+            <div>2026년 01월 마감결과 → SALES Plus FTP 전송 완료 (지급: 288,200,000원 / 환수: 30,100,000원)</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">처리자: 장수연 · 파일: SICHEK_202601_RESULT.xlsx</div>
+          </div>
+        </div>
+        <div class="log-item">
+          <div class="log-time">2025-12-10<br>16:30</div>
+          <div>
+            <span class="badge badge-danger" style="margin-bottom:4px;">FTP 전송 실패</span>
+            <span class="badge badge-success" style="margin-bottom:4px;margin-left:4px;">재전송 성공</span>
+            <div>2025년 11월 마감결과 → FTP 오류 후 재전송 성공</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">처리자: 장수연 · 파일: SICHEK_202511_RESULT.xlsx</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_037');
+function selectMethod(el, type) {
+  document.querySelectorAll('.send-method-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('ftp-config').style.display = type === 'ftp' ? 'block' : 'none';
+}
+</script>
+</body>
+</html>

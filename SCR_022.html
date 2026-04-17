@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_022 인사정보 조회 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>입수 데이터</span><span>›</span><span>인사정보 조회</span></div>
+      <div class="page-title">인사정보 조회</div>
+      <div class="page-subtitle">마감년월 기준 인사정보 List 조회 (입수데이터 확인용, 상세조회 없음)</div>
+    </div>
+    <div class="page-header-right"><button class="btn btn-outline btn-sm">📥 엑셀 다운로드</button></div>
+  </div>
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-field"><label>마감년월</label><input type="month" class="form-control" value="2026-04" style="width:150px;"></div>
+      <div class="search-field"><label>사번/이름</label><input type="text" class="form-control" placeholder="사번 또는 이름" style="width:150px;"></div>
+      <div class="search-field"><label>소속 지점</label><input type="text" class="form-control" placeholder="지점명" style="width:130px;"></div>
+      <div class="search-field"><label>재직상태</label><select class="form-control" style="width:100px;"><option>전체</option><option>재직</option><option>휴직</option><option>퇴직</option></select></div>
+      <div class="search-field"><label>&nbsp;</label><div class="flex gap-2"><button class="btn btn-primary">🔍 조회</button><button class="btn btn-outline">초기화</button></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">조회 결과 <span style="color:var(--text-muted);font-weight:400;font-size:13px;">총 248명</span></div>
+      <span class="badge badge-muted">마감년월: 2026-04</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>사번</th><th>이름</th><th>직급</th><th>소속지점</th><th>직책</th><th>입사일</th><th>재직상태</th><th>연락처</th></tr></thead>
+        <tbody>
+          <tr><td class="font-mono">EMP_001</td><td>장수연</td><td>대리</td><td>강남지점</td><td>설계사</td><td class="font-mono text-sm">2022-03-01</td><td><span class="badge badge-success">재직</span></td><td class="text-muted text-sm">010-1234-5678</td></tr>
+          <tr><td class="font-mono">EMP_002</td><td>박동수</td><td>과장</td><td>수원지점</td><td>팀장</td><td class="font-mono text-sm">2018-07-01</td><td><span class="badge badge-success">재직</span></td><td class="text-muted text-sm">010-2345-6789</td></tr>
+          <tr><td class="font-mono">EMP_003</td><td>김영희</td><td>사원</td><td>강북지점</td><td>설계사</td><td class="font-mono text-sm">2024-01-15</td><td><span class="badge badge-success">재직</span></td><td class="text-muted text-sm">010-3456-7890</td></tr>
+          <tr><td class="font-mono">EMP_004</td><td>이철수</td><td>차장</td><td>서울본점</td><td>부장</td><td class="font-mono text-sm">2015-04-01</td><td><span class="badge badge-warning">휴직</span></td><td class="text-muted text-sm">010-4567-8901</td></tr>
+          <tr><td class="font-mono">EMP_005</td><td>최지연</td><td>사원</td><td>해운대지점</td><td>설계사</td><td class="font-mono text-sm">2025-09-01</td><td><span class="badge badge-success">재직</span></td><td class="text-muted text-sm">010-5678-9012</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;padding:10px 14px;background:var(--accent-light);border-radius:var(--radius);font-size:12px;color:var(--accent);">ℹ️ 이 화면은 입수데이터 확인용입니다. 상세 조회는 제공되지 않습니다.</div>
+    <div class="pagination"><button class="page-btn">‹</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">›</button></div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_022');</script>
+</body></html>

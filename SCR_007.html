@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_007 상세정보 Step3 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+.mapping-row { display:grid; grid-template-columns:1fr 40px 1fr; gap:12px; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-light); }
+.mapping-row:last-child { border-bottom:none; }
+.arrow { text-align:center; font-size:18px; color:var(--text-muted); }
+.mapping-label { font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.4px; }
+.cond-card { background:#FAFCFF; border:1px solid var(--border); border-radius:var(--radius); padding:14px; margin-bottom:10px; }
+.cond-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.cond-label { font-size:12px; color:var(--text-muted); white-space:nowrap; }
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><a href="SCR_003.html">지급기준 관리</a><span>›</span><span>상세정보 Step3</span></div>
+        <div class="page-title">시책 지급기준 — 상세정보 Step3</div>
+        <div class="page-subtitle">삼성생명 · 종신 GA시책 (04월) · 원수사 시책기준을 내부 기준으로 정의합니다</div>
+      </div>
+    </div>
+
+    <div class="step-wizard">
+      <div class="step-item done"><div class="step-num">✓</div><div class="step-info"><div class="step-label">SCR_004</div><div class="step-title">기본정보 등록</div></div></div>
+      <div class="step-item done"><div class="step-num">✓</div><div class="step-info"><div class="step-label">SCR_005</div><div class="step-title">상세정보 Step1</div></div></div>
+      <div class="step-item done"><div class="step-num">✓</div><div class="step-info"><div class="step-label">SCR_006</div><div class="step-title">상세정보 Step2</div></div></div>
+      <div class="step-item active"><div class="step-num">4</div><div class="step-info"><div class="step-label">SCR_007</div><div class="step-title">상세정보 Step3</div></div></div>
+    </div>
+
+    <!-- 원수사 기준 참조 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><div class="card-title">참조 원수사 시책기준</div></div>
+      <div style="background:#F4F7FB;border-radius:var(--radius);padding:14px 18px;font-size:13px;line-height:1.9;border:1px solid var(--border);">
+        <div class="flex gap-3" style="flex-wrap:wrap;margin-bottom:8px;">
+          <span><span class="text-muted">보험회사:</span> <strong>삼성생명</strong></span>
+          <span><span class="text-muted">업적년월:</span> <strong class="font-mono">2026-04</strong></span>
+          <span><span class="text-muted">시책명:</span> <strong>2026년 4월 GA 시책 지급 기준 (종신/CI/건강)</strong></span>
+        </div>
+        <div style="font-size:12px;color:var(--text-secondary);">
+          ■ 적용상품: 종신보험, CI보험, 건강보험 &nbsp;|&nbsp; ■ 지급기준: 월납환산 초회보험료 기준 &nbsp;|&nbsp; ■ 지급시기: 익월 25일
+        </div>
+      </div>
+    </div>
+
+    <!-- 항목 매핑 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><div class="card-title">원수사 항목 → 내부 코드 매핑</div>
+        <span class="text-muted text-sm">원수사 엑셀의 표현을 내부 표준코드로 연결합니다</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px;">
+        <div class="mapping-label">원수사 표현 (이음동의어 포함)</div>
+        <div class="mapping-label">내부 표준 코드/명칭</div>
+      </div>
+      <div class="mapping-row">
+        <div>
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px;">상품 구분</div>
+          <div class="flex gap-2 flex-wrap">
+            <span class="badge badge-muted">종신</span><span class="badge badge-muted">종신보험</span><span class="badge badge-muted">LIFE</span>
+          </div>
+          <input type="text" class="form-control" style="margin-top:6px;width:100%;font-size:12px;" placeholder="원수사 표현 추가...">
+        </div>
+        <div class="arrow">→</div>
+        <div>
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px;">내부 코드</div>
+          <select class="form-control"><option>PRD_LIFE · 종신보험</option><option>PRD_CI · CI보험</option><option>PRD_HEALTH · 건강보험</option></select>
+        </div>
+      </div>
+      <div class="mapping-row">
+        <div>
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px;">납기 구분</div>
+          <div class="flex gap-2 flex-wrap">
+            <span class="badge badge-muted">10년납</span><span class="badge badge-muted">10年</span><span class="badge badge-muted">PAY10</span>
+          </div>
+          <input type="text" class="form-control" style="margin-top:6px;width:100%;font-size:12px;" placeholder="원수사 표현 추가...">
+        </div>
+        <div class="arrow">→</div>
+        <div>
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px;">내부 코드</div>
+          <select class="form-control"><option>PAY_10 · 10년납</option><option>PAY_15 · 15년납</option><option>PAY_20 · 20년납</option></select>
+        </div>
+      </div>
+      <div class="mapping-row">
+        <div>
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px;">지급 구분</div>
+          <div class="flex gap-2 flex-wrap">
+            <span class="badge badge-muted">GA시책</span><span class="badge badge-muted">시책지원금</span>
+          </div>
+          <input type="text" class="form-control" style="margin-top:6px;width:100%;font-size:12px;" placeholder="원수사 표현 추가...">
+        </div>
+        <div class="arrow">→</div>
+        <div>
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px;">내부 코드</div>
+          <select class="form-control"><option>PAY_GA · GA시책지급</option><option>PAY_ENV · 환경지원금</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 산출 조건 정의 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">산출 조건 정의</div>
+        <button class="btn btn-outline btn-sm">+ 조건 추가</button>
+      </div>
+      <div class="cond-card">
+        <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:10px;">조건 1 — 기본 지급 조건</div>
+        <div class="cond-row">
+          <span class="cond-label">계약 상태</span>
+          <select class="form-control" style="width:140px;"><option>정상 유지</option><option>실효</option><option>해지</option></select>
+          <span class="cond-label">이상 유지 회차</span>
+          <input type="number" class="form-control" value="2" style="width:70px;">
+          <span class="cond-label">회차</span>
+        </div>
+      </div>
+      <div class="cond-card">
+        <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:10px;">조건 2 — 설계사 자격 조건</div>
+        <div class="cond-row">
+          <span class="cond-label">활동 구분</span>
+          <select class="form-control" style="width:140px;"><option>정상 활동</option><option>휴직</option><option>전체</option></select>
+          <span class="cond-label">소속 기간</span>
+          <input type="number" class="form-control" value="1" style="width:70px;">
+          <span class="cond-label">개월 이상</span>
+        </div>
+      </div>
+      <div style="margin-top:12px;">
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:var(--text-secondary);">산출 메모</div>
+        <textarea class="form-control" rows="3" placeholder="산출 로직에 대한 특이사항, 주의사항 등을 메모합니다">익월 25일 지급. 정상유지 2회차 이상 계약건에 한해 지급. 방카채널 제외.</textarea>
+      </div>
+    </div>
+
+    <div class="flex justify-between mt-4">
+      <button class="btn btn-outline" onclick="location.href='SCR_006.html'">← 이전</button>
+      <div class="flex gap-2">
+        <button class="btn btn-outline">임시저장</button>
+        <button class="btn btn-success" onclick="if(confirm('저장 후 완료 처리합니까?')) location.href='SCR_003.html'">✅ 저장 완료 → 목록으로</button>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_003');
+</script>
+</body>
+</html>

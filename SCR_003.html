@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_003 지급기준 관리 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>기준관리</span><span>›</span><span>시책 지급기준 관리</span></div>
+        <div class="page-title">시책 지급기준 관리</div>
+        <div class="page-subtitle">시책 지급기준을 조회하고 등록합니다 | 처리단계: 작성중 → 산출 → 확정</div>
+      </div>
+      <div class="page-header-right">
+        <button class="btn btn-primary" onclick="location.href='SCR_004.html'">+ 신규 등록</button>
+      </div>
+    </div>
+
+    <!-- 검색 -->
+    <div class="search-bar">
+      <div class="search-row">
+        <div class="search-field">
+          <label>업적년월</label>
+          <input type="month" class="form-control" value="2026-04" style="width:150px;">
+        </div>
+        <div class="search-field">
+          <label>보험회사</label>
+          <select class="form-control" style="width:150px;">
+            <option value="">전체</option>
+            <option>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label>시책명</label>
+          <input type="text" class="form-control" placeholder="시책명 검색" style="width:200px;">
+        </div>
+        <div class="search-field">
+          <label>처리단계</label>
+          <select class="form-control" style="width:120px;">
+            <option value="">전체</option>
+            <option>작성중</option><option>산출</option><option>확정</option>
+          </select>
+        </div>
+        <div class="search-field" style="justify-content:flex-end;">
+          <label>&nbsp;</label>
+          <div class="flex gap-2">
+            <button class="btn btn-primary">🔍 조회</button>
+            <button class="btn btn-outline">초기화</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 목록 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">조회 결과 <span style="color:var(--text-muted);font-weight:400;font-size:13px;">총 8건</span></div>
+        <div class="flex gap-2">
+          <button class="btn btn-outline btn-sm">📥 엑셀 다운로드</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:50px;">No.</th>
+              <th>업적년월</th>
+              <th>보험회사</th>
+              <th>시책명</th>
+              <th>환수기준</th>
+              <th>처리단계</th>
+              <th>최종수정</th>
+              <th style="width:120px;">처리</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-muted font-mono">1</td>
+              <td class="font-mono">2026-04</td>
+              <td><span class="badge badge-primary">삼성생명</span></td>
+              <td><a class="table-link" onclick="location.href='SCR_004.html'">종신 GA시책 (04월)</a></td>
+              <td class="text-muted font-mono text-sm">RCL_2024_001</td>
+              <td><span class="badge badge-success">확정</span></td>
+              <td class="text-muted text-sm">2026.04.10</td>
+              <td>
+                <button class="btn btn-ghost btn-sm" onclick="location.href='SCR_004.html'">상세</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-muted font-mono">2</td>
+              <td class="font-mono">2026-04</td>
+              <td><span class="badge badge-primary">삼성생명</span></td>
+              <td><a class="table-link" onclick="location.href='SCR_004.html'">CI보험 GA시책 (04월)</a></td>
+              <td class="text-muted font-mono text-sm">RCL_2024_001</td>
+              <td><span class="badge badge-primary">산출</span></td>
+              <td class="text-muted text-sm">2026.04.09</td>
+              <td>
+                <button class="btn btn-ghost btn-sm" onclick="location.href='SCR_004.html'">상세</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-muted font-mono">3</td>
+              <td class="font-mono">2026-04</td>
+              <td><span class="badge badge-primary">한화생명</span></td>
+              <td><a class="table-link" onclick="location.href='SCR_004.html'">한화 종합 GA시책 (04월)</a></td>
+              <td class="text-muted font-mono text-sm">RCL_2024_002</td>
+              <td><span class="badge badge-warning">작성중</span></td>
+              <td class="text-muted text-sm">2026.04.12</td>
+              <td>
+                <button class="btn btn-ghost btn-sm" onclick="location.href='SCR_004.html'">상세</button>
+                <button class="btn btn-ghost btn-sm" style="color:var(--danger)">삭제</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-muted font-mono">4</td>
+              <td class="font-mono">2026-04</td>
+              <td><span class="badge badge-primary">교보생명</span></td>
+              <td><a class="table-link" onclick="location.href='SCR_004.html'">교보 CI특약 집중 육성 시책</a></td>
+              <td class="text-muted font-mono text-sm">RCL_2024_003</td>
+              <td><span class="badge badge-warning">작성중</span></td>
+              <td class="text-muted text-sm">2026.04.11</td>
+              <td>
+                <button class="btn btn-ghost btn-sm" onclick="location.href='SCR_004.html'">상세</button>
+                <button class="btn btn-ghost btn-sm" style="color:var(--danger)">삭제</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-muted font-mono">5</td>
+              <td class="font-mono">2026-04</td>
+              <td><span class="badge badge-primary">NH농협생명</span></td>
+              <td><a class="table-link" onclick="location.href='SCR_004.html'">NH 건강보험 GA시책</a></td>
+              <td class="text-muted font-mono text-sm">RCL_2024_004</td>
+              <td><span class="badge badge-primary">산출</span></td>
+              <td class="text-muted text-sm">2026.04.08</td>
+              <td>
+                <button class="btn btn-ghost btn-sm" onclick="location.href='SCR_004.html'">상세</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="page-btn">‹</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">›</button>
+      </div>
+    </div>
+
+    <!-- 처리단계 안내 -->
+    <div style="margin-top:12px;padding:12px 16px;background:var(--accent-light);border-radius:var(--radius);font-size:12px;color:var(--accent);border:1px solid rgba(46,134,193,.2);">
+      ℹ️ <strong>처리단계 안내:</strong> <span style="color:var(--warning);font-weight:600;">작성중</span> — 삭제 가능 &nbsp;|&nbsp; <span style="color:var(--accent);font-weight:600;">산출</span> — 자동 산출 완료, 삭제 불가 &nbsp;|&nbsp; <span style="color:var(--success);font-weight:600;">확정</span> — 사용자 확정, 삭제/수정 불가
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_003');
+</script>
+</body>
+</html>

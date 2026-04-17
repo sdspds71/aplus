@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_008 환수기준 관리 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>기준관리</span><span>›</span><span>시책 환수기준 관리</span></div>
+      <div class="page-title">시책 환수기준 관리</div>
+      <div class="page-subtitle">환수기준을 조회하고 등록합니다</div>
+    </div>
+    <div class="page-header-right">
+      <button class="btn btn-primary" onclick="location.href='SCR_009.html'">+ 신규 등록</button>
+    </div>
+  </div>
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-field"><label>보험회사</label><select class="form-control" style="width:150px;"><option>전체</option><option>삼성생명</option><option>한화생명</option><option>교보생명</option></select></div>
+      <div class="search-field"><label>환수기준명</label><input type="text" class="form-control" placeholder="환수기준명 검색" style="width:200px;"></div>
+      <div class="search-field"><label>&nbsp;</label><button class="btn btn-primary">🔍 조회</button></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">조회 결과 <span style="color:var(--text-muted);font-weight:400;font-size:13px;">총 5건</span></div></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>No.</th><th>환수기준ID</th><th>보험회사</th><th>환수기준명</th><th>적용시작월</th><th>적용종료월</th><th>시작회차</th><th>종료회차</th><th>처리</th></tr></thead>
+        <tbody>
+          <tr><td class="text-muted font-mono">1</td><td class="font-mono text-sm">RCL_2024_001</td><td><span class="badge badge-primary">삼성생명</span></td><td><a class="table-link" onclick="location.href='SCR_009.html'">삼성생명 표준 환수기준</a></td><td class="font-mono">2024-01</td><td class="font-mono">9999-12</td><td class="text-center">2회</td><td class="text-center">24회</td><td><button class="btn btn-ghost btn-sm">상세</button></td></tr>
+          <tr><td class="text-muted font-mono">2</td><td class="font-mono text-sm">RCL_2024_002</td><td><span class="badge badge-primary">한화생명</span></td><td><a class="table-link" onclick="location.href='SCR_009.html'">한화생명 환수기준 (2024년~)</a></td><td class="font-mono">2024-01</td><td class="font-mono">9999-12</td><td class="text-center">2회</td><td class="text-center">24회</td><td><button class="btn btn-ghost btn-sm">상세</button></td></tr>
+          <tr><td class="text-muted font-mono">3</td><td class="font-mono text-sm">RCL_2024_003</td><td><span class="badge badge-primary">교보생명</span></td><td><a class="table-link" onclick="location.href='SCR_009.html'">교보생명 환수기준</a></td><td class="font-mono">2024-01</td><td class="font-mono">9999-12</td><td class="text-center">2회</td><td class="text-center">36회</td><td><button class="btn btn-ghost btn-sm">상세</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_008');</script>
+</body></html>

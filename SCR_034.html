@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_034 마감 환수 결과 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>시책 마감</span><span>›</span><span>마감 환수 결과</span></div>
+        <div class="page-title">마감 환수 결과</div>
+        <div class="page-subtitle">원수사 시책결과를 이용해 산출한 최종 환수금액 결과입니다 (출력항목 추후 현업 확인)</div>
+      </div>
+      <div class="page-header-right">
+        <button class="btn btn-outline btn-sm">📥 엑셀 다운로드</button>
+        <button class="btn btn-outline btn-sm">🖨 인쇄</button>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <div class="search-row">
+        <div class="search-field"><label>마감년월</label><input type="month" class="form-control" value="2026-03" style="width:150px;"></div>
+        <div class="search-field"><label>보험회사</label><select class="form-control" style="width:150px;"><option>전체</option><option>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option></select></div>
+        <div class="search-field"><label>설계사</label><input type="text" class="form-control" placeholder="사번 또는 이름" style="width:140px;"></div>
+        <div class="search-field"><label>&nbsp;</label><div class="flex gap-2"><button class="btn btn-primary">🔍 조회</button><button class="btn btn-outline">초기화</button></div></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px;padding:12px 18px;background:var(--success-light);border:1px solid #A9DFBF;border-radius:var(--radius);display:flex;align-items:center;gap:10px;">
+      <span style="font-size:18px;">✅</span>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--success);">2026년 03월 마감 확정 완료</div>
+        <div style="font-size:12px;color:var(--text-muted);">확정일시: 2026-04-10 14:30 · 확정자: 장수연</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
+      <div class="card" style="padding:14px 18px;"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">환수 대상 건수</div><div style="font-size:22px;font-weight:700;color:var(--danger);">119건</div></div>
+      <div class="card" style="padding:14px 18px;"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">환수 대상자 수</div><div style="font-size:22px;font-weight:700;color:var(--danger);">87명</div></div>
+      <div class="card" style="padding:14px 18px;"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">환수 합계액</div><div style="font-size:20px;font-weight:700;color:var(--danger);font-family:'IBM Plex Mono',monospace;">38,850,000</div></div>
+      <div class="card" style="padding:14px 18px;"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">환수 기준</div><div style="font-size:14px;font-weight:600;">자체 환수기준 적용</div><div style="font-size:11px;color:var(--warning);margin-top:2px;">※ 원수사 환수 여부 추후 확인</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">설계사별 환수 결과 <span style="color:var(--text-muted);font-weight:400;font-size:13px;">총 87명</span></div>
+        <div style="font-size:12px;color:var(--warning);background:var(--warning-light);padding:4px 10px;border-radius:4px;">※ 출력 항목은 현업 장표 확인 후 추후 확정</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>사번</th><th>설계사명</th><th>소속지점</th><th>환수 원인</th>
+              <th class="text-right">원 지급액</th><th>환수율</th><th class="text-right" style="background:#FDF2F8;">환수액</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-mono">EMP_003</td><td>김영희</td><td>강북지점</td>
+              <td><span class="badge badge-warning">실효 (2회차)</span></td>
+              <td class="text-right font-mono">540,000</td>
+              <td class="text-center font-mono">100%</td>
+              <td class="text-right font-mono" style="color:var(--danger);font-weight:600;">540,000</td>
+            </tr>
+            <tr>
+              <td class="font-mono">EMP_007</td><td>이민준</td><td>성남지점</td>
+              <td><span class="badge badge-danger">해지 (3회차)</span></td>
+              <td class="text-right font-mono">820,000</td>
+              <td class="text-center font-mono">100%</td>
+              <td class="text-right font-mono" style="color:var(--danger);font-weight:600;">820,000</td>
+            </tr>
+            <tr>
+              <td class="font-mono">EMP_012</td><td>박소연</td><td>부산본점</td>
+              <td><span class="badge badge-warning">실효 (5회차)</span></td>
+              <td class="text-right font-mono">450,000</td>
+              <td class="text-center font-mono">80%</td>
+              <td class="text-right font-mono" style="color:var(--danger);font-weight:600;">360,000</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr style="background:#FDF2F8;font-weight:700;">
+              <td colspan="6" style="text-align:right;padding:10px 12px;">합계</td>
+              <td class="text-right font-mono" style="color:var(--danger);padding:10px 12px;">38,850,000</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="pagination"><button class="page-btn">‹</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">›</button></div>
+    </div>
+
+    <div style="margin-top:12px;padding:10px 14px;background:var(--warning-light);border:1px solid #F9E79F;border-radius:var(--radius);font-size:12px;color:var(--warning);">
+      ⚠️ 원수사의 환수를 이용하는지, 자체 보유한 엑셀로 작업하는지에 대해서는 추후 현업 확인이 필요합니다.
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_034');
+</script>
+</body>
+</html>

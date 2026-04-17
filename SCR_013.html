@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_013 화면권한관리 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+<style>
+.matrix-table th, .matrix-table td { text-align:center; padding:8px 12px; font-size:12px; }
+.matrix-table td:first-child { text-align:left; font-size:13px; }
+.check-y { color:var(--success); font-size:16px; }
+.check-n { color:var(--border); font-size:16px; }
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>공통업무</span><span>›</span><span>화면권한관리</span></div>
+      <div class="page-title">화면권한관리</div>
+      <div class="page-subtitle">화면ID와 권한ID를 연결합니다. 권한별 접근 가능한 화면을 매트릭스로 관리합니다.</div>
+    </div>
+    <div class="page-header-right"><button class="btn btn-primary">저장</button></div>
+  </div>
+  <div style="margin-bottom:12px;padding:10px 16px;background:var(--accent-light);border-radius:var(--radius);font-size:12px;color:var(--accent);border:1px solid rgba(46,134,193,.2);">
+    ℹ️ ✅ 는 해당 권한으로 접근 가능, — 는 접근 불가를 의미합니다. 체크박스를 클릭하여 변경할 수 있습니다.
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">화면 × 권한 매트릭스</div></div>
+    <div class="table-wrap">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;width:200px;">화면명</th>
+            <th style="width:60px;">화면ID</th>
+            <th><span class="badge badge-danger">관리자</span></th>
+            <th><span class="badge badge-primary">일반사용자</span></th>
+            <th><span class="badge badge-muted">조회전용</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#F4F7FB;"><td colspan="5" style="font-size:11px;font-weight:700;color:var(--text-muted);padding:6px 12px;letter-spacing:.5px;">기준관리</td></tr>
+          <tr><td>원수사 시책목록</td><td class="font-mono text-muted">SCR_001</td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td></tr>
+          <tr><td>지급기준 관리</td><td class="font-mono text-muted">SCR_003</td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td></tr>
+          <tr><td>환수기준 관리</td><td class="font-mono text-muted">SCR_008</td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td></tr>
+          <tr style="background:#F4F7FB;"><td colspan="5" style="font-size:11px;font-weight:700;color:var(--text-muted);padding:6px 12px;letter-spacing:.5px;">공통업무</td></tr>
+          <tr><td>화면관리</td><td class="font-mono text-muted">SCR_010</td><td><input type="checkbox" checked></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+          <tr><td>메뉴관리</td><td class="font-mono text-muted">SCR_011</td><td><input type="checkbox" checked></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+          <tr><td>권한관리</td><td class="font-mono text-muted">SCR_012</td><td><input type="checkbox" checked></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+          <tr><td>사용자관리</td><td class="font-mono text-muted">SCR_014</td><td><input type="checkbox" checked></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+          <tr style="background:#F4F7FB;"><td colspan="5" style="font-size:11px;font-weight:700;color:var(--text-muted);padding:6px 12px;letter-spacing:.5px;">시책 마감</td></tr>
+          <tr><td>마감 확정</td><td class="font-mono text-muted">SCR_036</td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td><td><input type="checkbox"></td></tr>
+          <tr><td>결과 송신</td><td class="font-mono text-muted">SCR_037</td><td><input type="checkbox" checked></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_013');</script>
+</body></html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_017 로그인이력 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>공통업무</span><span>›</span><span>로그인이력</span></div>
+      <div class="page-title">로그인이력</div>
+      <div class="page-subtitle">사용자들의 로그인 이력을 조회합니다</div>
+    </div>
+    <div class="page-header-right"><button class="btn btn-outline btn-sm">📥 엑셀 다운로드</button></div>
+  </div>
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-field"><label>조회기간</label>
+        <div class="flex gap-2 items-center">
+          <input type="date" class="form-control" value="2026-04-01" style="width:140px;">
+          <span class="text-muted">~</span>
+          <input type="date" class="form-control" value="2026-04-17" style="width:140px;">
+        </div>
+      </div>
+      <div class="search-field"><label>사번/이름</label><input type="text" class="form-control" placeholder="사번 또는 이름" style="width:150px;"></div>
+      <div class="search-field"><label>결과</label><select class="form-control" style="width:100px;"><option>전체</option><option>성공</option><option>실패</option></select></div>
+      <div class="search-field"><label>&nbsp;</label><button class="btn btn-primary">🔍 조회</button></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">로그인 이력 <span style="color:var(--text-muted);font-weight:400;font-size:13px;">총 48건</span></div></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>No.</th><th>사번</th><th>이름</th><th>로그인 일시</th><th>IP 주소</th><th>결과</th><th>실패 사유</th></tr></thead>
+        <tbody>
+          <tr><td class="font-mono text-muted">48</td><td class="font-mono">EMP_001</td><td>장수연</td><td class="font-mono text-sm">2026-04-17 09:15:22</td><td class="font-mono text-sm text-muted">192.168.1.101</td><td><span class="badge badge-success">성공</span></td><td>-</td></tr>
+          <tr><td class="font-mono text-muted">47</td><td class="font-mono">EMP_002</td><td>박동수</td><td class="font-mono text-sm">2026-04-17 08:52:10</td><td class="font-mono text-sm text-muted">192.168.1.102</td><td><span class="badge badge-success">성공</span></td><td>-</td></tr>
+          <tr><td class="font-mono text-muted">46</td><td class="font-mono">EMP_003</td><td>김영희</td><td class="font-mono text-sm">2026-04-16 17:30:05</td><td class="font-mono text-sm text-muted">192.168.1.103</td><td><span class="badge badge-success">성공</span></td><td>-</td></tr>
+          <tr><td class="font-mono text-muted">45</td><td class="font-mono">EMP_004</td><td>이철수</td><td class="font-mono text-sm">2026-04-16 14:22:47</td><td class="font-mono text-sm text-muted">192.168.1.104</td><td><span class="badge badge-danger">실패</span></td><td class="text-muted text-sm">비밀번호 오류</td></tr>
+          <tr><td class="font-mono text-muted">44</td><td class="font-mono">EMP_004</td><td>이철수</td><td class="font-mono text-sm">2026-04-16 14:22:30</td><td class="font-mono text-sm text-muted">192.168.1.104</td><td><span class="badge badge-danger">실패</span></td><td class="text-muted text-sm">비밀번호 오류</td></tr>
+          <tr><td class="font-mono text-muted">43</td><td class="font-mono">EMP_001</td><td>장수연</td><td class="font-mono text-sm">2026-04-16 09:01:18</td><td class="font-mono text-sm text-muted">192.168.1.101</td><td><span class="badge badge-success">성공</span></td><td>-</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination"><button class="page-btn">‹</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">›</button></div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_017');</script>
+</body></html>

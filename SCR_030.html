@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_030 시책 엑셀 매핑 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+.mapping-section { border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:14px; }
+.mapping-section-head { background:#F4F7FB; padding:10px 16px; font-size:12px; font-weight:700; color:var(--primary); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.col-map-row { display:grid; grid-template-columns:180px 40px 180px 1fr 40px; gap:8px; align-items:center; padding:9px 14px; border-bottom:1px solid var(--border-light); font-size:13px; }
+.col-map-row:last-child { border-bottom:none; }
+.col-map-row:hover { background:rgba(46,134,193,.03); }
+.arrow-icon { text-align:center; color:var(--text-muted); font-size:16px; }
+.src-col { font-family:'IBM Plex Mono',monospace; font-size:12px; background:var(--warning-light); padding:3px 8px; border-radius:4px; color:var(--warning); font-weight:600; }
+.dst-col { font-family:'IBM Plex Mono',monospace; font-size:12px; background:var(--accent-light); padding:3px 8px; border-radius:4px; color:var(--accent); font-weight:600; }
+.transform-tag { font-size:11px; background:#F0FFF4; color:var(--success); padding:2px 8px; border-radius:10px; border:1px solid #C6F6D5; }
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>원수사 시책</span><span>›</span><span>시책 엑셀 매핑</span></div>
+        <div class="page-title">시책 엑셀 매핑</div>
+        <div class="page-subtitle">원수사 시책결과 엑셀파일을 표준화된 레이아웃으로 매핑 정의합니다</div>
+      </div>
+      <div class="page-header-right">
+        <button class="btn btn-outline btn-sm">+ 매핑 추가</button>
+        <button class="btn btn-primary">저장</button>
+      </div>
+    </div>
+
+    <!-- 매핑 대상 선택 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><div class="card-title">매핑 대상 선택</div></div>
+      <div class="search-row">
+        <div class="search-field"><label>보험회사</label>
+          <select class="form-control" style="width:150px;">
+            <option>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option>
+          </select>
+        </div>
+        <div class="search-field"><label>매핑명</label>
+          <select class="form-control" style="width:240px;">
+            <option>삼성생명_GA시책결과_표준매핑_v3</option>
+            <option>삼성생명_CI시책결과_매핑_v1</option>
+          </select>
+        </div>
+        <div class="search-field"><label>엑셀 Sheet명</label>
+          <input type="text" class="form-control" value="GA시책지급내역" style="width:160px;">
+        </div>
+        <div class="search-field"><label>헤더 행번호</label>
+          <input type="number" class="form-control" value="3" style="width:80px;">
+        </div>
+        <div class="search-field"><label>&nbsp;</label><button class="btn btn-accent">매핑 불러오기</button></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:14px;">
+
+      <!-- 컬럼 매핑 -->
+      <div class="mapping-section">
+        <div class="mapping-section-head">
+          <span>📋 컬럼 매핑 — 원수사 컬럼명 → 내부 표준 컬럼</span>
+          <button class="btn btn-outline btn-sm">+ 행 추가</button>
+        </div>
+        <div class="col-map-row" style="background:#FAFCFF;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;">
+          <span>원수사 컬럼명</span><span></span><span>내부 표준 컬럼</span><span>변환 규칙</span><span></span>
+        </div>
+        <div class="col-map-row">
+          <span class="src-col">계약번호</span>
+          <span class="arrow-icon">→</span>
+          <span class="dst-col">CONTRACT_NO</span>
+          <span class="text-muted text-sm">그대로 사용</span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+        <div class="col-map-row">
+          <span class="src-col">설계사사번</span>
+          <span class="arrow-icon">→</span>
+          <span class="dst-col">EMP_ID</span>
+          <span class="text-muted text-sm">그대로 사용</span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+        <div class="col-map-row">
+          <span class="src-col">상품구분명</span>
+          <span class="arrow-icon">→</span>
+          <span class="dst-col">PRODUCT_TYPE</span>
+          <span><span class="transform-tag">코드변환</span> <span class="text-muted text-sm">종신/종신보험 → PRD_LIFE</span></span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+        <div class="col-map-row">
+          <span class="src-col">납입기간</span>
+          <span class="arrow-icon">→</span>
+          <span class="dst-col">PAY_PERIOD</span>
+          <span><span class="transform-tag">코드변환</span> <span class="text-muted text-sm">10년/10年/PAY10 → PAY_10</span></span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+        <div class="col-map-row">
+          <span class="src-col">월납환산보험료</span>
+          <span class="arrow-icon">→</span>
+          <span class="dst-col">MONTHLY_PREM</span>
+          <span><span class="transform-tag">숫자변환</span> <span class="text-muted text-sm">콤마 제거, 숫자로 변환</span></span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+        <div class="col-map-row">
+          <span class="src-col">계약일자</span>
+          <span class="arrow-icon">→</span>
+          <span class="dst-col">CONTRACT_DATE</span>
+          <span><span class="transform-tag">날짜변환</span> <span class="text-muted text-sm">YYYYMMDD → YYYY-MM-DD</span></span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+        <div class="col-map-row">
+          <span class="src-col">지급금액</span>
+          <span class="arrow-icon">→</span>
+          <span class="dst-col">PAY_AMT</span>
+          <span><span class="transform-tag">숫자변환</span> <span class="text-muted text-sm">콤마 제거, 숫자로 변환</span></span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+      </div>
+
+      <!-- 코드 변환 규칙 -->
+      <div class="mapping-section">
+        <div class="mapping-section-head">
+          <span>🔄 이음동의어 코드변환 규칙</span>
+          <button class="btn btn-outline btn-sm">+ 규칙 추가</button>
+        </div>
+        <div class="col-map-row" style="background:#FAFCFF;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;">
+          <span>대상 컬럼</span><span></span><span>원수사 표현값</span><span>내부 코드값</span><span></span>
+        </div>
+        <div class="col-map-row">
+          <span style="font-size:12px;font-weight:600;color:var(--text-secondary);">PRODUCT_TYPE</span>
+          <span class="arrow-icon">:</span>
+          <span class="text-muted text-sm">종신, 종신보험, LIFE, 終身</span>
+          <span class="dst-col">PRD_LIFE</span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+        <div class="col-map-row">
+          <span style="font-size:12px;font-weight:600;color:var(--text-secondary);">PRODUCT_TYPE</span>
+          <span class="arrow-icon">:</span>
+          <span class="text-muted text-sm">CI, CI보험, CI보험(중대질병)</span>
+          <span class="dst-col">PRD_CI</span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+        <div class="col-map-row">
+          <span style="font-size:12px;font-weight:600;color:var(--text-secondary);">PAY_PERIOD</span>
+          <span class="arrow-icon">:</span>
+          <span class="text-muted text-sm">10년, 10年, PAY10, 10Y</span>
+          <span class="dst-col">PAY_10</span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+        <div class="col-map-row">
+          <span style="font-size:12px;font-weight:600;color:var(--text-secondary);">PAY_PERIOD</span>
+          <span class="arrow-icon">:</span>
+          <span class="text-muted text-sm">전기납, 전납, FULLPAY</span>
+          <span class="dst-col">PAY_FULL</span>
+          <button class="btn btn-ghost btn-sm" style="color:var(--danger);">×</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;padding:10px 14px;background:var(--warning-light);border:1px solid #F9E79F;border-radius:var(--radius);font-size:12px;color:var(--warning);">
+      ⚠️ 매핑 정의는 매월 변경이 있을 수 있습니다. 원수사 엑셀 업로드 전 반드시 최신 매핑으로 업데이트 확인하세요.
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_030');
+</script>
+</body>
+</html>

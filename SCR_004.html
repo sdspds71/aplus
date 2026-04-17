@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_004 기본정보 등록 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>기준관리</span><span>›</span><a href="SCR_003.html">지급기준 관리</a><span>›</span><span>기본정보 등록</span></div>
+        <div class="page-title">시책 지급기준 등록</div>
+        <div class="page-subtitle">SCR_004 · 기본정보 등록 → SCR_005 · 상세정보 Step1 → SCR_006 · Step2 → SCR_007 · Step3</div>
+      </div>
+    </div>
+
+    <!-- 스텝 위저드 -->
+    <div class="step-wizard">
+      <div class="step-item active">
+        <div class="step-num">1</div>
+        <div class="step-info">
+          <div class="step-label">SCR_004</div>
+          <div class="step-title">기본정보 등록</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-info">
+          <div class="step-label">SCR_005</div>
+          <div class="step-title">상세정보 Step1</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-info">
+          <div class="step-label">SCR_006</div>
+          <div class="step-title">상세정보 Step2</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-info">
+          <div class="step-label">SCR_007</div>
+          <div class="step-title">상세정보 Step3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 폼 -->
+    <div class="card">
+      <div class="card-header"><div class="card-title">기본정보</div></div>
+      <div class="form-grid form-grid-3" style="margin-bottom:20px;">
+        <div class="form-row"><label class="required">보험회사</label>
+          <select class="form-control">
+            <option value="">선택</option>
+            <option selected>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option>
+          </select>
+        </div>
+        <div class="form-row"><label class="required">시책명</label>
+          <input type="text" class="form-control" placeholder="시책명을 입력하세요" value="종신 GA시책 (04월)">
+        </div>
+        <div class="form-row"><label class="required">적용 업적년월</label>
+          <input type="month" class="form-control" value="2026-04">
+        </div>
+      </div>
+      <div class="form-grid form-grid-3" style="margin-bottom:20px;">
+        <div class="form-row"><label class="required">적용 환수기준</label>
+          <select class="form-control">
+            <option>RCL_2024_001 · 삼성생명 표준환수</option>
+            <option>RCL_2024_002 · 한화생명 환수기준</option>
+            <option>RCL_2024_003 · 교보생명 환수기준</option>
+          </select>
+        </div>
+        <div class="form-row"><label>원수사 시책 참조</label>
+          <select class="form-control">
+            <option>2026년 4월 GA 시책 지급 기준 (종신/CI/건강)</option>
+          </select>
+        </div>
+        <div class="form-row"><label>처리단계</label>
+          <input type="text" class="form-control" value="작성중" readonly style="background:#f8fafd;color:var(--text-muted);">
+        </div>
+      </div>
+
+      <div class="card-header" style="margin-top:8px;"><div class="card-title">제약조건</div></div>
+      <div class="form-grid form-grid-3">
+        <div class="form-row"><label>최소 계약유지 회차</label>
+          <div class="flex gap-2 items-center">
+            <input type="number" class="form-control" value="2" style="width:80px;"> <span style="font-size:13px;color:var(--text-muted);">회차 이상</span>
+          </div>
+        </div>
+        <div class="form-row"><label>지급 시기 (익월 몇 일)</label>
+          <div class="flex gap-2 items-center">
+            <input type="number" class="form-control" value="25" style="width:80px;"> <span style="font-size:13px;color:var(--text-muted);">일</span>
+          </div>
+        </div>
+        <div class="form-row"><label>대상 채널 제외</label>
+          <select class="form-control">
+            <option>없음</option><option>방카채널 제외</option><option>TM채널 제외</option>
+          </select>
+        </div>
+        <div class="form-row"><label>지급 유형</label>
+          <select class="form-control">
+            <option>월납환산 초회보험료</option>
+            <option>연납환산 초회보험료</option>
+            <option>실납입보험료</option>
+          </select>
+        </div>
+        <div class="form-row"><label>중복 지급 허용</label>
+          <select class="form-control"><option>불가</option><option>가능</option></select>
+        </div>
+        <div class="form-row"><label>비고</label>
+          <input type="text" class="form-control" placeholder="추가 제약사항">
+        </div>
+      </div>
+    </div>
+
+    <!-- 버튼 -->
+    <div class="flex justify-between mt-4">
+      <button class="btn btn-outline" onclick="location.href='SCR_003.html'">← 목록으로</button>
+      <div class="flex gap-2">
+        <button class="btn btn-outline">임시저장</button>
+        <button class="btn btn-primary" onclick="location.href='SCR_005.html'">저장 후 다음 →</button>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_003');
+</script>
+</body>
+</html>

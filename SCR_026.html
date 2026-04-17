@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_026 일일 지급 상세 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><a href="SCR_025.html">일일 지급 목록</a><span>›</span><span>일일 지급 상세</span></div>
+      <div class="page-title">일일 지급 상세</div>
+      <div class="page-subtitle">삼성생명 · 종신 GA시책 (04월) · 계약 건별 지급 내역</div>
+    </div>
+    <div class="page-header-right">
+      <button class="btn btn-outline btn-sm" onclick="location.href='SCR_025.html'">← 목록으로</button>
+      <button class="btn btn-outline btn-sm">📥 엑셀 다운로드</button>
+    </div>
+  </div>
+
+  <!-- 시책 요약 -->
+  <div class="card" style="margin-bottom:16px;">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0;">
+      <div style="padding:14px 18px;border-right:1px solid var(--border);">
+        <div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">보험회사</div>
+        <div style="font-size:14px;font-weight:700;">삼성생명</div>
+      </div>
+      <div style="padding:14px 18px;border-right:1px solid var(--border);">
+        <div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">업적년월</div>
+        <div style="font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;">2026-04</div>
+      </div>
+      <div style="padding:14px 18px;border-right:1px solid var(--border);">
+        <div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">시책명</div>
+        <div style="font-size:13px;font-weight:600;">종신 GA시책 (04월)</div>
+      </div>
+      <div style="padding:14px 18px;border-right:1px solid var(--border);">
+        <div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">대상 계약 건수</div>
+        <div style="font-size:20px;font-weight:700;color:var(--primary);">142건</div>
+      </div>
+      <div style="padding:14px 18px;">
+        <div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">지급 예상 합계액</div>
+        <div style="font-size:18px;font-weight:700;color:var(--accent);font-family:'IBM Plex Mono',monospace;">85,200,000</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-field"><label>설계사</label><input type="text" class="form-control" placeholder="사번 또는 이름" style="width:140px;"></div>
+      <div class="search-field"><label>소속 지점</label><input type="text" class="form-control" placeholder="지점명" style="width:130px;"></div>
+      <div class="search-field"><label>상품명</label><input type="text" class="form-control" placeholder="상품명" style="width:140px;"></div>
+      <div class="search-field"><label>&nbsp;</label><button class="btn btn-primary">🔍 조회</button></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">계약 건별 지급 내역</div></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>계약번호</th><th>설계사</th><th>소속지점</th><th>상품명</th><th>납기</th>
+            <th class="text-right">초회보험료</th><th>보험료구간</th><th class="text-right">지급액</th><th>계약일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="font-mono text-sm">CTR_2604001</td><td>장수연</td><td>강남지점</td><td>삼성 종신보험 (무배당)</td><td>20년납</td><td class="text-right font-mono">150,000</td><td><span class="badge badge-primary">5만~10만</span></td><td class="text-right font-mono" style="color:var(--accent);font-weight:600;">32,000</td><td class="font-mono text-sm">2026-04-03</td></tr>
+          <tr><td class="font-mono text-sm">CTR_2604007</td><td>장수연</td><td>강남지점</td><td>삼성 종신보험 (무배당)</td><td>15년납</td><td class="text-right font-mono">200,000</td><td><span class="badge badge-success">10만 이상</span></td><td class="text-right font-mono" style="color:var(--accent);font-weight:600;">55,000</td><td class="font-mono text-sm">2026-04-08</td></tr>
+          <tr><td class="font-mono text-sm">CTR_2604012</td><td>박동수</td><td>수원지점</td><td>삼성 종신보험 (무배당)</td><td>10년납</td><td class="text-right font-mono">80,000</td><td><span class="badge badge-primary">5만~10만</span></td><td class="text-right font-mono" style="color:var(--accent);font-weight:600;">27,000</td><td class="font-mono text-sm">2026-04-10</td></tr>
+          <tr><td class="font-mono text-sm">CTR_2604015</td><td>김영희</td><td>강북지점</td><td>삼성 종신보험 (무배당)</td><td>20년납</td><td class="text-right font-mono">120,000</td><td><span class="badge badge-success">10만 이상</span></td><td class="text-right font-mono" style="color:var(--accent);font-weight:600;">48,000</td><td class="font-mono text-sm">2026-04-12</td></tr>
+          <tr><td class="font-mono text-sm">CTR_2604022</td><td>최지연</td><td>해운대지점</td><td>삼성 종신보험 (무배당)</td><td>10년납</td><td class="text-right font-mono">40,000</td><td><span class="badge badge-muted">~5만</span></td><td class="text-right font-mono" style="color:var(--accent);font-weight:600;">10,000</td><td class="font-mono text-sm">2026-04-14</td></tr>
+        </tbody>
+        <tfoot>
+          <tr style="background:#F4F7FB;font-weight:700;">
+            <td colspan="7" style="text-align:right;padding:10px 12px;font-size:13px;">합계 (표시 건수 기준)</td>
+            <td class="text-right font-mono" style="color:var(--accent);padding:10px 12px;">172,000</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="pagination"><button class="page-btn">‹</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">›</button></div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_025');</script>
+</body></html>

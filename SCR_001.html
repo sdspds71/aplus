@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_001 원수사 시책목록 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>기준관리</span><span>›</span><span>원수사 시책목록</span></div>
+        <div class="page-title">원수사 시책목록</div>
+        <div class="page-subtitle">원수사의 시책기준을 조회하고 관리합니다</div>
+      </div>
+      <div class="page-header-right">
+        <button class="btn btn-primary" onclick="document.getElementById('modal-reg').style.display='flex'">+ 시책 등록</button>
+      </div>
+    </div>
+
+    <!-- 검색 -->
+    <div class="search-bar">
+      <div class="search-row">
+        <div class="search-field">
+          <label>업적년월</label>
+          <input type="month" class="form-control" value="2026-04" style="width:150px;">
+        </div>
+        <div class="search-field">
+          <label>보험회사</label>
+          <select class="form-control" style="width:150px;">
+            <option value="">전체</option>
+            <option>삼성생명</option>
+            <option>한화생명</option>
+            <option>교보생명</option>
+            <option>NH농협생명</option>
+            <option>미래에셋생명</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label>시책명</label>
+          <input type="text" class="form-control" placeholder="시책명 검색" style="width:200px;">
+        </div>
+        <div class="search-field" style="justify-content:flex-end;">
+          <label>&nbsp;</label>
+          <div class="flex gap-2">
+            <button class="btn btn-primary">🔍 조회</button>
+            <button class="btn btn-outline">초기화</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 목록 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">조회 결과 <span style="color:var(--text-muted);font-weight:400;font-size:13px;">총 12건</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:50px;">No.</th>
+              <th>업적년월</th>
+              <th>보험회사</th>
+              <th>시책명</th>
+              <th>등록일</th>
+              <th>첨부파일</th>
+              <th style="width:100px;">처리</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-muted font-mono">1</td>
+              <td class="font-mono">2026-04</td>
+              <td><span class="badge badge-primary">삼성생명</span></td>
+              <td><a class="table-link" onclick="document.getElementById('modal-view').style.display='flex'">2026년 4월 GA 시책 지급 기준 (종신/CI/건강)</a></td>
+              <td class="text-muted">2026.04.02</td>
+              <td><span class="badge badge-muted">📎 2개</span></td>
+              <td><button class="btn btn-ghost btn-sm">수정</button></td>
+            </tr>
+            <tr>
+              <td class="text-muted font-mono">2</td>
+              <td class="font-mono">2026-04</td>
+              <td><span class="badge badge-primary">한화생명</span></td>
+              <td><a class="table-link" onclick="document.getElementById('modal-view').style.display='flex'">한화생명 4월 시책 안내 (방카채널 제외)</a></td>
+              <td class="text-muted">2026.04.03</td>
+              <td><span class="badge badge-muted">📎 1개</span></td>
+              <td><button class="btn btn-ghost btn-sm">수정</button></td>
+            </tr>
+            <tr>
+              <td class="text-muted font-mono">3</td>
+              <td class="font-mono">2026-04</td>
+              <td><span class="badge badge-primary">교보생명</span></td>
+              <td><a class="table-link" onclick="document.getElementById('modal-view').style.display='flex'">교보 다이렉트 시책 (CI특약 집중 육성)</a></td>
+              <td class="text-muted">2026.04.03</td>
+              <td><span class="badge badge-muted">📎 3개</span></td>
+              <td><button class="btn btn-ghost btn-sm">수정</button></td>
+            </tr>
+            <tr>
+              <td class="text-muted font-mono">4</td>
+              <td class="font-mono">2026-04</td>
+              <td><span class="badge badge-primary">NH농협생명</span></td>
+              <td><a class="table-link">NH생명 4월 GA 시책 안내문</a></td>
+              <td class="text-muted">2026.04.05</td>
+              <td><span class="badge badge-muted">📎 1개</span></td>
+              <td><button class="btn btn-ghost btn-sm">수정</button></td>
+            </tr>
+            <tr>
+              <td class="text-muted font-mono">5</td>
+              <td class="font-mono">2026-03</td>
+              <td><span class="badge badge-muted">삼성생명</span></td>
+              <td><a class="table-link">2026년 3월 GA 시책 지급 기준</a></td>
+              <td class="text-muted">2026.03.03</td>
+              <td><span class="badge badge-muted">📎 2개</span></td>
+              <td><button class="btn btn-ghost btn-sm" style="color:var(--text-muted)">조회</button></td>
+            </tr>
+            <tr>
+              <td class="text-muted font-mono">6</td>
+              <td class="font-mono">2026-03</td>
+              <td><span class="badge badge-muted">한화생명</span></td>
+              <td><a class="table-link">한화생명 3월 시책 안내</a></td>
+              <td class="text-muted">2026.03.04</td>
+              <td><span class="badge badge-muted">📎 1개</span></td>
+              <td><button class="btn btn-ghost btn-sm" style="color:var(--text-muted)">조회</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="page-btn">‹</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">›</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- 시책 등록 팝업 (SCR_002) -->
+<div id="modal-reg" class="modal-overlay" style="display:none;" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div class="modal-title">SCR_002 · 원수사 시책 등록</div>
+      <button class="modal-close" onclick="document.getElementById('modal-reg').style.display='none'">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid form-grid-3" style="margin-bottom:16px;">
+        <div class="form-row"><label class="required">업적년월</label><input type="month" class="form-control" value="2026-04"></div>
+        <div class="form-row"><label class="required">보험회사</label>
+          <select class="form-control"><option>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option></select>
+        </div>
+        <div class="form-row"><label class="required">시책명</label><input type="text" class="form-control" placeholder="시책명을 입력하세요"></div>
+      </div>
+      <div class="form-row" style="margin-bottom:16px;">
+        <label>시책 내용 (본문)</label>
+        <textarea class="form-control" rows="8" placeholder="시책 내용을 입력하세요"></textarea>
+      </div>
+      <div class="form-row">
+        <label>첨부파일</label>
+        <div style="border:1.5px dashed var(--border);border-radius:var(--radius);padding:20px;text-align:center;color:var(--text-muted);font-size:13px;cursor:pointer;">
+          📎 파일을 드래그하거나 클릭하여 업로드 (PDF, Excel, 이미지 등)
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-reg').style.display='none'">취소</button>
+      <button class="btn btn-primary">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- 시책 상세 조회 팝업 -->
+<div id="modal-view" class="modal-overlay" style="display:none;" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div class="modal-title">시책 상세 내용</div>
+      <button class="modal-close" onclick="document.getElementById('modal-view').style.display='none'">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid form-grid-3" style="margin-bottom:16px;">
+        <div class="form-row"><label>업적년월</label><input type="text" class="form-control" value="2026-04" readonly style="background:#f8fafd;"></div>
+        <div class="form-row"><label>보험회사</label><input type="text" class="form-control" value="삼성생명" readonly style="background:#f8fafd;"></div>
+        <div class="form-row"><label>시책명</label><input type="text" class="form-control" value="2026년 4월 GA 시책 지급 기준" readonly style="background:#f8fafd;"></div>
+      </div>
+      <div class="form-row" style="margin-bottom:16px;">
+        <label>시책 내용</label>
+        <textarea class="form-control" rows="10" readonly style="background:#f8fafd;">■ 적용대상: GA(법인보험대리점) 소속 설계사
+■ 적용상품: 종신보험, CI보험, 건강보험
+■ 지급기준:
+  - 종신: 월납환산 초회보험료 기준
+  - CI/건강: 연납환산 초회보험료 기준
+■ 지급시기: 익월 25일
+■ 지급대상: 정상유지 계약건에 한함 (2회차 이후)
+■ 환수기준: 별도 환수기준 참고</textarea>
+      </div>
+      <div class="form-row">
+        <label>첨부파일</label>
+        <div style="display:flex;gap:8px;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;">
+            <span>📄</span><span style="flex:1;">삼성생명_2604_GA시책기준.pdf</span><button class="btn btn-outline btn-sm">다운로드</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;">
+            <span>📊</span><span style="flex:1;">삼성생명_2604_시책금액산출표.xlsx</span><button class="btn btn-outline btn-sm">다운로드</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-view').style.display='none'">닫기</button>
+      <button class="btn btn-primary">수정</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_001');
+</script>
+</body>
+</html>

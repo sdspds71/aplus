@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_020 메인화면 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+.stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:20px; }
+.stat-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:18px 20px;
+  box-shadow:var(--shadow-sm);
+}
+.stat-label { font-size:11px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; }
+.stat-value { font-size:26px; font-weight:700; color:var(--primary); letter-spacing:-1px; }
+.stat-sub { font-size:12px; color:var(--text-muted); margin-top:4px; }
+.stat-badge { display:inline-flex; align-items:center; gap:3px; font-size:11px; font-weight:600; }
+.stat-up { color:var(--success); } .stat-down { color:var(--danger); }
+
+.dash-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:16px; }
+.notice-list { list-style:none; }
+.notice-item {
+  display:flex; align-items:flex-start; gap:10px;
+  padding:11px 0; border-bottom:1px solid var(--border-light);
+}
+.notice-item:last-child { border-bottom:none; }
+.notice-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); margin-top:5px; flex-shrink:0; }
+.notice-text { flex:1; font-size:13px; color:var(--text-primary); line-height:1.5; }
+.notice-date { font-size:11px; color:var(--text-muted); white-space:nowrap; }
+
+.quick-menu { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.quick-item {
+  display:flex; align-items:center; gap:10px;
+  padding:12px 14px; border:1px solid var(--border);
+  border-radius:var(--radius); text-decoration:none;
+  color:var(--text-primary); transition:all .15s; background:var(--surface);
+}
+.quick-item:hover { border-color:var(--accent); color:var(--accent); box-shadow:var(--shadow); }
+.quick-icon { font-size:18px; }
+.quick-label { font-size:12px; font-weight:600; }
+
+.month-summary { display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.month-cell { padding:14px 16px; }
+.month-cell:first-child { border-right:1px solid var(--border); }
+.month-cell-label { font-size:11px; color:var(--text-muted); margin-bottom:4px; }
+.month-cell-val { font-size:18px; font-weight:700; font-family:'IBM Plex Mono',monospace; }
+.month-cell-val.blue { color:var(--accent); }
+.month-cell-val.red { color:var(--danger); }
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="page-title">메인 대시보드</div>
+        <div class="page-subtitle">2026년 04월 17일 기준 현황</div>
+      </div>
+      <div class="page-header-right">
+        <span style="font-size:12px;color:var(--text-muted);">최종 마감: 2026년 03월</span>
+        <button class="btn btn-accent btn-sm">📊 월간 리포트</button>
+      </div>
+    </div>
+
+    <!-- 요약 통계 -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">이번달 시책 건수</div>
+        <div class="stat-value">24</div>
+        <div class="stat-sub"><span class="stat-badge stat-up">▲ 3건</span> 전월 대비</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">지급 예상금액</div>
+        <div class="stat-value">3.2억</div>
+        <div class="stat-sub"><span class="stat-badge stat-up">▲ 12%</span> 전월 대비</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">환수 예상금액</div>
+        <div class="stat-value">0.4억</div>
+        <div class="stat-sub"><span class="stat-badge stat-down">▼ 5%</span> 전월 대비</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">처리 진행 현황</div>
+        <div class="stat-value">18/24</div>
+        <div class="stat-sub">시책 산출 완료</div>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <!-- 공지/알림 -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📢 공지 및 주요 알림</div>
+            <button class="btn btn-ghost btn-sm">전체보기</button>
+          </div>
+          <ul class="notice-list">
+            <li class="notice-item">
+              <div class="notice-dot"></div>
+              <div class="notice-text">[중요] 2026년 04월 시책 등록 마감일: 04월 20일까지 완료 요망</div>
+              <div class="notice-date">04.17</div>
+            </li>
+            <li class="notice-item">
+              <div class="notice-dot" style="background:var(--warning)"></div>
+              <div class="notice-text">삼성생명 04월 시책기준 업데이트 — 원수사 시책목록에서 확인</div>
+              <div class="notice-date">04.15</div>
+            </li>
+            <li class="notice-item">
+              <div class="notice-dot"></div>
+              <div class="notice-text">03월 마감 확정 완료 및 SALES Plus 결과 송신 완료</div>
+              <div class="notice-date">04.10</div>
+            </li>
+            <li class="notice-item">
+              <div class="notice-dot"></div>
+              <div class="notice-text">시스템 점검 안내: 04월 19일(일) 02:00 ~ 06:00 서비스 중단</div>
+              <div class="notice-date">04.08</div>
+            </li>
+            <li class="notice-item">
+              <div class="notice-dot"></div>
+              <div class="notice-text">교보생명 시책 엑셀 매핑 정의 수정 완료</div>
+              <div class="notice-date">04.05</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 이번달 요약 -->
+        <div class="card" style="margin-top:14px;">
+          <div class="card-header"><div class="card-title">📅 2026년 04월 시책 현황</div></div>
+          <div class="month-summary">
+            <div class="month-cell">
+              <div class="month-cell-label">지급 예상 합계</div>
+              <div class="month-cell-val blue">323,450,000원</div>
+            </div>
+            <div class="month-cell">
+              <div class="month-cell-label">환수 예상 합계</div>
+              <div class="month-cell-val red">41,200,000원</div>
+            </div>
+          </div>
+          <div style="padding:14px 0 0;">
+            <table>
+              <thead><tr><th>보험회사</th><th class="text-right">지급액</th><th class="text-right">환수액</th><th>상태</th></tr></thead>
+              <tbody>
+                <tr><td>삼성생명</td><td class="text-right font-mono">85,200,000</td><td class="text-right font-mono">12,300,000</td><td><span class="badge badge-success">확정</span></td></tr>
+                <tr><td>한화생명</td><td class="text-right font-mono">72,100,000</td><td class="text-right font-mono">8,900,000</td><td><span class="badge badge-primary">산출중</span></td></tr>
+                <tr><td>교보생명</td><td class="text-right font-mono">91,350,000</td><td class="text-right font-mono">15,400,000</td><td><span class="badge badge-warning">작성중</span></td></tr>
+                <tr><td>NH농협생명</td><td class="text-right font-mono">74,800,000</td><td class="text-right font-mono">4,600,000</td><td><span class="badge badge-muted">대기</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 바로가기 -->
+      <div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">⚡ 빠른 메뉴</div></div>
+          <div class="quick-menu">
+            <a href="SCR_001.html" class="quick-item"><span class="quick-icon">📋</span><span class="quick-label">원수사 시책목록</span></a>
+            <a href="SCR_003.html" class="quick-item"><span class="quick-icon">💰</span><span class="quick-label">지급기준 관리</span></a>
+            <a href="SCR_025.html" class="quick-item"><span class="quick-icon">📤</span><span class="quick-label">일일 지급 목록</span></a>
+            <a href="SCR_027.html" class="quick-item"><span class="quick-icon">📥</span><span class="quick-label">일일 환수 목록</span></a>
+            <a href="SCR_031.html" class="quick-item"><span class="quick-icon">⬆️</span><span class="quick-label">시책 엑셀 업로드</span></a>
+            <a href="SCR_036.html" class="quick-item"><span class="quick-icon">🔏</span><span class="quick-label">마감 확정</span></a>
+            <a href="SCR_037.html" class="quick-item"><span class="quick-icon">📡</span><span class="quick-label">결과 송신</span></a>
+            <a href="SCR_029.html" class="quick-item"><span class="quick-icon">🔮</span><span class="quick-label">시책 예측</span></a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px;">
+          <div class="card-header"><div class="card-title">🔄 처리 단계 현황</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;padding-top:4px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+                <span style="font-weight:600;">지급기준 등록</span><span style="color:var(--text-muted);">24/24</span>
+              </div>
+              <div style="height:6px;background:var(--border-light);border-radius:3px;">
+                <div style="height:100%;width:100%;background:var(--success);border-radius:3px;"></div>
+              </div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+                <span style="font-weight:600;">산출 완료</span><span style="color:var(--text-muted);">18/24</span>
+              </div>
+              <div style="height:6px;background:var(--border-light);border-radius:3px;">
+                <div style="height:100%;width:75%;background:var(--accent);border-radius:3px;"></div>
+              </div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+                <span style="font-weight:600;">마감 확정</span><span style="color:var(--text-muted);">0/24</span>
+              </div>
+              <div style="height:6px;background:var(--border-light);border-radius:3px;">
+                <div style="height:100%;width:0%;background:var(--warning);border-radius:3px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_020');
+initLNB();
+</script>
+</body>
+</html>

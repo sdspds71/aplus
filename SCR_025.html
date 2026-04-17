@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_025 일일 지급 목록 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>시책 일보</span><span>›</span><span>일일 지급 목록</span></div>
+      <div class="page-title">일일 지급 목록</div>
+      <div class="page-subtitle">지급이 산출된 시책의 제목과 산출금액을 표시합니다</div>
+    </div>
+    <div class="page-header-right">
+      <button class="btn btn-accent">▶ 전체 실시간 산출</button>
+    </div>
+  </div>
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-field"><label>마감년월</label><input type="month" class="form-control" value="2026-04" style="width:150px;"></div>
+      <div class="search-field"><label>보험회사</label><select class="form-control" style="width:150px;"><option>전체</option><option>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option></select></div>
+      <div class="search-field"><label>&nbsp;</label><div class="flex gap-2"><button class="btn btn-primary">🔍 조회</button><button class="btn btn-outline">초기화</button></div></div>
+    </div>
+  </div>
+
+  <!-- 요약 -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
+    <div class="card" style="padding:14px 18px;">
+      <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:6px;">총 시책 건수</div>
+      <div style="font-size:22px;font-weight:700;color:var(--primary);">8건</div>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:6px;">합계 지급 예상액</div>
+      <div style="font-size:22px;font-weight:700;color:var(--accent);font-family:'IBM Plex Mono',monospace;">323,450,000</div>
+    </div>
+    <div class="card" style="padding:14px 18px;">
+      <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:6px;">최종 산출일시</div>
+      <div style="font-size:16px;font-weight:600;color:var(--text-secondary);font-family:'IBM Plex Mono',monospace;">2026-04-17 09:30</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">시책별 지급 목록</div>
+      <button class="btn btn-outline btn-sm">📥 엑셀 다운로드</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th><th>보험회사</th><th>시책명</th><th>업적년월</th>
+            <th class="text-right">계약 건수</th><th class="text-right">지급 예상액 (원)</th>
+            <th>산출일시</th><th>처리</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-muted font-mono">1</td>
+            <td><span class="badge badge-primary">삼성생명</span></td>
+            <td><a class="table-link" onclick="location.href='SCR_026.html'">종신 GA시책 (04월)</a></td>
+            <td class="font-mono">2026-04</td>
+            <td class="text-right font-mono">142건</td>
+            <td class="text-right font-mono" style="color:var(--accent);font-weight:600;">85,200,000</td>
+            <td class="text-muted text-sm">2026-04-17 09:30</td>
+            <td><button class="btn btn-accent btn-sm">▶ 재산출</button></td>
+          </tr>
+          <tr>
+            <td class="text-muted font-mono">2</td>
+            <td><span class="badge badge-primary">삼성생명</span></td>
+            <td><a class="table-link" onclick="location.href='SCR_026.html'">CI보험 GA시책 (04월)</a></td>
+            <td class="font-mono">2026-04</td>
+            <td class="text-right font-mono">89건</td>
+            <td class="text-right font-mono" style="color:var(--accent);font-weight:600;">47,300,000</td>
+            <td class="text-muted text-sm">2026-04-17 09:30</td>
+            <td><button class="btn btn-accent btn-sm">▶ 재산출</button></td>
+          </tr>
+          <tr>
+            <td class="text-muted font-mono">3</td>
+            <td><span class="badge badge-primary">한화생명</span></td>
+            <td><a class="table-link" onclick="location.href='SCR_026.html'">한화 종합 GA시책 (04월)</a></td>
+            <td class="font-mono">2026-04</td>
+            <td class="text-right font-mono">201건</td>
+            <td class="text-right font-mono" style="color:var(--accent);font-weight:600;">72,100,000</td>
+            <td class="text-muted text-sm">2026-04-16 18:00</td>
+            <td><button class="btn btn-accent btn-sm">▶ 재산출</button></td>
+          </tr>
+          <tr>
+            <td class="text-muted font-mono">4</td>
+            <td><span class="badge badge-primary">교보생명</span></td>
+            <td><a class="table-link" onclick="location.href='SCR_026.html'">교보 CI특약 집중 육성 시책</a></td>
+            <td class="font-mono">2026-04</td>
+            <td class="text-right font-mono">178건</td>
+            <td class="text-right font-mono" style="color:var(--accent);font-weight:600;">91,350,000</td>
+            <td class="text-muted text-sm">2026-04-16 18:00</td>
+            <td><button class="btn btn-accent btn-sm">▶ 재산출</button></td>
+          </tr>
+          <tr>
+            <td class="text-muted font-mono">5</td>
+            <td><span class="badge badge-primary">NH농협생명</span></td>
+            <td><a class="table-link" onclick="location.href='SCR_026.html'">NH 건강보험 GA시책</a></td>
+            <td class="font-mono">2026-04</td>
+            <td class="text-right font-mono">134건</td>
+            <td class="text-right font-mono" style="color:var(--accent);font-weight:600;">27,500,000</td>
+            <td class="text-muted text-sm">2026-04-15 09:00</td>
+            <td><button class="btn btn-accent btn-sm">▶ 재산출</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <button class="page-btn">‹</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">›</button>
+    </div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_025');</script>
+</body></html>

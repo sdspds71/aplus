@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_021 상품정보 관리 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+<style>
+.edit-cell { border:none; background:transparent; font-size:13px; font-family:inherit; color:var(--text-primary); width:100%; padding:0; }
+.edit-cell:focus { outline:2px solid var(--accent); border-radius:2px; background:#fff; padding:0 4px; }
+.new-row { background:#f0f8ff !important; }
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>입수 데이터</span><span>›</span><span>상품정보 관리</span></div>
+      <div class="page-title">상품정보 관리</div>
+      <div class="page-subtitle">보험회사별 상품정보를 Grid에서 직접 등록/수정합니다 (월드시스템 연동)</div>
+    </div>
+    <div class="page-header-right">
+      <button class="btn btn-outline btn-sm" onclick="addRow()">+ 행 추가</button>
+      <button class="btn btn-primary btn-sm">저장</button>
+    </div>
+  </div>
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-field"><label>보험회사</label><select class="form-control" style="width:140px;"><option>전체</option><option>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option></select></div>
+      <div class="search-field"><label>상품군</label><select class="form-control" style="width:120px;"><option>전체</option><option>종신</option><option>CI</option><option>건강</option><option>연금</option></select></div>
+      <div class="search-field"><label>상품명</label><input type="text" class="form-control" placeholder="상품명 검색" style="width:160px;"></div>
+      <div class="search-field"><label>판매상태</label><select class="form-control" style="width:100px;"><option>전체</option><option>판매중</option><option>판매종료</option></select></div>
+      <div class="search-field"><label>&nbsp;</label><button class="btn btn-primary">🔍 조회</button></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">상품 목록 <span style="color:var(--text-muted);font-weight:400;font-size:13px;">총 48건</span></div>
+      <div style="font-size:12px;color:var(--text-muted);">셀을 클릭하여 직접 수정 가능합니다</div>
+    </div>
+    <div class="table-wrap">
+      <table id="prod-table">
+        <thead><tr><th style="width:40px;"></th><th>보험회사</th><th>상품군</th><th>상품코드</th><th>상품명</th><th>납기구분</th><th>판매개시일</th><th>판매종료일</th><th>사용여부</th></tr></thead>
+        <tbody id="prod-body">
+          <tr><td class="text-center"><button class="btn btn-ghost btn-sm" style="color:var(--danger);padding:0 4px;" onclick="this.closest('tr').remove()">×</button></td><td><select class="edit-cell"><option>삼성생명</option><option>한화생명</option><option>교보생명</option></select></td><td><input class="edit-cell" value="종신"></td><td class="font-mono"><input class="edit-cell" value="SS_LIFE_001"></td><td><input class="edit-cell" value="삼성 종신보험 (무배당)"></td><td><select class="edit-cell"><option>10년납</option><option>15년납</option><option>20년납</option><option>전기납</option></select></td><td><input class="edit-cell" type="date" value="2022-01-01"></td><td><input class="edit-cell" type="date" value="9999-12-31"></td><td><select class="edit-cell"><option>사용</option><option>미사용</option></select></td></tr>
+          <tr><td class="text-center"><button class="btn btn-ghost btn-sm" style="color:var(--danger);padding:0 4px;" onclick="this.closest('tr').remove()">×</button></td><td><select class="edit-cell"><option>삼성생명</option><option>한화생명</option><option>교보생명</option></select></td><td><input class="edit-cell" value="CI"></td><td class="font-mono"><input class="edit-cell" value="SS_CI_001"></td><td><input class="edit-cell" value="삼성 CI보험 프리미엄"></td><td><select class="edit-cell"><option>10년납</option><option selected>15년납</option><option>20년납</option></select></td><td><input class="edit-cell" type="date" value="2023-03-01"></td><td><input class="edit-cell" type="date" value="9999-12-31"></td><td><select class="edit-cell"><option>사용</option><option>미사용</option></select></td></tr>
+          <tr><td class="text-center"><button class="btn btn-ghost btn-sm" style="color:var(--danger);padding:0 4px;" onclick="this.closest('tr').remove()">×</button></td><td><select class="edit-cell"><option>삼성생명</option><option selected>한화생명</option><option>교보생명</option></select></td><td><input class="edit-cell" value="종신"></td><td class="font-mono"><input class="edit-cell" value="HH_LIFE_001"></td><td><input class="edit-cell" value="한화 생명사랑 종신보험"></td><td><select class="edit-cell"><option>10년납</option><option>15년납</option><option selected>20년납</option></select></td><td><input class="edit-cell" type="date" value="2021-06-01"></td><td><input class="edit-cell" type="date" value="9999-12-31"></td><td><select class="edit-cell"><option>사용</option><option>미사용</option></select></td></tr>
+          <tr><td class="text-center"><button class="btn btn-ghost btn-sm" style="color:var(--danger);padding:0 4px;" onclick="this.closest('tr').remove()">×</button></td><td><select class="edit-cell"><option>삼성생명</option><option>한화생명</option><option selected>교보생명</option></select></td><td><input class="edit-cell" value="건강"></td><td class="font-mono"><input class="edit-cell" value="KB_HLTH_001"></td><td><input class="edit-cell" value="교보 건강플러스 보험"></td><td><select class="edit-cell"><option>10년납</option><option>15년납</option><option>20년납</option><option selected>전기납</option></select></td><td><input class="edit-cell" type="date" value="2024-01-01"></td><td><input class="edit-cell" type="date" value="9999-12-31"></td><td><select class="edit-cell"><option>사용</option><option>미사용</option></select></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination"><button class="page-btn">‹</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">›</button></div>
+  </div>
+</main></div>
+<script>
+document.getElementById('gnb').innerHTML=renderGNB();
+document.getElementById('lnb').innerHTML=renderLNB('SCR_021');
+function addRow() {
+  const tbody = document.getElementById('prod-body');
+  const tr = document.createElement('tr');
+  tr.className = 'new-row';
+  tr.innerHTML = `<td class="text-center"><button class="btn btn-ghost btn-sm" style="color:var(--danger);padding:0 4px;" onclick="this.closest('tr').remove()">×</button></td><td><select class="edit-cell"><option>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option></select></td><td><input class="edit-cell" placeholder="상품군"></td><td class="font-mono"><input class="edit-cell" placeholder="상품코드"></td><td><input class="edit-cell" placeholder="상품명"></td><td><select class="edit-cell"><option>10년납</option><option>15년납</option><option>20년납</option><option>전기납</option></select></td><td><input class="edit-cell" type="date"></td><td><input class="edit-cell" type="date"></td><td><select class="edit-cell"><option>사용</option><option>미사용</option></select></td>`;
+  tbody.appendChild(tr);
+  tr.querySelector('input').focus();
+}
+</script>
+</body></html>

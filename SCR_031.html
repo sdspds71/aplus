@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_031 시책 엑셀 업로드 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+.upload-zone {
+  border: 2px dashed var(--border); border-radius: var(--radius-lg);
+  padding: 40px; text-align: center; cursor: pointer;
+  transition: all .2s; background: #FAFCFF;
+}
+.upload-zone:hover { border-color: var(--accent); background: var(--accent-light); }
+.upload-icon { font-size: 40px; margin-bottom: 12px; }
+.upload-title { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
+.upload-sub { font-size: 12px; color: var(--text-muted); }
+.step-badge { display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600; }
+.step-done { background:var(--success-light);color:var(--success); }
+.step-current { background:var(--accent-light);color:var(--accent); }
+.step-wait { background:#EDF2F7;color:var(--text-muted); }
+.result-stat { text-align:center;padding:14px 0; }
+.result-stat .num { font-size:28px;font-weight:700;font-family:'IBM Plex Mono',monospace; }
+.result-stat .lbl { font-size:11px;color:var(--text-muted);font-weight:600;margin-top:4px;text-transform:uppercase; }
+.err-row { background: #FFF5F5; }
+.err-row td { color: var(--danger); }
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>원수사 시책</span><span>›</span><span>시책 엑셀 업로드</span></div>
+        <div class="page-title">시책 엑셀 업로드</div>
+        <div class="page-subtitle">원수사 시책결과 엑셀파일을 업로드하고 표준화 매핑을 실행합니다</div>
+      </div>
+    </div>
+
+    <!-- 진행 단계 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span class="step-badge step-done">✓ 1. 파일 업로드</span>
+        <span style="color:var(--border);">→</span>
+        <span class="step-badge step-current">▶ 2. 매핑 실행 / 결과 확인</span>
+        <span style="color:var(--border);">→</span>
+        <span class="step-badge step-wait">3. 오류 수정 (필요시)</span>
+        <span style="color:var(--border);">→</span>
+        <span class="step-badge step-wait">4. 저장 확정</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      <!-- 업로드 영역 -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">파일 업로드</div></div>
+        <div class="upload-zone" onclick="alert('파일 선택 다이얼로그 열림')">
+          <div class="upload-icon">📊</div>
+          <div class="upload-title">엑셀 파일을 드래그하거나 클릭하여 업로드</div>
+          <div class="upload-sub">.xlsx, .xls 파일 지원 · 최대 50MB</div>
+        </div>
+        <div style="margin-top:12px;padding:12px;background:#F4F7FB;border-radius:var(--radius);font-size:12px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <span>📄</span>
+            <span style="font-weight:600;flex:1;">삼성생명_2604_GA시책결과.xlsx</span>
+            <span class="badge badge-success">업로드 완료</span>
+          </div>
+          <div style="color:var(--text-muted);">파일크기: 1.2MB · Sheet: GA시책지급내역, 환수내역 (2개)</div>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="form-row" style="margin-bottom:10px;">
+            <label>보험회사</label>
+            <select class="form-control"><option>삼성생명</option><option>한화생명</option></select>
+          </div>
+          <div class="form-row" style="margin-bottom:10px;">
+            <label>적용 매핑</label>
+            <select class="form-control"><option>삼성생명_GA시책결과_표준매핑_v3</option></select>
+          </div>
+          <div class="form-row">
+            <label>대상 Sheet</label>
+            <select class="form-control"><option>GA시책지급내역</option><option>환수내역</option></select>
+          </div>
+        </div>
+        <div class="flex gap-2" style="margin-top:14px;">
+          <button class="btn btn-accent w-full">▶ 매핑 실행</button>
+        </div>
+      </div>
+
+      <!-- 매핑 결과 요약 -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">매핑 결과 요약</div><span class="badge badge-warning">오류 있음</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;">
+          <div class="result-stat" style="border-right:1px solid var(--border);">
+            <div class="num" style="color:var(--primary);">1,248</div>
+            <div class="lbl">전체 행수</div>
+          </div>
+          <div class="result-stat" style="border-right:1px solid var(--border);">
+            <div class="num" style="color:var(--success);">1,231</div>
+            <div class="lbl">정상 처리</div>
+          </div>
+          <div class="result-stat">
+            <div class="num" style="color:var(--danger);">17</div>
+            <div class="lbl">오류 건수</div>
+          </div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:8px;">오류 유형 분류</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#FFF5F5;border-radius:var(--radius);border:1px solid #FECACA;">
+            <span style="font-size:12px;color:var(--danger);font-weight:600;">코드 매핑 불일치</span>
+            <span class="badge badge-danger">12건</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#FFF5F5;border-radius:var(--radius);border:1px solid #FECACA;">
+            <span style="font-size:12px;color:var(--danger);font-weight:600;">필수값 누락</span>
+            <span class="badge badge-danger">3건</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#FFF5F5;border-radius:var(--radius);border:1px solid #FECACA;">
+            <span style="font-size:12px;color:var(--danger);font-weight:600;">날짜 형식 오류</span>
+            <span class="badge badge-danger">2건</span>
+          </div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:8px;">
+          <button class="btn btn-outline btn-sm" style="flex:1;">SCR_030 매핑 수정</button>
+          <button class="btn btn-success" style="flex:1;" onclick="if(confirm('정상 1,231건을 저장합니까?\n오류 17건은 제외됩니다.'))alert('저장 완료')">정상건만 저장</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 오류 데이터 확인 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">오류 데이터 상세 <span style="color:var(--danger);font-weight:400;font-size:13px;">17건</span></div>
+        <div class="flex gap-2">
+          <button class="btn btn-outline btn-sm">📥 오류목록 다운로드</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>행번호</th><th>계약번호</th><th>오류 컬럼</th><th>원본값</th><th>오류내용</th><th>수동 매핑</th></tr></thead>
+          <tbody>
+            <tr class="err-row">
+              <td class="font-mono text-center">15</td>
+              <td class="font-mono">CTR_2604099</td>
+              <td class="font-mono text-sm">PRODUCT_TYPE</td>
+              <td class="font-mono text-sm">종합보장형</td>
+              <td>코드 매핑 불일치 — '종합보장형' 에 해당하는 코드 없음</td>
+              <td><select class="form-control" style="width:150px;height:28px;font-size:12px;"><option>-- 선택 --</option><option>PRD_LIFE</option><option>PRD_CI</option><option>PRD_HEALTH</option></select></td>
+            </tr>
+            <tr class="err-row">
+              <td class="font-mono text-center">23</td>
+              <td class="font-mono">CTR_2604107</td>
+              <td class="font-mono text-sm">CONTRACT_DATE</td>
+              <td class="font-mono text-sm">2026/04/05</td>
+              <td>날짜 형식 오류 — '/' 구분자 미지원 (YYYYMMDD 형식 필요)</td>
+              <td><input type="date" class="form-control" value="2026-04-05" style="height:28px;font-size:12px;width:150px;"></td>
+            </tr>
+            <tr class="err-row">
+              <td class="font-mono text-center">41</td>
+              <td class="font-mono">CTR_2604125</td>
+              <td class="font-mono text-sm">EMP_ID</td>
+              <td class="font-mono text-sm">(공백)</td>
+              <td>필수값 누락 — 설계사 사번(EMP_ID)이 비어있음</td>
+              <td><input type="text" class="form-control" placeholder="사번 직접 입력" style="height:28px;font-size:12px;width:150px;"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:8px;justify-content:flex-end;">
+        <button class="btn btn-outline">수동 수정 초기화</button>
+        <button class="btn btn-accent" onclick="alert('수동 수정을 반영하여 재매핑합니다')">수동 수정 후 재매핑</button>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;padding:10px 14px;background:var(--accent-light);border-radius:var(--radius);font-size:12px;color:var(--accent);">
+      ℹ️ 업로드된 원본 엑셀파일은 서버에 자동 보관됩니다. (보관위치: /archive/insurer-excel/2026/04/)
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_031');
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_023 조직정보 조회 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>입수 데이터</span><span>›</span><span>조직정보 조회</span></div>
+      <div class="page-title">조직정보 조회</div>
+      <div class="page-subtitle">마감년월 기준 조직정보 List 조회 (입수데이터 확인용)</div>
+    </div>
+    <div class="page-header-right"><button class="btn btn-outline btn-sm">📥 엑셀 다운로드</button></div>
+  </div>
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-field"><label>마감년월</label><input type="month" class="form-control" value="2026-04" style="width:150px;"></div>
+      <div class="search-field"><label>조직코드/명</label><input type="text" class="form-control" placeholder="조직코드 또는 조직명" style="width:180px;"></div>
+      <div class="search-field"><label>조직유형</label><select class="form-control" style="width:120px;"><option>전체</option><option>지역본부</option><option>지점</option><option>팀</option></select></div>
+      <div class="search-field"><label>&nbsp;</label><div class="flex gap-2"><button class="btn btn-primary">🔍 조회</button><button class="btn btn-outline">초기화</button></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">조회 결과 <span style="color:var(--text-muted);font-weight:400;font-size:13px;">총 32개 조직</span></div>
+      <span class="badge badge-muted">마감년월: 2026-04</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>조직코드</th><th>조직명</th><th>상위조직</th><th>조직유형</th><th>지역</th><th>조직장</th><th>소속인원</th><th>생성일</th></tr></thead>
+        <tbody>
+          <tr><td class="font-mono">ORG_ALL</td><td><strong>에셋 GA 전체</strong></td><td class="text-muted">-</td><td><span class="badge badge-primary">총괄</span></td><td>전국</td><td>대표이사</td><td class="text-center font-mono">248명</td><td class="font-mono text-sm text-muted">2020-01-01</td></tr>
+          <tr><td class="font-mono">ORG_SEL</td><td>서울지역본부</td><td class="font-mono text-sm text-muted">ORG_ALL</td><td><span class="badge badge-muted">지역본부</span></td><td>서울</td><td>김본부장</td><td class="text-center font-mono">89명</td><td class="font-mono text-sm text-muted">2020-01-01</td></tr>
+          <tr><td class="font-mono">ORG_SEL_01</td><td>강남지점</td><td class="font-mono text-sm text-muted">ORG_SEL</td><td><span class="badge badge-muted">지점</span></td><td>서울강남</td><td>이지점장</td><td class="text-center font-mono">32명</td><td class="font-mono text-sm text-muted">2020-01-01</td></tr>
+          <tr><td class="font-mono">ORG_SEL_02</td><td>강북지점</td><td class="font-mono text-sm text-muted">ORG_SEL</td><td><span class="badge badge-muted">지점</span></td><td>서울강북</td><td>정지점장</td><td class="text-center font-mono">28명</td><td class="font-mono text-sm text-muted">2020-01-01</td></tr>
+          <tr><td class="font-mono">ORG_GGI</td><td>경기지역본부</td><td class="font-mono text-sm text-muted">ORG_ALL</td><td><span class="badge badge-muted">지역본부</span></td><td>경기</td><td>박본부장</td><td class="text-center font-mono">76명</td><td class="font-mono text-sm text-muted">2020-01-01</td></tr>
+          <tr><td class="font-mono">ORG_BSN</td><td>부산지역본부</td><td class="font-mono text-sm text-muted">ORG_ALL</td><td><span class="badge badge-muted">지역본부</span></td><td>부산</td><td>최본부장</td><td class="text-center font-mono">83명</td><td class="font-mono text-sm text-muted">2020-01-01</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;padding:10px 14px;background:var(--accent-light);border-radius:var(--radius);font-size:12px;color:var(--accent);">ℹ️ 이 화면은 입수데이터 확인용입니다. 상세 조회는 제공되지 않습니다.</div>
+    <div class="pagination"><button class="page-btn">‹</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">›</button></div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_023');</script>
+</body></html>

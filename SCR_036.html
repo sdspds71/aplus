@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_036 마감 확정 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+<style>
+.confirm-box {
+  border:2px solid var(--warning); background:#FFFBF0;
+  border-radius:var(--radius-lg); padding:24px; text-align:center;
+  margin:20px 0;
+}
+.confirm-box h3 { font-size:16px; color:var(--warning); margin-bottom:8px; }
+.confirm-box p { font-size:13px; color:var(--text-secondary); line-height:1.7; }
+.confirm-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  height:44px; padding:0 28px; background:var(--danger); color:#fff;
+  border:none; border-radius:6px; font-size:15px; font-weight:700;
+  font-family:inherit; cursor:pointer; margin-top:16px;
+}
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>시책 마감</span><span>›</span><span>마감 확정</span></div>
+      <div class="page-title">마감 확정</div>
+      <div class="page-subtitle">산출된 시책금액의 검증이 완료된 후 마감을 확정합니다</div>
+    </div>
+  </div>
+
+  <!-- 마감 대상 선택 -->
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-header"><div class="card-title">마감 대상 선택</div></div>
+    <div class="flex gap-3 items-center">
+      <div class="search-field"><label>마감년월</label><input type="month" class="form-control" value="2026-03" style="width:150px;"></div>
+      <div class="search-field"><label>&nbsp;</label><button class="btn btn-primary">조회</button></div>
+    </div>
+  </div>
+
+  <!-- 마감 현황 -->
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-header"><div class="card-title">2026년 03월 시책 마감 현황</div></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>보험회사</th><th class="text-right">지급 시책수</th><th class="text-right">지급 합계액</th><th class="text-right">환수 합계액</th><th>검증상태</th><th>확정여부</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-primary">삼성생명</span></td>
+            <td class="text-right font-mono">8건</td>
+            <td class="text-right font-mono">85,200,000</td>
+            <td class="text-right font-mono" style="color:var(--danger);">12,300,000</td>
+            <td><span class="badge badge-success">✓ 검증완료</span></td>
+            <td><span class="badge badge-muted">미확정</span></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-primary">한화생명</span></td>
+            <td class="text-right font-mono">5건</td>
+            <td class="text-right font-mono">72,100,000</td>
+            <td class="text-right font-mono" style="color:var(--danger);">8,900,000</td>
+            <td><span class="badge badge-success">✓ 검증완료</span></td>
+            <td><span class="badge badge-muted">미확정</span></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-primary">교보생명</span></td>
+            <td class="text-right font-mono">6건</td>
+            <td class="text-right font-mono">91,350,000</td>
+            <td class="text-right font-mono" style="color:var(--danger);">15,400,000</td>
+            <td><span class="badge badge-warning">⚠ 검토필요</span></td>
+            <td><span class="badge badge-muted">미확정</span></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-primary">NH농협생명</span></td>
+            <td class="text-right font-mono">3건</td>
+            <td class="text-right font-mono">74,800,000</td>
+            <td class="text-right font-mono" style="color:var(--danger);">4,600,000</td>
+            <td><span class="badge badge-success">✓ 검증완료</span></td>
+            <td><span class="badge badge-muted">미확정</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:14px;padding:12px 16px;background:#FEF9E7;border:1px solid #F9E79F;border-radius:var(--radius);font-size:12px;color:var(--warning);">
+      ⚠️ <strong>교보생명</strong> 항목에 검토가 필요한 항목이 있습니다. 마감 확정 전 반드시 확인하세요.
+    </div>
+  </div>
+
+  <!-- 확정 버튼 영역 -->
+  <div class="card">
+    <div class="card-header"><div class="card-title">마감 확정 처리</div></div>
+    <div class="confirm-box">
+      <h3>⚠️ 마감 확정 시 주의사항</h3>
+      <p>
+        마감을 확정하면 <strong>배치 작업 수행이 불가</strong>하고, <strong>결과 값의 수정도 불가능</strong>합니다.<br>
+        확정 후에는 결과 송신(SCR_037) 단계로 진행됩니다.<br>
+        모든 시책이 검증 완료 상태인지 반드시 확인하세요.
+      </p>
+      <button class="confirm-btn" onclick="if(confirm('2026년 03월 마감을 확정합니까?\n확정 후 수정이 불가합니다.'))alert('마감 확정 처리되었습니다.')">
+        🔏 2026년 03월 마감 확정
+      </button>
+    </div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_036');</script>
+</body></html>

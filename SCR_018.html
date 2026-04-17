@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_018 사용현황 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+<style>
+.bar { height:8px; background:var(--accent); border-radius:4px; }
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>공통업무</span><span>›</span><span>사용현황</span></div>
+      <div class="page-title">사용현황</div>
+      <div class="page-subtitle">화면ID별 접속 횟수 및 사용 현황을 조회합니다</div>
+    </div>
+    <div class="page-header-right"><button class="btn btn-outline btn-sm">📥 엑셀 다운로드</button></div>
+  </div>
+  <div class="search-bar">
+    <div class="search-row">
+      <div class="search-field"><label>조회기간</label>
+        <div class="flex gap-2 items-center">
+          <input type="date" class="form-control" value="2026-04-01" style="width:140px;"> <span class="text-muted">~</span>
+          <input type="date" class="form-control" value="2026-04-17" style="width:140px;">
+        </div>
+      </div>
+      <div class="search-field"><label>&nbsp;</label><button class="btn btn-primary">🔍 조회</button></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">화면별 접속 현황 (2026.04.01 ~ 04.17)</div></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>화면ID</th><th>화면명</th><th class="text-right">접속 횟수</th><th style="width:200px;">비율</th><th class="text-right">최근 접속일</th></tr></thead>
+        <tbody>
+          <tr><td class="font-mono">SCR_003</td><td>지급기준 관리</td><td class="text-right font-mono">234회</td><td><div style="background:var(--border-light);border-radius:4px;overflow:hidden;"><div class="bar" style="width:100%;"></div></div></td><td class="text-right text-muted text-sm">2026-04-17</td></tr>
+          <tr><td class="font-mono">SCR_025</td><td>일일 지급 목록</td><td class="text-right font-mono">198회</td><td><div style="background:var(--border-light);border-radius:4px;overflow:hidden;"><div class="bar" style="width:85%;"></div></div></td><td class="text-right text-muted text-sm">2026-04-17</td></tr>
+          <tr><td class="font-mono">SCR_001</td><td>원수사 시책목록</td><td class="text-right font-mono">156회</td><td><div style="background:var(--border-light);border-radius:4px;overflow:hidden;"><div class="bar" style="width:67%;"></div></div></td><td class="text-right text-muted text-sm">2026-04-16</td></tr>
+          <tr><td class="font-mono">SCR_020</td><td>메인화면</td><td class="text-right font-mono">142회</td><td><div style="background:var(--border-light);border-radius:4px;overflow:hidden;"><div class="bar" style="width:61%;"></div></div></td><td class="text-right text-muted text-sm">2026-04-17</td></tr>
+          <tr><td class="font-mono">SCR_031</td><td>시책 엑셀 업로드</td><td class="text-right font-mono">87회</td><td><div style="background:var(--border-light);border-radius:4px;overflow:hidden;"><div class="bar" style="width:37%;"></div></div></td><td class="text-right text-muted text-sm">2026-04-15</td></tr>
+          <tr><td class="font-mono">SCR_036</td><td>마감 확정</td><td class="text-right font-mono">12회</td><td><div style="background:var(--border-light);border-radius:4px;overflow:hidden;"><div class="bar" style="width:5%;"></div></div></td><td class="text-right text-muted text-sm">2026-04-10</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_018');</script>
+</body></html>

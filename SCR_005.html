@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_005 상세정보 Step1 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+.axis-selector { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+.axis-chip {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:5px 12px; border:1.5px solid var(--border);
+  border-radius:20px; font-size:12px; font-weight:500; cursor:pointer;
+  background:#fff; color:var(--text-secondary); transition:all .15s; user-select:none;
+}
+.axis-chip.active { border-color:var(--accent); background:var(--accent-light); color:var(--primary); font-weight:600; }
+.axis-chip input[type=checkbox] { display:none; }
+
+.grid-preview { overflow-x:auto; border:1px solid var(--border); border-radius:var(--radius); }
+.grid-preview table { width:100%; border-collapse:collapse; font-size:12px; }
+.grid-preview th {
+  background:#EBF5FB; padding:8px 10px;
+  border:1px solid var(--border); text-align:center;
+  font-size:11px; font-weight:700; color:var(--primary); white-space:nowrap;
+}
+.grid-preview td {
+  padding:7px 10px; border:1px solid var(--border-light);
+  text-align:right; font-family:'IBM Plex Mono',monospace; font-size:12px;
+}
+.grid-preview td.row-header {
+  background:#F4F7FB; text-align:left; font-family:'Noto Sans KR',sans-serif;
+  font-weight:600; color:var(--text-secondary); width:160px;
+}
+.grid-preview td input {
+  width:90px; height:26px; padding:0 6px; border:1px solid transparent;
+  background:transparent; font-size:12px; font-family:'IBM Plex Mono',monospace;
+  text-align:right; border-radius:3px; color:var(--text-primary);
+}
+.grid-preview td input:focus { border-color:var(--accent); background:#fff; outline:none; }
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><a href="SCR_003.html">지급기준 관리</a><span>›</span><span>상세정보 Step1</span></div>
+        <div class="page-title">시책 지급기준 — 상세정보 Step1</div>
+        <div class="page-subtitle">삼성생명 · 종신 GA시책 (04월) · 업적년월: 2026-04</div>
+      </div>
+    </div>
+
+    <!-- 스텝 위저드 -->
+    <div class="step-wizard">
+      <div class="step-item done">
+        <div class="step-num">✓</div>
+        <div class="step-info"><div class="step-label">SCR_004</div><div class="step-title">기본정보 등록</div></div>
+      </div>
+      <div class="step-item active">
+        <div class="step-num">2</div>
+        <div class="step-info"><div class="step-label">SCR_005</div><div class="step-title">상세정보 Step1</div></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-info"><div class="step-label">SCR_006</div><div class="step-title">상세정보 Step2</div></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-info"><div class="step-label">SCR_007</div><div class="step-title">상세정보 Step3</div></div>
+      </div>
+    </div>
+
+    <!-- 축 선택 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><div class="card-title">지급 기준 축(Axis) 선택</div><span style="font-size:12px;color:var(--text-muted);">선택한 항목에 따라 아래 Grid가 자동 구성됩니다</span></div>
+      <div class="flex gap-3 flex-wrap" style="margin-bottom:12px;">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:6px;letter-spacing:.5px;">행 기준 (Row)</div>
+          <div class="axis-selector">
+            <label class="axis-chip active"><input type="checkbox" checked>📦 상품별</label>
+            <label class="axis-chip active"><input type="checkbox" checked>📅 납기별</label>
+            <label class="axis-chip"><input type="checkbox">📆 주차별</label>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:6px;letter-spacing:.5px;">열 기준 (Column)</div>
+          <div class="axis-selector">
+            <label class="axis-chip active"><input type="checkbox" checked>💵 보험료 구간별</label>
+            <label class="axis-chip"><input type="checkbox">📊 달성률 구간별</label>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--accent-light);border-radius:var(--radius);padding:10px 14px;font-size:12px;color:var(--accent);">
+        ✅ 현재 구성: <strong>상품 × 납기</strong> (행) / <strong>보험료 구간</strong> (열) → Grid 자동 생성됨
+      </div>
+    </div>
+
+    <!-- 보험료 구간 설정 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header">
+        <div class="card-title">보험료 구간 설정</div>
+        <button class="btn btn-outline btn-sm">+ 구간 추가</button>
+      </div>
+      <div class="flex gap-2 flex-wrap" style="align-items:center;">
+        <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;">
+          <span class="text-muted text-sm">구간1</span>
+          <input type="text" value="0" style="width:60px;border:none;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;"> ~
+          <input type="text" value="50,000" style="width:80px;border:none;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;"> 원
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;">
+          <span class="text-muted text-sm">구간2</span>
+          <input type="text" value="50,001" style="width:80px;border:none;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;"> ~
+          <input type="text" value="100,000" style="width:80px;border:none;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;"> 원
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;">
+          <span class="text-muted text-sm">구간3</span>
+          <input type="text" value="100,001" style="width:80px;border:none;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;"> ~
+          <input type="text" value="이상" style="width:60px;border:none;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;color:var(--text-muted);">
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid 미리보기 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">지급 기준 Grid</div>
+        <div class="flex gap-2">
+          <button class="btn btn-outline btn-sm">Grid 초기화</button>
+          <span style="font-size:12px;color:var(--text-muted);align-self:center;">단위: 원(₩)</span>
+        </div>
+      </div>
+      <div class="grid-preview">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2" style="width:160px;">상품 / 납기</th>
+              <th colspan="3">보험료 구간</th>
+            </tr>
+            <tr>
+              <th>~5만원</th>
+              <th>5만~10만원</th>
+              <th>10만원 이상</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-header">종신보험 / 10년납</td>
+              <td><input type="text" value="15,000"></td>
+              <td><input type="text" value="32,000"></td>
+              <td><input type="text" value="68,000"></td>
+            </tr>
+            <tr>
+              <td class="row-header">종신보험 / 15년납</td>
+              <td><input type="text" value="12,000"></td>
+              <td><input type="text" value="27,000"></td>
+              <td><input type="text" value="55,000"></td>
+            </tr>
+            <tr>
+              <td class="row-header">종신보험 / 20년납</td>
+              <td><input type="text" value="10,000"></td>
+              <td><input type="text" value="23,000"></td>
+              <td><input type="text" value="48,000"></td>
+            </tr>
+            <tr>
+              <td class="row-header">CI보험 / 10년납</td>
+              <td><input type="text" value="18,000"></td>
+              <td><input type="text" value="38,000"></td>
+              <td><input type="text" value="75,000"></td>
+            </tr>
+            <tr>
+              <td class="row-header">CI보험 / 15년납</td>
+              <td><input type="text" value="14,000"></td>
+              <td><input type="text" value="31,000"></td>
+              <td><input type="text" value="62,000"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 버튼 -->
+    <div class="flex justify-between mt-4">
+      <button class="btn btn-outline" onclick="location.href='SCR_004.html'">← 이전</button>
+      <div class="flex gap-2">
+        <button class="btn btn-outline">임시저장</button>
+        <button class="btn btn-primary" onclick="location.href='SCR_006.html'">저장 후 다음 →</button>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_003');
+// Toggle axis chips
+document.querySelectorAll('.axis-chip').forEach(chip => {
+  chip.addEventListener('click', () => chip.classList.toggle('active'));
+});
+</script>
+</body>
+</html>

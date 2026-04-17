@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_006 상세정보 Step2 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+.org-tree { border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.org-header { background:#F4F7FB; padding:10px 16px; font-size:11px; font-weight:700; color:var(--text-muted); display:grid; grid-template-columns:20px 1fr 110px 30px; gap:10px; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:.5px; }
+.org-row { display:grid; grid-template-columns:20px 1fr 110px 30px; gap:10px; align-items:center; padding:9px 16px; border-bottom:1px solid var(--border-light); font-size:13px; }
+.org-row:last-child { border-bottom:none; }
+.org-row:hover { background:rgba(46,134,193,.04); }
+.org-indent1 { padding-left:28px; grid-template-columns:20px 1fr 110px 30px; }
+.org-indent2 { padding-left:48px; grid-template-columns:20px 1fr 110px 30px; }
+.org-code { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-muted); }
+.selected-list { display:flex; flex-wrap:wrap; gap:6px; min-height:40px; padding:8px; border:1px solid var(--border); border-radius:var(--radius); background:#fafcff; }
+.selected-tag { display:inline-flex; align-items:center; gap:5px; padding:3px 10px; background:var(--accent-light); border:1px solid rgba(46,134,193,.25); border-radius:12px; font-size:12px; color:var(--primary); font-weight:500; }
+.selected-tag button { background:none; border:none; cursor:pointer; color:var(--text-muted); font-size:14px; padding:0; line-height:1; }
+</style>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+  <main class="content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><a href="SCR_003.html">지급기준 관리</a><span>›</span><span>상세정보 Step2</span></div>
+        <div class="page-title">시책 지급기준 — 상세정보 Step2</div>
+        <div class="page-subtitle">삼성생명 · 종신 GA시책 (04월) · 지급 대상 조직정보를 등록합니다</div>
+      </div>
+    </div>
+
+    <div class="step-wizard">
+      <div class="step-item done"><div class="step-num">✓</div><div class="step-info"><div class="step-label">SCR_004</div><div class="step-title">기본정보 등록</div></div></div>
+      <div class="step-item done"><div class="step-num">✓</div><div class="step-info"><div class="step-label">SCR_005</div><div class="step-title">상세정보 Step1</div></div></div>
+      <div class="step-item active"><div class="step-num">3</div><div class="step-info"><div class="step-label">SCR_006</div><div class="step-title">상세정보 Step2</div></div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-info"><div class="step-label">SCR_007</div><div class="step-title">상세정보 Step3</div></div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">대상 조직 선택</div>
+          <div class="flex gap-2">
+            <input type="text" class="form-control" placeholder="조직명 검색" style="width:130px;">
+            <button class="btn btn-outline btn-sm">검색</button>
+          </div>
+        </div>
+        <div class="org-tree">
+          <div class="org-header">
+            <span></span><span>조직명</span><span>조직코드</span><span>선택</span>
+          </div>
+          <div class="org-row" style="font-weight:700;">
+            <span style="color:var(--text-muted);font-size:11px;">▼</span>
+            <span>🏢 에셋 GA 전체</span>
+            <span class="org-code">ORG_ALL</span>
+            <input type="checkbox" onchange="toggleAll(this)">
+          </div>
+          <div class="org-row org-indent1" style="font-weight:600;">
+            <span style="color:var(--text-muted);font-size:11px;">▼</span>
+            <span>📁 서울지역본부</span>
+            <span class="org-code">ORG_SEL</span>
+            <input type="checkbox" checked onchange="addTag('서울지역본부',this)">
+          </div>
+          <div class="org-row org-indent2">
+            <span></span><span>강남지점</span>
+            <span class="org-code">ORG_SEL_01</span>
+            <input type="checkbox" checked onchange="addTag('강남지점',this)">
+          </div>
+          <div class="org-row org-indent2">
+            <span></span><span>강북지점</span>
+            <span class="org-code">ORG_SEL_02</span>
+            <input type="checkbox" checked onchange="addTag('강북지점',this)">
+          </div>
+          <div class="org-row org-indent2">
+            <span></span><span>송파지점</span>
+            <span class="org-code">ORG_SEL_03</span>
+            <input type="checkbox" onchange="addTag('송파지점',this)">
+          </div>
+          <div class="org-row org-indent1" style="font-weight:600;">
+            <span style="color:var(--text-muted);font-size:11px;">▼</span>
+            <span>📁 경기지역본부</span>
+            <span class="org-code">ORG_GGI</span>
+            <input type="checkbox" onchange="addTag('경기지역본부',this)">
+          </div>
+          <div class="org-row org-indent2">
+            <span></span><span>수원지점</span>
+            <span class="org-code">ORG_GGI_01</span>
+            <input type="checkbox" onchange="addTag('수원지점',this)">
+          </div>
+          <div class="org-row org-indent2">
+            <span></span><span>성남지점</span>
+            <span class="org-code">ORG_GGI_02</span>
+            <input type="checkbox" onchange="addTag('성남지점',this)">
+          </div>
+          <div class="org-row org-indent1" style="font-weight:600;">
+            <span style="color:var(--text-muted);font-size:11px;">▼</span>
+            <span>📁 부산지역본부</span>
+            <span class="org-code">ORG_BSN</span>
+            <input type="checkbox" onchange="addTag('부산지역본부',this)">
+          </div>
+          <div class="org-row org-indent2">
+            <span></span><span>부산본점</span>
+            <span class="org-code">ORG_BSN_01</span>
+            <input type="checkbox" onchange="addTag('부산본점',this)">
+          </div>
+          <div class="org-row org-indent2">
+            <span></span><span>해운대지점</span>
+            <span class="org-code">ORG_BSN_02</span>
+            <input type="checkbox" onchange="addTag('해운대지점',this)">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="card-header">
+            <div class="card-title">선택된 대상 조직</div>
+            <button class="btn btn-ghost btn-sm" onclick="clearAll()">전체 해제</button>
+          </div>
+          <div id="selected-list" class="selected-list">
+            <span class="selected-tag" data-name="서울지역본부">서울지역본부 <button onclick="removeTag(this)">×</button></span>
+            <span class="selected-tag" data-name="강남지점">강남지점 <button onclick="removeTag(this)">×</button></span>
+            <span class="selected-tag" data-name="강북지점">강북지점 <button onclick="removeTag(this)">×</button></span>
+          </div>
+          <div style="margin-top:10px;padding:10px 12px;background:var(--accent-light);border-radius:var(--radius);font-size:12px;color:var(--accent);">
+            ℹ️ 선택된 조직의 하위 조직은 자동으로 포함됩니다.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">제외 조건 설정</div></div>
+          <div class="form-row" style="margin-bottom:12px;">
+            <label>제외 채널</label>
+            <select class="form-control">
+              <option>없음</option>
+              <option>TM 설계사 제외</option>
+              <option>방카 설계사 제외</option>
+              <option>신인 설계사 제외 (입사 3개월 미만)</option>
+            </select>
+          </div>
+          <div class="form-row" style="margin-bottom:12px;">
+            <label>제외 조직</label>
+            <div class="selected-list" style="min-height:32px;">
+              <span style="font-size:12px;color:var(--text-muted);">없음 (위 트리에서 체크 해제)</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>추가 비고</label>
+            <textarea class="form-control" rows="3" placeholder="기타 제외 조건이나 특이사항 입력"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between mt-4">
+      <button class="btn btn-outline" onclick="location.href='SCR_005.html'">← 이전</button>
+      <div class="flex gap-2">
+        <button class="btn btn-outline">임시저장</button>
+        <button class="btn btn-primary" onclick="location.href='SCR_007.html'">저장 후 다음 →</button>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_003');
+function addTag(name, cb) {
+  const list = document.getElementById('selected-list');
+  if (cb.checked) {
+    const tag = document.createElement('span');
+    tag.className = 'selected-tag'; tag.dataset.name = name;
+    tag.innerHTML = `${name} <button onclick="removeTag(this)">×</button>`;
+    list.appendChild(tag);
+  } else {
+    list.querySelectorAll('.selected-tag').forEach(t => { if(t.dataset.name===name) t.remove(); });
+  }
+}
+function removeTag(btn) { btn.parentElement.remove(); }
+function clearAll() {
+  document.getElementById('selected-list').querySelectorAll('.selected-tag').forEach(t=>t.remove());
+  document.querySelectorAll('.org-tree input[type=checkbox]').forEach(cb=>cb.checked=false);
+}
+function toggleAll(cb) { document.querySelectorAll('.org-tree input[type=checkbox]').forEach(c=>c.checked=cb.checked); }
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_028 일일 환수 상세 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><a href="SCR_027.html">일일 환수 목록</a><span>›</span><span>일일 환수 상세</span></div>
+      <div class="page-title">일일 환수 상세</div>
+      <div class="page-subtitle">삼성생명 · 2026-04 · 계약 건별 환수 내역</div>
+    </div>
+    <div class="page-header-right">
+      <button class="btn btn-outline btn-sm" onclick="location.href='SCR_027.html'">← 목록으로</button>
+      <button class="btn btn-outline btn-sm">📥 엑셀 다운로드</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;">
+      <div style="padding:14px 18px;border-right:1px solid var(--border);"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">보험회사</div><div style="font-size:14px;font-weight:700;">삼성생명</div></div>
+      <div style="padding:14px 18px;border-right:1px solid var(--border);"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">마감년월</div><div style="font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;">2026-04</div></div>
+      <div style="padding:14px 18px;border-right:1px solid var(--border);"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">환수 계약 건수</div><div style="font-size:20px;font-weight:700;color:var(--danger);">38건</div></div>
+      <div style="padding:14px 18px;"><div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">환수 예상 합계액</div><div style="font-size:18px;font-weight:700;color:var(--danger);font-family:'IBM Plex Mono',monospace;">12,300,000</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">계약 건별 환수 내역</div></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>계약번호</th><th>설계사</th><th>소속지점</th><th>상품명</th><th>원 지급 시책</th><th>원 지급액</th><th>환수 회차</th><th>환수율</th><th class="text-right">환수액</th><th>계약상태</th></tr></thead>
+        <tbody>
+          <tr><td class="font-mono text-sm">CTR_2603021</td><td>장수연</td><td>강남지점</td><td>삼성 종신보험</td><td class="text-muted text-sm">종신 GA시책(03월)</td><td class="font-mono text-sm text-muted">32,000</td><td class="text-center font-mono">2회</td><td class="text-center font-mono">100%</td><td class="text-right font-mono" style="color:var(--danger);font-weight:600;">32,000</td><td><span class="badge badge-warning">실효</span></td></tr>
+          <tr><td class="font-mono text-sm">CTR_2602047</td><td>박동수</td><td>수원지점</td><td>삼성 CI보험</td><td class="text-muted text-sm">CI GA시책(02월)</td><td class="font-mono text-sm text-muted">55,000</td><td class="text-center font-mono">3회</td><td class="text-center font-mono">100%</td><td class="text-right font-mono" style="color:var(--danger);font-weight:600;">55,000</td><td><span class="badge badge-danger">해지</span></td></tr>
+          <tr><td class="font-mono text-sm">CTR_2601085</td><td>김영희</td><td>강북지점</td><td>삼성 건강보험</td><td class="text-muted text-sm">건강 GA시책(01월)</td><td class="font-mono text-sm text-muted">48,000</td><td class="text-center font-mono">5회</td><td class="text-center font-mono">80%</td><td class="text-right font-mono" style="color:var(--danger);font-weight:600;">38,400</td><td><span class="badge badge-warning">실효</span></td></tr>
+        </tbody>
+        <tfoot>
+          <tr style="background:#FDF2F8;font-weight:700;">
+            <td colspan="8" style="text-align:right;padding:10px 12px;font-size:13px;">합계</td>
+            <td class="text-right font-mono" style="color:var(--danger);padding:10px 12px;">125,400</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="pagination"><button class="page-btn">‹</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">›</button></div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_027');</script>
+</body></html>

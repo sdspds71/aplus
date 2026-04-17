@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_016 공통코드관리 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>공통업무</span><span>›</span><span>공통코드관리</span></div>
+      <div class="page-title">공통코드관리</div>
+      <div class="page-subtitle">코드 그룹과 코드 상세정보를 관리합니다</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:16px;">
+    <!-- 코드 그룹 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">코드 그룹</div>
+        <button class="btn btn-outline btn-sm">+ 그룹 등록</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>그룹ID</th><th>그룹명</th><th>코드수</th></tr></thead>
+          <tbody>
+            <tr style="background:var(--accent-light);"><td class="font-mono">GRP_INS</td><td><strong>보험회사</strong></td><td class="text-center">8</td></tr>
+            <tr><td class="font-mono">GRP_PRD</td><td>상품구분</td><td class="text-center">12</td></tr>
+            <tr><td class="font-mono">GRP_PAY</td><td>납기구분</td><td class="text-center">5</td></tr>
+            <tr><td class="font-mono">GRP_ORG</td><td>조직구분</td><td class="text-center">6</td></tr>
+            <tr><td class="font-mono">GRP_STAT</td><td>처리상태</td><td class="text-center">3</td></tr>
+            <tr><td class="font-mono">GRP_AUTH</td><td>권한구분</td><td class="text-center">3</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- 코드 상세 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">코드 상세 — 보험회사 (GRP_INS)</div>
+        <button class="btn btn-outline btn-sm">+ 코드 등록</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>코드ID</th><th>코드명</th><th>정렬</th><th>사용여부</th><th>처리</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono">INS_SS</td><td>삼성생명</td><td class="text-center">1</td><td><span class="badge badge-success">사용</span></td><td><button class="btn btn-ghost btn-sm">수정</button></td></tr>
+            <tr><td class="font-mono">INS_HH</td><td>한화생명</td><td class="text-center">2</td><td><span class="badge badge-success">사용</span></td><td><button class="btn btn-ghost btn-sm">수정</button></td></tr>
+            <tr><td class="font-mono">INS_KB</td><td>교보생명</td><td class="text-center">3</td><td><span class="badge badge-success">사용</span></td><td><button class="btn btn-ghost btn-sm">수정</button></td></tr>
+            <tr><td class="font-mono">INS_NH</td><td>NH농협생명</td><td class="text-center">4</td><td><span class="badge badge-success">사용</span></td><td><button class="btn btn-ghost btn-sm">수정</button></td></tr>
+            <tr><td class="font-mono">INS_ME</td><td>미래에셋생명</td><td class="text-center">5</td><td><span class="badge badge-success">사용</span></td><td><button class="btn btn-ghost btn-sm">수정</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main></div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_016');</script>
+</body></html>

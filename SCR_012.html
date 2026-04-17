@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><title>SCR_012 권한관리 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css"><script src="common.js"></script>
+</head>
+<body>
+<div id="gnb"></div>
+<div class="layout"><div id="lnb"></div>
+<main class="content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="breadcrumb"><a href="SCR_020.html">홈</a><span>›</span><span>공통업무</span><span>›</span><span>권한관리</span></div>
+      <div class="page-title">권한관리</div>
+      <div class="page-subtitle">시스템 권한 유형을 정의합니다 (조회전용, 일반사용자, 관리자 등)</div>
+    </div>
+    <div class="page-header-right"><button class="btn btn-primary" onclick="document.getElementById('modal').style.display='flex'">+ 권한 등록</button></div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">권한 목록</div></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>권한ID</th><th>권한명</th><th>설명</th><th>사용자 수</th><th>사용여부</th><th>처리</th></tr></thead>
+        <tbody>
+          <tr><td class="font-mono">ROLE_ADMIN</td><td><span class="badge badge-danger">관리자</span></td><td>전체 화면 접근 및 설정 가능</td><td class="text-center">2명</td><td><span class="badge badge-success">사용</span></td><td><button class="btn btn-ghost btn-sm">수정</button></td></tr>
+          <tr><td class="font-mono">ROLE_USER</td><td><span class="badge badge-primary">일반사용자</span></td><td>업무 화면 조회/입력 가능 (공통업무 일부 제외)</td><td class="text-center">8명</td><td><span class="badge badge-success">사용</span></td><td><button class="btn btn-ghost btn-sm">수정</button></td></tr>
+          <tr><td class="font-mono">ROLE_VIEW</td><td><span class="badge badge-muted">조회전용</span></td><td>모든 화면 조회만 가능, 등록/수정/삭제 불가</td><td class="text-center">3명</td><td><span class="badge badge-success">사용</span></td><td><button class="btn btn-ghost btn-sm">수정</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="margin-top:12px;padding:12px 16px;background:var(--warning-light);border:1px solid #F9E79F;border-radius:var(--radius);font-size:12px;color:var(--warning);">
+    ⚠️ 권한 정의는 현업 확인 후 확정 예정입니다. 현재 임시 정의 상태입니다.
+  </div>
+</main></div>
+<div id="modal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">권한 등록 / 수정</div><button class="modal-close" onclick="document.getElementById('modal').style.display='none'">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid" style="gap:14px;">
+        <div class="form-row"><label class="required">권한ID</label><input type="text" class="form-control" placeholder="ROLE_XXX"></div>
+        <div class="form-row"><label class="required">권한명</label><input type="text" class="form-control" placeholder="권한 이름"></div>
+        <div class="form-row"><label>설명</label><textarea class="form-control" rows="3" placeholder="권한 설명"></textarea></div>
+        <div class="form-row"><label>사용여부</label><select class="form-control"><option>사용</option><option>미사용</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('modal').style.display='none'">취소</button>
+      <button class="btn btn-primary">저장</button>
+    </div>
+  </div>
+</div>
+<script>document.getElementById('gnb').innerHTML=renderGNB();document.getElementById('lnb').innerHTML=renderLNB('SCR_012');</script>
+</body></html>

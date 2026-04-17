@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 시책관리 시스템 - 화면 목록</title>
+<link rel="stylesheet" href="common.css">
+<style>
+.index-header {
+  background: var(--primary); color: #fff;
+  padding: 32px 40px; border-radius: var(--radius-lg);
+  margin-bottom: 24px;
+}
+.index-header h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+.index-header p { font-size: 14px; opacity: .7; }
+.index-meta { display: flex; gap: 24px; margin-top: 16px; }
+.index-meta span { font-size: 12px; opacity: .6; }
+.index-meta strong { font-size: 14px; opacity: .9; }
+
+.section-group { margin-bottom: 28px; }
+.section-group-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  color: var(--text-muted); text-transform: uppercase;
+  margin-bottom: 10px; padding-left: 4px;
+  border-left: 3px solid var(--accent); padding-left: 10px;
+}
+.screen-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+.screen-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px;
+  text-decoration: none; color: inherit;
+  transition: all .15s; display: flex; align-items: flex-start; gap: 12px;
+}
+.screen-card:hover {
+  border-color: var(--accent); box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+.screen-id {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  font-weight: 600; color: var(--accent);
+  background: var(--accent-light); padding: 3px 7px;
+  border-radius: 4px; flex-shrink: 0; margin-top: 1px;
+}
+.screen-info {}
+.screen-name { font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 3px; }
+.screen-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.screen-tag {
+  display: inline-flex; align-items: center; padding: 1px 6px;
+  border-radius: 3px; font-size: 10px; font-weight: 600;
+  margin-top: 5px;
+}
+.tag-main { background: #EBF5FB; color: var(--accent); }
+.tag-popup { background: #FEF9E7; color: var(--warning); }
+</style>
+</head>
+<body style="background:var(--bg); padding:24px; min-height:100vh;">
+
+<div style="max-width:1200px; margin:0 auto;">
+  <div class="index-header">
+    <h1>🗂 GA 시책관리 시스템 — 화면정의서</h1>
+    <p>에셋 GA 시책관리 시스템 화면 목록 (총 37개 화면)</p>
+    <div class="index-meta">
+      <div><span>작성자</span><br><strong>장수연</strong></div>
+      <div><span>작성일</span><br><strong>2026.04.30</strong></div>
+      <div><span>버전</span><br><strong>v0.5</strong></div>
+      <div><span>총 화면수</span><br><strong>37개</strong></div>
+    </div>
+  </div>
+
+  <!-- 로그인/메인 -->
+  <div class="section-group">
+    <div class="section-group-title">로그인 / 메인</div>
+    <div class="screen-grid">
+      <a href="SCR_019.html" class="screen-card">
+        <span class="screen-id">SCR_019</span>
+        <div class="screen-info">
+          <div class="screen-name">로그인화면</div>
+          <div class="screen-desc">처음 시스템에 접속할 때의 로그인 화면</div>
+          <span class="screen-tag tag-main">메인</span>
+        </div>
+      </a>
+      <a href="SCR_020.html" class="screen-card">
+        <span class="screen-id">SCR_020</span>
+        <div class="screen-info">
+          <div class="screen-name">메인화면</div>
+          <div class="screen-desc">로그인에 성공한 후 최초의 메인 화면 (GNB, LNB)</div>
+          <span class="screen-tag tag-main">메인</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 기준관리 -->
+  <div class="section-group">
+    <div class="section-group-title">기준관리</div>
+    <div class="screen-grid">
+      <a href="SCR_001.html" class="screen-card">
+        <span class="screen-id">SCR_001</span>
+        <div class="screen-info">
+          <div class="screen-name">원수사 시책목록</div>
+          <div class="screen-desc">원수사의 시책기준을 일괄로 조회. 조회조건: 업적년월, 보험회사, 시책명(Like). 클릭 시 상세내용 조회</div>
+          <span class="screen-tag tag-main">메인</span>
+        </div>
+      </a>
+      <a href="SCR_002.html" class="screen-card">
+        <span class="screen-id">SCR_002</span>
+        <div class="screen-info">
+          <div class="screen-name">원수사 시책등록</div>
+          <div class="screen-desc">업적년월, 보험회사, 시책명과 본문 및 첨부파일을 등록</div>
+          <span class="screen-tag tag-popup">팝업</span>
+        </div>
+      </a>
+      <a href="SCR_003.html" class="screen-card">
+        <span class="screen-id">SCR_003</span>
+        <div class="screen-info">
+          <div class="screen-name">지급기준 관리</div>
+          <div class="screen-desc">시책 지급기준을 일괄 조회. 시책처리 단계: 작성중 → 산출(자동) → 확정(사용자)</div>
+          <span class="screen-tag tag-main">메인</span>
+        </div>
+      </a>
+      <a href="SCR_004.html" class="screen-card">
+        <span class="screen-id">SCR_004</span>
+        <div class="screen-info">
+          <div class="screen-name">기본정보 등록</div>
+          <div class="screen-desc">보험회사, 시책명, 적용업적월, 환수기준, 제약조건 등을 등록</div>
+          <span class="screen-tag tag-main">메인</span>
+        </div>
+      </a>
+      <a href="SCR_005.html" class="screen-card">
+        <span class="screen-id">SCR_005</span>
+        <div class="screen-info">
+          <div class="screen-name">상세정보 Step1</div>
+          <div class="screen-desc">상품별/납기별/주차별/보험료구간별 요건에 따라 Grid 자동 세팅. 지급 기준의 메인 화면</div>
+          <span class="screen-tag tag-main">메인</span>
+        </div>
+      </a>
+      <a href="SCR_006.html" class="screen-card">
+        <span class="screen-id">SCR_006</span>
+        <div class="screen-info">
+          <div class="screen-name">상세정보 Step2</div>
+          <div class="screen-desc">시책 지급의 대상이 되는 조직정보 등록</div>
+          <span class="screen-tag tag-main">메인</span>
+        </div>
+      </a>
+      <a href="SCR_007.html" class="screen-card">
+        <span class="screen-id">SCR_007</span>
+        <div class="screen-info">
+          <div class="screen-name">상세정보 Step3</div>
+          <div class="screen-desc">원수사 시책기준을 파악해서 정의</div>
+          <span class="screen-tag tag-main">메인</span>
+        </div>
+      </a>
+      <a href="SCR_008.html" class="screen-card">
+        <span class="screen-id">SCR_008</span>
+        <div class="screen-info">
+          <div class="screen-name">환수기준 관리</div>
+          <div class="screen-desc">시책 환수기준을 일괄로 조회 (List)</div>
+          <span class="screen-tag tag-main">메인</span>
+        </div>
+      </a>
+      <a href="SCR_009.html" class="screen-card">
+        <span class="screen-id">SCR_009</span>
+        <div class="screen-info">
+          <div class="screen-name">환수 상세정보 등록</div>
+          <div class="screen-desc">시작/종료회차 입력 시 회차별 공란 생성, 각각의 환수율을 입력</div>
+          <span class="screen-tag tag-main">메인</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 공통업무 -->
+  <div class="section-group">
+    <div class="section-group-title">공통업무</div>
+    <div class="screen-grid">
+      <a href="SCR_010.html" class="screen-card"><span class="screen-id">SCR_010</span><div class="screen-info"><div class="screen-name">화면관리</div><div class="screen-desc">화면ID, 화면명, 연결프로그램, 사용여부 관리</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_011.html" class="screen-card"><span class="screen-id">SCR_011</span><div class="screen-info"><div class="screen-name">메뉴관리</div><div class="screen-desc">메뉴ID, 메뉴명, 화면ID 관리. 메인화면은 메뉴관리 데이터를 읽어 화면에 출력</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_012.html" class="screen-card"><span class="screen-id">SCR_012</span><div class="screen-info"><div class="screen-name">권한관리</div><div class="screen-desc">조회전용, 일반사용자, 관리자 등으로 구분</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_013.html" class="screen-card"><span class="screen-id">SCR_013</span><div class="screen-info"><div class="screen-name">화면권한관리</div><div class="screen-desc">화면ID, 권한ID를 연결</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_014.html" class="screen-card"><span class="screen-id">SCR_014</span><div class="screen-info"><div class="screen-name">사용자관리</div><div class="screen-desc">시스템의 사용자정보를 등록</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_015.html" class="screen-card"><span class="screen-id">SCR_015</span><div class="screen-info"><div class="screen-name">사용자권한관리</div><div class="screen-desc">사번, 권한ID를 연결</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_016.html" class="screen-card"><span class="screen-id">SCR_016</span><div class="screen-info"><div class="screen-name">공통코드관리</div><div class="screen-desc">공통코드목록과 코드상세정보를 관리</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_017.html" class="screen-card"><span class="screen-id">SCR_017</span><div class="screen-info"><div class="screen-name">로그인이력</div><div class="screen-desc">사용자들이 로그인한 이력을 조회</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_018.html" class="screen-card"><span class="screen-id">SCR_018</span><div class="screen-info"><div class="screen-name">사용현황</div><div class="screen-desc">화면ID별 사용현황을 조회</div><span class="screen-tag tag-main">메인</span></div></a>
+    </div>
+  </div>
+
+  <!-- 입수 데이터 -->
+  <div class="section-group">
+    <div class="section-group-title">입수 데이터</div>
+    <div class="screen-grid">
+      <a href="SCR_021.html" class="screen-card"><span class="screen-id">SCR_021</span><div class="screen-info"><div class="screen-name">상품정보 관리</div><div class="screen-desc">보험회사, 상품군, 상품코드, 상품명, 판매개시/종료일자 등을 Grid로 관리</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_022.html" class="screen-card"><span class="screen-id">SCR_022</span><div class="screen-info"><div class="screen-name">인사정보 조회</div><div class="screen-desc">마감년월 Key를 포함한 인사정보 List 조회</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_023.html" class="screen-card"><span class="screen-id">SCR_023</span><div class="screen-info"><div class="screen-name">조직정보 조회</div><div class="screen-desc">마감년월 Key를 포함한 조직정보 List 조회</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_024.html" class="screen-card"><span class="screen-id">SCR_024</span><div class="screen-info"><div class="screen-name">계약정보 조회</div><div class="screen-desc">마감년월 Key를 포함한 계약정보 List 조회</div><span class="screen-tag tag-main">메인</span></div></a>
+    </div>
+  </div>
+
+  <!-- 시책 일보 -->
+  <div class="section-group">
+    <div class="section-group-title">시책 일보</div>
+    <div class="screen-grid">
+      <a href="SCR_025.html" class="screen-card"><span class="screen-id">SCR_025</span><div class="screen-info"><div class="screen-name">일일 지급 목록</div><div class="screen-desc">지급이 산출된 시책의 제목과 산출금액을 표시. 실시간 산출 수행 가능</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_026.html" class="screen-card"><span class="screen-id">SCR_026</span><div class="screen-info"><div class="screen-name">일일 지급 상세</div><div class="screen-desc">일일 지급 목록에서 클릭한 시책의 계약 건별 List를 표시</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_027.html" class="screen-card"><span class="screen-id">SCR_027</span><div class="screen-info"><div class="screen-name">일일 환수 목록</div><div class="screen-desc">환수가 산출된 내역과 산출금액 표시</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_028.html" class="screen-card"><span class="screen-id">SCR_028</span><div class="screen-info"><div class="screen-name">일일 환수 상세</div><div class="screen-desc">일일 환수 목록에서 클릭한 시책의 계약 건별 List를 표시</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_029.html" class="screen-card"><span class="screen-id">SCR_029</span><div class="screen-info"><div class="screen-name">일일 시책 예측</div><div class="screen-desc">보험회사별 시책 수입 금액 예측 (지급+환수)</div><span class="screen-tag tag-main">메인</span></div></a>
+    </div>
+  </div>
+
+  <!-- 원수사 시책 -->
+  <div class="section-group">
+    <div class="section-group-title">원수사 시책</div>
+    <div class="screen-grid">
+      <a href="SCR_030.html" class="screen-card"><span class="screen-id">SCR_030</span><div class="screen-info"><div class="screen-name">시책 엑셀 매핑</div><div class="screen-desc">원수사 시책결과 엑셀을 표준화된 레이아웃으로 매핑 정의</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_031.html" class="screen-card"><span class="screen-id">SCR_031</span><div class="screen-info"><div class="screen-name">시책 엑셀 업로드</div><div class="screen-desc">원수사 시책결과 엑셀파일을 업로드하고 매핑을 실행. 오류/정상 데이터 확인</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_032.html" class="screen-card"><span class="screen-id">SCR_032</span><div class="screen-info"><div class="screen-name">원수사 시책 통계</div><div class="screen-desc">업로드된 시책결과에 대한 회사별 통계정보 제공</div><span class="screen-tag tag-main">메인</span></div></a>
+    </div>
+  </div>
+
+  <!-- 시책 마감 -->
+  <div class="section-group">
+    <div class="section-group-title">시책 마감</div>
+    <div class="screen-grid">
+      <a href="SCR_033.html" class="screen-card"><span class="screen-id">SCR_033</span><div class="screen-info"><div class="screen-name">마감 지급 결과</div><div class="screen-desc">원수사 시책결과를 이용해 지급금액을 산출한 결과</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_034.html" class="screen-card"><span class="screen-id">SCR_034</span><div class="screen-info"><div class="screen-name">마감 환수 결과</div><div class="screen-desc">원수사 시책결과를 이용해 환수금액을 산출한 결과</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_035.html" class="screen-card"><span class="screen-id">SCR_035</span><div class="screen-info"><div class="screen-name">마감 변경 관리</div><div class="screen-desc">마감 배치를 통해 산출한 결과 값에 대한 수정</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_036.html" class="screen-card"><span class="screen-id">SCR_036</span><div class="screen-info"><div class="screen-name">마감 확정</div><div class="screen-desc">시책금액 검증 완료 후 마감 확정. 확정 후 배치/수정 불가</div><span class="screen-tag tag-main">메인</span></div></a>
+      <a href="SCR_037.html" class="screen-card"><span class="screen-id">SCR_037</span><div class="screen-info"><div class="screen-name">결과 송신</div><div class="screen-desc">마감 완료된 시책결과를 수수료(SALES Plus) 시스템으로 전송</div><span class="screen-tag tag-main">메인</span></div></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
