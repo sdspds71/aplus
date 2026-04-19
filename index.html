@@ -56,6 +56,87 @@
 .tag-popup { background: #FEF9E7; color: var(--warning); }
 </style>
 </head>
+
+<!-- ── 접근 잠금 ──────────────────────────────── -->
+<style>
+#lock-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+}
+#lock-box {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 40px 48px;
+  box-shadow: var(--shadow-lg); width: 360px; text-align: center;
+}
+#lock-logo {
+  display: inline-block;
+  background: var(--primary); color: #fff;
+  font-size: 13px; font-weight: 700; letter-spacing: 1px;
+  padding: 6px 14px; border-radius: var(--radius); margin-bottom: 20px;
+}
+#lock-title { font-size: 17px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+#lock-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 28px; }
+#lock-input {
+  width: 100%; padding: 10px 14px; font-size: 14px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  outline: none; margin-bottom: 12px; text-align: center;
+  letter-spacing: 3px; font-family: 'IBM Plex Mono', monospace;
+  color: var(--text-primary);
+  transition: border-color .2s;
+}
+#lock-input:focus { border-color: var(--accent); }
+#lock-btn {
+  width: 100%; padding: 11px; font-size: 14px; font-weight: 600;
+  background: var(--primary); color: #fff; border: none;
+  border-radius: var(--radius); cursor: pointer; transition: background .2s;
+}
+#lock-btn:hover { background: var(--primary-hover); }
+#lock-error {
+  font-size: 12px; color: var(--danger);
+  margin-top: 10px; min-height: 18px;
+}
+</style>
+
+<div id="lock-overlay">
+  <div id="lock-box">
+    <div id="lock-logo">A+ ASSET</div>
+    <div id="lock-title">GA 시책관리 시스템</div>
+    <div id="lock-sub">화면정의서 — 접근 비밀번호를 입력하세요</div>
+    <input id="lock-input" type="password" placeholder="● ● ● ● ● ●" maxlength="20"
+           onkeydown="if(event.key==='Enter') checkLock()">
+    <button id="lock-btn" onclick="checkLock()">확인</button>
+    <div id="lock-error"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const PW = 'aplus2026';
+  const KEY = 'proto_auth';
+
+  if (sessionStorage.getItem(KEY) === '1') unlock();
+
+  function unlock() {
+    var el = document.getElementById('lock-overlay');
+    if (el) el.remove();
+  }
+
+  window.checkLock = function () {
+    var input = document.getElementById('lock-input');
+    if (input.value === PW) {
+      sessionStorage.setItem(KEY, '1');
+      unlock();
+    } else {
+      document.getElementById('lock-error').textContent = '비밀번호가 올바르지 않습니다.';
+      input.value = '';
+      input.focus();
+    }
+  };
+})();
+</script>
+<!-- ────────────────────────────────────────────── -->
+
 <body style="background:var(--bg); padding:24px; min-height:100vh;">
 
 <div style="max-width:1200px; margin:0 auto;">
