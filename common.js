@@ -17,6 +17,7 @@ const MENU_STRUCTURE = [
       { id: 'SCR_001', label: '원수사 시책목록', icon: '📋', path: 'SCR_001.html' },
       { id: 'SCR_003', label: '시책 지급기준 관리', icon: '💰', path: 'SCR_003.html' },
       { id: 'SCR_008', label: '시책 환수기준 관리', icon: '↩️', path: 'SCR_008.html' },
+      { id: 'SCR_0031', label: '연속가동(사례)', icon: '↩️', path: 'SCR_0031.html' },
     ]
   },
   {

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCR_0031 연속가동 지급기준 등록 | GA 시책관리 시스템</title>
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+/* ── 이 화면 전용 스타일 ──────────────────── */
+
+/* 섹션 타이틀 */
+.sec-title {
+  font-size: 13px; font-weight: 700; color: var(--primary);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec-title::before {
+  content: '';
+  display: inline-block; width: 3px; height: 14px;
+  background: var(--accent); border-radius: 2px;
+}
+
+/* 폼 그리드 (이 화면용) */
+.fg { display: grid; gap: 14px; }
+.fg-3 { grid-template-columns: 1fr 1fr 1fr; }
+.fg-row { display: flex; flex-direction: column; gap: 5px; }
+.fg-row label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+.fg-row.span2 { grid-column: span 2; }
+.fg-row.full  { grid-column: 1 / -1; }
+
+/* multi-select */
+select[multiple] {
+  min-height: 88px; padding: 4px;
+  font-size: 13px;
+}
+select[multiple] option { padding: 3px 6px; border-radius: 3px; }
+select[multiple] option:checked {
+  background: var(--accent-light); color: var(--primary);
+}
+
+/* 테이블 셀 인풋/셀렉트 */
+td .form-control { height: 30px; font-size: 12px; }
+td select.form-control { padding-right: 24px; }
+
+/* 지급기준 명세 결과 구분선 */
+.result-sep { border-left: 2px solid #82e0aa !important; }
+
+/* 연속가동 컨테이너 */
+.cont-wrap {
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+
+/* 토글 스위치 */
+.sw { position: relative; width: 38px; height: 21px; cursor: pointer; flex-shrink: 0; }
+.sw input { opacity: 0; width: 0; height: 0; }
+.sw-track {
+  position: absolute; inset: 0;
+  background: var(--border); border-radius: 21px; transition: .2s;
+}
+.sw-track::before {
+  content: '';
+  position: absolute; width: 15px; height: 15px;
+  left: 3px; top: 3px;
+  background: #fff; border-radius: 50%; transition: .2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+.sw input:checked + .sw-track { background: var(--accent); }
+.sw input:checked + .sw-track::before { transform: translateX(17px); }
+
+/* 연속가동 설정 바 */
+.cfg-bar {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 11px 15px;
+  background: var(--accent-light); border: 1px solid rgba(46,134,193,.3);
+  border-radius: var(--radius); margin-bottom: 14px;
+}
+.cfg-bar label { font-size: 12px; font-weight: 600; color: var(--primary); white-space: nowrap; }
+.cfg-bar select.form-control { width: auto; height: 30px; font-size: 12px; }
+.cfg-bar .note { font-size: 11px; color: var(--text-muted); }
+
+/* 패턴 테이블 */
+.pattern-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  background: var(--accent-light); color: var(--accent);
+  border: 1px solid rgba(46,134,193,.3); border-radius: 50%;
+  font-size: 13px; font-weight: 700;
+}
+
+/* th 그룹 (조건) */
+th.th-cond {
+  background: var(--accent-light); color: var(--primary);
+  font-size: 11px; text-align: center; border: 1px solid var(--border);
+}
+td.cond-sep, th.cond-sep { border-left: 2px solid var(--accent) !important; }
+
+/* 날짜 쌍 */
+.date-pair {
+  display: flex; align-items: center; gap: 4px; justify-content: center;
+  padding: 4px 0;
+}
+.date-pair input[type=date] {
+  width: 124px; height: 28px;
+  font-size: 11px; padding: 3px 6px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'IBM Plex Mono', monospace;
+  background: #fff; color: var(--primary);
+  outline: none;
+}
+.date-pair input[type=date]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(46,134,193,.15);
+}
+.date-pair .tilde { font-size: 12px; color: var(--text-muted); flex-shrink: 0; }
+
+/* 하단 버튼 바 */
+.bottom-bar {
+  display: flex; justify-content: flex-end; gap: 8px;
+  margin-top: 24px; padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+/* table 내부 정렬 */
+td.center { text-align: center; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<div id="gnb"></div>
+<div class="layout">
+  <div id="lnb"></div>
+
+  <main class="content">
+
+    <!-- 페이지 헤더 -->
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="breadcrumb">
+          <a href="SCR_020.html">홈</a><span>›</span>
+          <span>기준관리</span><span>›</span>
+          <a href="SCR_003.html">시책 지급기준 관리</a><span>›</span>
+          <span>연속가동 지급기준 등록</span>
+        </div>
+        <div class="page-title">연속가동 지급기준 등록</div>
+        <div class="page-subtitle">시책 상세정보 — 지급기준 명세 및 연속가동 패턴을 등록합니다</div>
+      </div>
+      <div class="page-header-right">
+        <button class="btn btn-outline" onclick="history.back()">← 목록으로</button>
+      </div>
+    </div>
+
+    <!-- ① 기본 정보 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="sec-title" style="margin-bottom:0">기본 정보</div>
+      </div>
+      <div class="fg fg-3">
+        <div class="fg-row span2">
+          <label>시책명 <span style="color:var(--danger)">*</span></label>
+          <input type="text" class="form-control w-full"
+            value="건강상해 13회 연속가동 골드 프로모션"/>
+        </div>
+        <div class="fg-row">
+          <label>운영기간 <span style="color:var(--danger)">*</span></label>
+          <div style="display:flex;gap:6px;align-items:center">
+            <input type="month" class="form-control" value="2025-12" style="flex:1"/>
+            <span style="font-size:12px;color:var(--text-muted)">~</span>
+            <input type="month" class="form-control" value="2026-02" style="flex:1"/>
+          </div>
+        </div>
+        <div class="fg-row full">
+          <label>비고</label>
+          <input type="text" class="form-control w-full" placeholder="시책 관련 특이사항 입력"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② 지급기준 명세 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="sec-title" style="margin-bottom:0">지급기준 명세</div>
+        <span class="text-sm text-muted">상품 목록에서 Ctrl(Mac: Cmd)+클릭으로 다중 선택 가능</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width:10%"><col style="width:22%"><col style="width:11%"><col style="width:12%">
+            <col style="width:12%"><col style="width:12%"><col style="width:21%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>상품군</th>
+              <th>상품 <span style="font-weight:400;color:var(--text-muted)">(다중선택)</span></th>
+              <th>납기</th>
+              <th>보험료 구간</th>
+              <th class="result-sep text-center">지급 결과</th>
+              <th class="text-center">현금 대체금액</th>
+              <th>현금 대체조건</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <select class="form-control">
+                  <option>보장성</option><option>저축성</option><option>연금</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" multiple size="4">
+                  <option selected>The라이트(간편)건강</option>
+                  <option selected>The퍼스트건강</option>
+                  <option selected>The간편한다모은건강</option>
+                  <option>시그니처H암보험</option>
+                  <option>H당뇨보험</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control">
+                  <option>전체</option><option>10년 이상</option>
+                  <option>20년 이상</option><option>1년 이상</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control">
+                  <option>구간 없음</option><option>10만원 이상</option>
+                  <option>20만원 이상</option><option>30만원 이상</option><option>50만원 이상</option>
+                </select>
+              </td>
+              <td class="result-sep center">
+                <input type="text" class="form-control text-center"
+                  value="금 2돈" style="font-weight:600;color:var(--primary)"/>
+              </td>
+              <td>
+                <div style="display:flex;align-items:center;gap:4px">
+                  <input type="number" class="form-control text-right" value="140" style="flex:1"/>
+                  <span class="text-sm text-muted" style="white-space:nowrap">만원</span>
+                </div>
+              </td>
+              <td>
+                <input type="text" class="form-control"
+                  value="골드바 1돈 시세 70만원 이상 시" style="font-size:12px"/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ③ 연속가동 -->
+    <div class="card cont-wrap">
+      <div class="card-header" style="padding-bottom:12px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <label class="sw">
+            <input type="checkbox" id="contToggle" onchange="toggleCont(this)"/>
+            <span class="sw-track"></span>
+          </label>
+          <span style="font-size:14px;font-weight:700;color:var(--primary)">연속가동 시책</span>
+          <span id="contBadge" class="badge badge-primary" style="display:none">연속가동</span>
+        </div>
+      </div>
+
+      <div id="contPanel" style="display:none">
+        <!-- 설정 바 -->
+        <div class="cfg-bar">
+          <label>패턴 수</label>
+          <select class="form-control" id="patternCount" onchange="renderTable()">
+            <option value="1">1개</option>
+            <option value="2" selected>2개</option>
+            <option value="3">3개</option>
+            <option value="4">4개</option>
+          </select>
+          <label>조건(월) 수</label>
+          <select class="form-control" id="condCount" onchange="renderTable()">
+            <option value="1">1개</option>
+            <option value="2">2개</option>
+            <option value="3" selected>3개</option>
+            <option value="4">4개</option>
+          </select>
+          <span class="note">※ 조건 수 = 평가 개월 수. 각 조건별 평가 기간(from ~ to)을 직접 입력하세요.</span>
+        </div>
+
+        <!-- 패턴 테이블 -->
+        <div class="table-wrap" id="patternTableWrap"></div>
+      </div>
+    </div>
+
+    <!-- 하단 버튼 -->
+    <div class="bottom-bar">
+      <button class="btn btn-outline" onclick="history.back()">취소</button>
+      <button class="btn btn-primary" onclick="handleSave()">저장</button>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* GNB / LNB */
+document.getElementById('gnb').innerHTML = renderGNB();
+document.getElementById('lnb').innerHTML = renderLNB('SCR_0031');
+initLNB();
+
+/* ─── 상수 ─── */
+const OPERANDS  = ['월초보험료','납기','계약건수','보험료구간','월초건수'];
+const OPERATORS = ['>=','<=','>','<','='];
+const LABELS    = ['①','②','③','④','⑤','⑥'];
+const DEFAULTS  = [
+  ['100,000','100,000','100,000'],
+  ['10,000','150,000','150,000']
+];
+
+/* ─── 연속가동 토글 ─── */
+function toggleCont(cb) {
+  document.getElementById('contPanel').style.display  = cb.checked ? 'block' : 'none';
+  document.getElementById('contBadge').style.display  = cb.checked ? 'inline-flex' : 'none';
+  if (cb.checked) renderTable();
+}
+
+/* ─── 기간 기본값 계산 ─── */
+function defaultDates(c) {
+  const base = new Date(2025, 11, 1);
+  base.setMonth(base.getMonth() + c);
+  const y  = base.getFullYear();
+  const m  = String(base.getMonth() + 1).padStart(2, '0');
+  const ld = new Date(y, base.getMonth() + 1, 0).getDate();
+  return {
+    from: `${y}-${m}-01`,
+    to:   `${y}-${m}-${String(ld).padStart(2, '0')}`
+  };
+}
+
+/* ─── 패턴 테이블 렌더 ─── */
+function renderTable() {
+  const pCount = +document.getElementById('patternCount').value;
+  const cCount = +document.getElementById('condCount').value;
+  const wrap   = document.getElementById('patternTableWrap');
+
+  const opSel  = OPERANDS.map(o  => `<option>${o}</option>`).join('');
+  const opsSel = OPERATORS.map(op => `<option>${op}</option>`).join('');
+
+  /* 헤더 3행 */
+  let th1 = `<tr><th rowspan="3" style="text-align:center;width:56px;vertical-align:middle;background:#F4F7FB">패턴</th>`;
+  let th2 = '<tr>';
+  let th3 = '<tr>';
+
+  for (let c = 0; c < cCount; c++) {
+    const sep = c === 0 ? 'cond-sep' : '';
+    const d   = defaultDates(c);
+    th1 += `<th colspan="3" class="th-cond ${sep}">${c + 1}차월 조건</th>`;
+    th2 += `
+      <td colspan="3" class="th-cond ${sep}" style="padding:5px 8px">
+        <div class="date-pair">
+          <input type="date" value="${d.from}"/>
+          <span class="tilde">~</span>
+          <input type="date" value="${d.to}"/>
+        </div>
+      </td>`;
+    th3 += `
+      <td class="th-cond ${sep}" style="width:114px;padding:6px 8px;font-size:11px">항목</td>
+      <td class="th-cond"         style="width:66px; padding:6px 8px;font-size:11px;text-align:center">연산자</td>
+      <td class="th-cond"         style="width:92px; padding:6px 8px;font-size:11px;text-align:center">비교값</td>`;
+  }
+  th1 += '</tr>'; th2 += '</tr>'; th3 += '</tr>';
+
+  /* 데이터 행 */
+  let rows = '';
+  for (let p = 0; p < pCount; p++) {
+    rows += `<tr><td class="center" style="background:#F4F7FB">
+      <span class="pattern-badge">${LABELS[p] || p + 1}</span>
+    </td>`;
+    for (let c = 0; c < cCount; c++) {
+      const sep = c === 0 ? 'cond-sep' : '';
+      const def = DEFAULTS[p] && DEFAULTS[p][c] != null ? DEFAULTS[p][c] : '';
+      rows += `
+        <td class="${sep}" style="padding:6px 5px">
+          <select class="form-control" style="height:30px;font-size:12px">${opSel}</select>
+        </td>
+        <td style="padding:6px 5px;text-align:center">
+          <select class="form-control" style="height:30px;font-size:12px">${opsSel}</select>
+        </td>
+        <td style="padding:6px 5px">
+          <input type="text" class="form-control font-mono text-right"
+            value="${def}" style="height:30px;font-size:12px;font-weight:500"/>
+        </td>`;
+    }
+    rows += '</tr>';
+  }
+
+  wrap.innerHTML = `
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:4px">
+      <thead>${th1}${th2}${th3}</thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+/* ─── 저장 ─── */
+function handleSave() {
+  alert('저장되었습니다.');
+}
+</script>
+</body>
+</html>
