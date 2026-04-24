@@ -5,6 +5,121 @@
 <title>SCR_004 기본정보 등록 | GA 시책관리 시스템</title>
 <link rel="stylesheet" href="common.css">
 <script src="common.js"></script>
+<style>
+/* 좌우 2단 레이아웃 */
+.form-two-col {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 16px;
+  align-items: start;
+}
+
+/* 기본정보 폼 - 1행씩 세로 배치 */
+.form-vertical .form-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-light, #f0f0f0);
+  gap: 12px;
+}
+.form-vertical .form-row:last-child {
+  border-bottom: none;
+}
+.form-vertical .form-row label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary, #555);
+  white-space: nowrap;
+}
+.form-vertical .form-row label.required::after {
+  content: ' *';
+  color: var(--danger);
+}
+
+/* 적용특이사항 폼 */
+.special-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.special-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border-light, #f0f0f0);
+  gap: 12px;
+}
+.special-row:last-child {
+  border-bottom: none;
+}
+.special-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary, #555);
+  white-space: nowrap;
+}
+
+/* Y/N 토글 버튼 */
+.yn-group {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border, #ddd);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.yn-btn {
+  padding: 5px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted, #aaa);
+  transition: background 0.15s, color 0.15s;
+}
+.yn-btn:first-child {
+  border-right: 1px solid var(--border, #ddd);
+}
+.yn-btn.active-y {
+  background: var(--success, #22c55e);
+  color: #fff;
+}
+.yn-btn.active-n {
+  background: var(--danger, #ef4444);
+  color: #fff;
+}
+
+/* 인정한도 특이사항 */
+.limit-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.limit-row .special-label {
+  margin-bottom: 2px;
+}
+.limit-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.limit-inputs select {
+  flex: 1;
+  min-width: 0;
+}
+.limit-inputs input[type="number"] {
+  width: 70px;
+  flex-shrink: 0;
+}
+.limit-inputs span {
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+</style>
 </head>
 <body>
 <div id="gnb"></div>
@@ -51,73 +166,117 @@
       </div>
     </div>
 
-    <!-- 폼 -->
-    <div class="card">
-      <div class="card-header"><div class="card-title">기본정보</div></div>
-      <div class="form-grid form-grid-3" style="margin-bottom:20px;">
-        <div class="form-row"><label class="required">보험회사</label>
-          <select class="form-control">
-            <option value="">선택</option>
-            <option selected>삼성생명</option><option>한화생명</option><option>교보생명</option><option>NH농협생명</option>
-          </select>
-        </div>
-        <div class="form-row"><label class="required">시책명</label>
-          <input type="text" class="form-control" placeholder="시책명을 입력하세요" value="종신 GA시책 (04월)">
-        </div>
-        <div class="form-row"><label class="required">적용 업적년월</label>
-          <input type="month" class="form-control" value="2026-04">
-        </div>
-      </div>
-      <div class="form-grid form-grid-3" style="margin-bottom:20px;">
-        <div class="form-row"><label class="required">적용 환수기준</label>
-          <select class="form-control">
-            <option>RCL_2024_001 · 삼성생명 표준환수</option>
-            <option>RCL_2024_002 · 한화생명 환수기준</option>
-            <option>RCL_2024_003 · 교보생명 환수기준</option>
-          </select>
-        </div>
-        <div class="form-row"><label>원수사 시책 참조</label>
-          <select class="form-control">
-            <option>2026년 4월 GA 시책 지급 기준 (종신/CI/건강)</option>
-          </select>
-        </div>
-        <div class="form-row"><label>처리단계</label>
-          <input type="text" class="form-control" value="작성중" readonly style="background:#f8fafd;color:var(--text-muted);">
+    <!-- 좌우 2단 레이아웃 -->
+    <div class="form-two-col">
+
+      <!-- 좌측: 기본정보 -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">기본정보</div></div>
+        <div class="form-vertical" style="padding: 4px 0;">
+
+          <div class="form-row">
+            <label class="required">보험회사</label>
+            <select class="form-control">
+              <option value="">선택</option>
+              <option selected>삼성생명</option>
+              <option>한화생명</option>
+              <option>교보생명</option>
+              <option>NH농협생명</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="required">시책명</label>
+            <input type="text" class="form-control" placeholder="시책명을 입력하세요" value="종신 GA시책 (04월)">
+          </div>
+
+          <div class="form-row">
+            <label class="required">적용 업적년월</label>
+            <input type="month" class="form-control" value="2026-04">
+          </div>
+
+          <div class="form-row">
+            <label class="required">지급년월</label>
+            <input type="month" class="form-control" value="2026-05">
+          </div>
+
+          <div class="form-row">
+            <label class="required">적용 환수기준</label>
+            <select class="form-control">
+              <option>RCL_2024_001 · 삼성생명 표준환수</option>
+              <option>RCL_2024_002 · 한화생명 환수기준</option>
+              <option>RCL_2024_003 · 교보생명 환수기준</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label>원수사 시책 참조</label>
+            <select class="form-control">
+              <option>2026년 4월 GA 시책 지급 기준 (종신/CI/건강)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label>처리단계</label>
+            <input type="text" class="form-control" value="작성중" readonly style="background:#f8fafd;color:var(--text-muted);">
+          </div>
+
         </div>
       </div>
 
-      <div class="card-header" style="margin-top:8px;"><div class="card-title">제약조건</div></div>
-      <div class="form-grid form-grid-3">
-        <div class="form-row"><label>최소 계약유지 회차</label>
-          <div class="flex gap-2 items-center">
-            <input type="number" class="form-control" value="2" style="width:80px;"> <span style="font-size:13px;color:var(--text-muted);">회차 이상</span>
+      <!-- 우측: 적용 특이사항 -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">적용 특이사항</div></div>
+        <div class="special-section" style="padding: 4px 0;">
+
+          <!-- 본인계약 지급 -->
+          <div class="special-row">
+            <span class="special-label">본인계약 지급</span>
+            <div class="yn-group">
+              <button class="yn-btn active-y" onclick="toggleYN(this, 'Y')">Y</button>
+              <button class="yn-btn" onclick="toggleYN(this, 'N')">N</button>
+            </div>
           </div>
-        </div>
-        <div class="form-row"><label>지급 시기 (익월 몇 일)</label>
-          <div class="flex gap-2 items-center">
-            <input type="number" class="form-control" value="25" style="width:80px;"> <span style="font-size:13px;color:var(--text-muted);">일</span>
+
+          <!-- 부활재지급 -->
+          <div class="special-row">
+            <span class="special-label">부활재지급</span>
+            <div class="yn-group">
+              <button class="yn-btn" onclick="toggleYN(this, 'Y')">Y</button>
+              <button class="yn-btn active-n" onclick="toggleYN(this, 'N')">N</button>
+            </div>
           </div>
-        </div>
-        <div class="form-row"><label>대상 채널 제외</label>
-          <select class="form-control">
-            <option>없음</option><option>방카채널 제외</option><option>TM채널 제외</option>
-          </select>
-        </div>
-        <div class="form-row"><label>지급 유형</label>
-          <select class="form-control">
-            <option>월납환산 초회보험료</option>
-            <option>연납환산 초회보험료</option>
-            <option>실납입보험료</option>
-          </select>
-        </div>
-        <div class="form-row"><label>중복 지급 허용</label>
-          <select class="form-control"><option>불가</option><option>가능</option></select>
-        </div>
-        <div class="form-row"><label>비고</label>
-          <input type="text" class="form-control" placeholder="추가 제약사항">
+
+          <!-- 비원납지급 -->
+          <div class="special-row">
+            <span class="special-label">비원납지급</span>
+            <div class="yn-group">
+              <button class="yn-btn" onclick="toggleYN(this, 'Y')">Y</button>
+              <button class="yn-btn active-n" onclick="toggleYN(this, 'N')">N</button>
+            </div>
+          </div>
+
+          <!-- 인정한도 특이사항 -->
+          <div class="special-row limit-row">
+            <span class="special-label">인정한도 특이사항</span>
+            <div class="limit-inputs">
+              <select class="form-control">
+                <option value="">상품 선택</option>
+                <option>종신보험</option>
+                <option>CI보험</option>
+                <option>건강보험</option>
+                <option>연금보험</option>
+                <option>변액보험</option>
+              </select>
+              <input type="number" class="form-control" placeholder="0" min="0" max="100" value="">
+              <span>% 인정</span>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
+
+    </div><!-- /form-two-col -->
 
     <!-- 버튼 -->
     <div class="flex justify-between mt-4">
@@ -127,11 +286,20 @@
         <button class="btn btn-primary" onclick="location.href='SCR_005.html'">저장 후 다음 →</button>
       </div>
     </div>
+
   </main>
 </div>
 <script>
 document.getElementById('gnb').innerHTML = renderGNB();
 document.getElementById('lnb').innerHTML = renderLNB('SCR_003');
+
+function toggleYN(btn, val) {
+  const group = btn.closest('.yn-group');
+  const btns = group.querySelectorAll('.yn-btn');
+  btns.forEach(b => b.classList.remove('active-y', 'active-n'));
+  if (val === 'Y') btn.classList.add('active-y');
+  else btn.classList.add('active-n');
+}
 </script>
 </body>
 </html>
