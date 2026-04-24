@@ -6,20 +6,73 @@
 <link rel="stylesheet" href="common.css">
 <script src="common.js"></script>
 <style>
-.predict-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; }
-.predict-header { padding:14px 18px; background:#F4F7FB; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
-.predict-company { font-size:14px; font-weight:700; color:var(--primary); }
-.predict-body { padding:0; }
-.predict-row { display:grid; grid-template-columns:1fr 140px 140px 140px; gap:0; border-bottom:1px solid var(--border-light); }
-.predict-row:last-child { border-bottom:none; }
-.predict-cell { padding:10px 14px; font-size:13px; border-right:1px solid var(--border-light); }
-.predict-cell:last-child { border-right:none; }
-.predict-col-header { background:#FAFCFF; font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.4px; padding:8px 14px; }
-.net { color:var(--primary); font-weight:700; }
-.pay-val { color:var(--accent); font-weight:600; }
-.rcl-val { color:var(--danger); font-weight:600; }
-.progress-wrap { height:6px; background:var(--border-light); border-radius:3px; margin-top:4px; overflow:hidden; }
-.progress-bar { height:100%; border-radius:3px; }
+.predict-table { width:100%; border-collapse:collapse; font-size:13px; }
+.predict-table thead tr th {
+  background: #EBF5FB;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+.predict-table thead tr th.text-right { text-align: right; }
+
+/* 보험회사 그룹 헤더 행 */
+.predict-table tr.company-header td {
+  background: #F4F7FB;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  border-top: 2px solid var(--border);
+  border-bottom: 1px solid var(--border-light);
+}
+.predict-table tr.company-header td .badge {
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* 일반 데이터 행 */
+.predict-table tr.data-row td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text);
+  vertical-align: middle;
+}
+.predict-table tr.data-row:hover td {
+  background: #f8fafc;
+}
+
+/* 소계 행 */
+.predict-table tr.subtotal-row td {
+  padding: 9px 14px;
+  background: #F0F4FA;
+  font-weight: 700;
+  border-top: 1px solid var(--border);
+  border-bottom: 2px solid var(--border);
+}
+.predict-table tr.subtotal-row.warning td {
+  background: #FEF9E7;
+  color: var(--warning);
+}
+
+/* 합계 행 */
+.predict-table tr.total-row td {
+  padding: 11px 14px;
+  background: #EBF5FB;
+  font-weight: 700;
+  font-size: 13px;
+  border-top: 2px solid var(--accent);
+}
+
+.pay-val  { color: var(--accent);  font-weight: 600; }
+.rcl-val  { color: var(--danger);  font-weight: 600; }
+.net-val  { color: var(--primary); font-weight: 700; }
+.font-mono { font-family: 'IBM Plex Mono', monospace; }
+.text-right { text-align: right; }
+.text-muted-val { color: var(--text-muted); }
 </style>
 </head>
 <body>
@@ -48,7 +101,7 @@
       </div>
     </div>
 
-    <!-- 전체 요약 -->
+    <!-- 전체 요약 카드 (현행 유지) -->
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">
       <div class="card" style="padding:16px 18px;text-align:center;">
         <div style="font-size:11px;color:var(--text-muted);font-weight:700;margin-bottom:6px;text-transform:uppercase;">총 지급 예상액</div>
@@ -72,127 +125,117 @@
       </div>
     </div>
 
-    <!-- 보험회사별 예측 -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <!-- List 형태 테이블 -->
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div class="table-wrap">
+        <table class="predict-table">
+          <thead>
+            <tr>
+              <th style="width:160px;">보험회사</th>
+              <th>시책명</th>
+              <th class="text-right" style="width:150px;">지급액</th>
+              <th class="text-right" style="width:150px;">환수액</th>
+              <th class="text-right" style="width:150px;">순액</th>
+            </tr>
+          </thead>
+          <tbody>
 
-      <!-- 삼성생명 -->
-      <div class="predict-card">
-        <div class="predict-header">
-          <div class="predict-company">🏢 삼성생명</div>
-          <span class="badge badge-success">산출완료</span>
-        </div>
-        <div class="predict-body">
-          <div class="predict-row">
-            <div class="predict-col-header">시책명</div>
-            <div class="predict-col-header text-right">지급액</div>
-            <div class="predict-col-header text-right">환수액</div>
-            <div class="predict-col-header text-right">순액</div>
-          </div>
-          <div class="predict-row">
-            <div class="predict-cell">종신 GA시책 (04월)</div>
-            <div class="predict-cell text-right pay-val font-mono">85,200,000</div>
-            <div class="predict-cell text-right rcl-val font-mono">12,300,000</div>
-            <div class="predict-cell text-right net font-mono">72,900,000</div>
-          </div>
-          <div class="predict-row">
-            <div class="predict-cell">CI보험 GA시책 (04월)</div>
-            <div class="predict-cell text-right pay-val font-mono">47,300,000</div>
-            <div class="predict-cell text-right rcl-val font-mono">5,800,000</div>
-            <div class="predict-cell text-right net font-mono">41,500,000</div>
-          </div>
-          <div class="predict-row" style="background:#F4F7FB;font-weight:700;">
-            <div class="predict-cell">소계</div>
-            <div class="predict-cell text-right pay-val font-mono">132,500,000</div>
-            <div class="predict-cell text-right rcl-val font-mono">18,100,000</div>
-            <div class="predict-cell text-right net font-mono">114,400,000</div>
-          </div>
-        </div>
-      </div>
+            <!-- ── 삼성생명 ── -->
+            <tr class="company-header">
+              <td colspan="5">🏢 삼성생명 <span class="badge badge-success">산출완료</span></td>
+            </tr>
+            <tr class="data-row">
+              <td></td>
+              <td>종신 GA시책 (04월)</td>
+              <td class="text-right pay-val font-mono">85,200,000</td>
+              <td class="text-right rcl-val font-mono">12,300,000</td>
+              <td class="text-right net-val font-mono">72,900,000</td>
+            </tr>
+            <tr class="data-row">
+              <td></td>
+              <td>CI보험 GA시책 (04월)</td>
+              <td class="text-right pay-val font-mono">47,300,000</td>
+              <td class="text-right rcl-val font-mono">5,800,000</td>
+              <td class="text-right net-val font-mono">41,500,000</td>
+            </tr>
+            <tr class="subtotal-row">
+              <td></td>
+              <td>소계</td>
+              <td class="text-right pay-val font-mono">132,500,000</td>
+              <td class="text-right rcl-val font-mono">18,100,000</td>
+              <td class="text-right net-val font-mono">114,400,000</td>
+            </tr>
 
-      <!-- 한화생명 -->
-      <div class="predict-card">
-        <div class="predict-header">
-          <div class="predict-company">🏢 한화생명</div>
-          <span class="badge badge-primary">산출중</span>
-        </div>
-        <div class="predict-body">
-          <div class="predict-row">
-            <div class="predict-col-header">시책명</div>
-            <div class="predict-col-header text-right">지급액</div>
-            <div class="predict-col-header text-right">환수액</div>
-            <div class="predict-col-header text-right">순액</div>
-          </div>
-          <div class="predict-row">
-            <div class="predict-cell">한화 종합 GA시책 (04월)</div>
-            <div class="predict-cell text-right pay-val font-mono">72,100,000</div>
-            <div class="predict-cell text-right rcl-val font-mono">8,900,000</div>
-            <div class="predict-cell text-right net font-mono">63,200,000</div>
-          </div>
-          <div class="predict-row" style="background:#F4F7FB;font-weight:700;">
-            <div class="predict-cell">소계</div>
-            <div class="predict-cell text-right pay-val font-mono">72,100,000</div>
-            <div class="predict-cell text-right rcl-val font-mono">8,900,000</div>
-            <div class="predict-cell text-right net font-mono">63,200,000</div>
-          </div>
-        </div>
-      </div>
+            <!-- ── 한화생명 ── -->
+            <tr class="company-header">
+              <td colspan="5">🏢 한화생명 <span class="badge badge-primary">산출중</span></td>
+            </tr>
+            <tr class="data-row">
+              <td></td>
+              <td>한화 종합 GA시책 (04월)</td>
+              <td class="text-right pay-val font-mono">72,100,000</td>
+              <td class="text-right rcl-val font-mono">8,900,000</td>
+              <td class="text-right net-val font-mono">63,200,000</td>
+            </tr>
+            <tr class="subtotal-row">
+              <td></td>
+              <td>소계</td>
+              <td class="text-right pay-val font-mono">72,100,000</td>
+              <td class="text-right rcl-val font-mono">8,900,000</td>
+              <td class="text-right net-val font-mono">63,200,000</td>
+            </tr>
 
-      <!-- 교보생명 -->
-      <div class="predict-card">
-        <div class="predict-header">
-          <div class="predict-company">🏢 교보생명</div>
-          <span class="badge badge-warning">작성중</span>
-        </div>
-        <div class="predict-body">
-          <div class="predict-row">
-            <div class="predict-col-header">시책명</div>
-            <div class="predict-col-header text-right">지급액(예상)</div>
-            <div class="predict-col-header text-right">환수액(예상)</div>
-            <div class="predict-col-header text-right">순액(예상)</div>
-          </div>
-          <div class="predict-row">
-            <div class="predict-cell">교보 CI특약 집중 육성 시책</div>
-            <div class="predict-cell text-right font-mono" style="color:var(--text-muted);">91,350,000</div>
-            <div class="predict-cell text-right font-mono" style="color:var(--text-muted);">15,400,000</div>
-            <div class="predict-cell text-right font-mono" style="color:var(--text-muted);">75,950,000</div>
-          </div>
-          <div class="predict-row" style="background:#FEF9E7;font-weight:700;">
-            <div class="predict-cell" style="color:var(--warning);">소계 (확정 전)</div>
-            <div class="predict-cell text-right font-mono" style="color:var(--warning);">91,350,000</div>
-            <div class="predict-cell text-right font-mono" style="color:var(--warning);">15,400,000</div>
-            <div class="predict-cell text-right font-mono" style="color:var(--warning);">75,950,000</div>
-          </div>
-        </div>
-      </div>
+            <!-- ── 교보생명 ── -->
+            <tr class="company-header">
+              <td colspan="5">🏢 교보생명 <span class="badge badge-warning">작성중</span></td>
+            </tr>
+            <tr class="data-row">
+              <td></td>
+              <td>교보 CI특약 집중 육성 시책</td>
+              <td class="text-right text-muted-val font-mono">91,350,000</td>
+              <td class="text-right text-muted-val font-mono">15,400,000</td>
+              <td class="text-right text-muted-val font-mono">75,950,000</td>
+            </tr>
+            <tr class="subtotal-row warning">
+              <td></td>
+              <td>소계 (확정 전)</td>
+              <td class="text-right font-mono">91,350,000</td>
+              <td class="text-right font-mono">15,400,000</td>
+              <td class="text-right font-mono">75,950,000</td>
+            </tr>
 
-      <!-- NH농협생명 -->
-      <div class="predict-card">
-        <div class="predict-header">
-          <div class="predict-company">🏢 NH농협생명</div>
-          <span class="badge badge-primary">산출중</span>
-        </div>
-        <div class="predict-body">
-          <div class="predict-row">
-            <div class="predict-col-header">시책명</div>
-            <div class="predict-col-header text-right">지급액</div>
-            <div class="predict-col-header text-right">환수액</div>
-            <div class="predict-col-header text-right">순액</div>
-          </div>
-          <div class="predict-row">
-            <div class="predict-cell">NH 건강보험 GA시책</div>
-            <div class="predict-cell text-right pay-val font-mono">27,500,000</div>
-            <div class="predict-cell text-right rcl-val font-mono">4,600,000</div>
-            <div class="predict-cell text-right net font-mono">22,900,000</div>
-          </div>
-          <div class="predict-row" style="background:#F4F7FB;font-weight:700;">
-            <div class="predict-cell">소계</div>
-            <div class="predict-cell text-right pay-val font-mono">27,500,000</div>
-            <div class="predict-cell text-right rcl-val font-mono">4,600,000</div>
-            <div class="predict-cell text-right net font-mono">22,900,000</div>
-          </div>
-        </div>
+            <!-- ── NH농협생명 ── -->
+            <tr class="company-header">
+              <td colspan="5">🏢 NH농협생명 <span class="badge badge-primary">산출중</span></td>
+            </tr>
+            <tr class="data-row">
+              <td></td>
+              <td>NH 건강보험 GA시책</td>
+              <td class="text-right pay-val font-mono">27,500,000</td>
+              <td class="text-right rcl-val font-mono">4,600,000</td>
+              <td class="text-right net-val font-mono">22,900,000</td>
+            </tr>
+            <tr class="subtotal-row">
+              <td></td>
+              <td>소계</td>
+              <td class="text-right pay-val font-mono">27,500,000</td>
+              <td class="text-right rcl-val font-mono">4,600,000</td>
+              <td class="text-right net-val font-mono">22,900,000</td>
+            </tr>
+
+            <!-- ── 전체 합계 ── -->
+            <tr class="total-row">
+              <td colspan="2" style="color:var(--primary);">전체 합계</td>
+              <td class="text-right pay-val font-mono">323,450,000</td>
+              <td class="text-right rcl-val font-mono">46,800,000</td>
+              <td class="text-right net-val font-mono">276,650,000</td>
+            </tr>
+
+          </tbody>
+        </table>
       </div>
     </div>
+
   </main>
 </div>
 <script>
