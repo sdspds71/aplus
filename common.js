@@ -56,7 +56,7 @@ const MENU_STRUCTURE = [
     ]
   },
   {
-    section: '공통업무',
+    section: '시스템관리',
     items: [
       { id: 'SCR_010', label: '화면관리', icon: '🖥', path: 'SCR_010.html' },
       { id: 'SCR_011', label: '메뉴관리', icon: '☰', path: 'SCR_011.html' },
