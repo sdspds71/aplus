@@ -137,6 +137,89 @@ td.goods-cell { background:#FFFDF7; }
   font-size:13px; background:#fafbfc; border-radius:var(--radius);
   border:1px dashed var(--border);
 }
+
+/* ── 연속가동 패널 ────────────────────────────── */
+#contSection {
+  display:none; /* JS로 show/hide */
+  margin-top:14px;
+  border:2px solid #e8a020;
+  border-radius:var(--radius-lg, 10px);
+  overflow:hidden;
+  background:#fff;
+  animation: slideDown .25s ease;
+}
+@keyframes slideDown {
+  from { opacity:0; transform:translateY(-10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.cont-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 16px;
+  background:linear-gradient(90deg,#fff8ec,#fff3dc);
+  border-bottom:1px solid #f0d080;
+}
+.cont-header-left { display:flex; align-items:center; gap:10px; }
+.cont-badge {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:3px 10px; border-radius:20px;
+  background:#e8a020; color:#fff; font-size:11px; font-weight:700;
+}
+.cont-title { font-size:13px; font-weight:700; color:#7a5000; }
+.cont-desc  { font-size:11px; color:#a07830; }
+.cont-body  { padding:14px 16px; }
+
+/* 설정 바 */
+.cont-cfg-bar {
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  padding:9px 13px;
+  background:#fff8ec; border:1px solid #f0d080;
+  border-radius:6px; margin-bottom:12px;
+}
+.cont-cfg-bar label { font-size:12px; font-weight:600; color:#7a5000; white-space:nowrap; }
+.cont-cfg-bar select {
+  height:28px; padding:0 6px; font-size:12px;
+  border:1px solid #e0c060; border-radius:4px;
+  background:#fff; color:#7a5000;
+}
+.cont-cfg-bar .cfg-note { font-size:11px; color:#a07830; }
+
+/* 패턴 테이블 */
+.cont-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:4px; }
+.cont-table th {
+  padding:6px 8px; border:1px solid #e0c878;
+  text-align:center; font-size:11px; font-weight:700;
+  background:#fff3dc; color:#7a5000; white-space:nowrap;
+}
+.cont-table th.th-cond-sep,
+.cont-table td.td-cond-sep { border-left:2px solid #e8a020 !important; }
+.cont-table td {
+  padding:5px 4px; border:1px solid #e8dfc0; vertical-align:middle;
+}
+.cont-table td.td-pattern {
+  text-align:center; background:#fff8ec; width:52px;
+}
+.pattern-badge {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:26px; height:26px;
+  background:#e8a020; color:#fff;
+  border-radius:50%; font-size:12px; font-weight:700;
+}
+.cont-table select, .cont-table input[type=text],
+.cont-table input[type=date] {
+  height:26px; padding:0 5px; font-size:11px;
+  border:1px solid #ddd; border-radius:3px;
+  background:#fff; width:100%; box-sizing:border-box;
+}
+.cont-table input[type=date] { font-family:'IBM Plex Mono',monospace; }
+.cont-table select:focus, .cont-table input:focus {
+  outline:none; border-color:#e8a020;
+  box-shadow:0 0 0 2px rgba(232,160,32,.15);
+}
+.date-pair-cont {
+  display:flex; align-items:center; gap:3px;
+}
+.date-pair-cont .tilde { font-size:11px; color:#aaa; flex-shrink:0; }
+.date-pair-cont input[type=date] { flex:1; min-width:100px; }
 </style>
 </head>
 <body>
@@ -195,6 +278,48 @@ td.goods-cell { background:#FFFDF7; }
       </div>
       <div id="gridContainer">
         <div class="grid-empty">행 기준 chip을 선택하거나 [+ 행 추가]를 클릭하면 Grid가 생성됩니다.</div>
+      </div>
+    </div>
+
+    <!-- ③ 연속가동 패널 (D type: ROW_05 chip 선택 시 표시) -->
+    <div id="contSection">
+      <div class="cont-header">
+        <div class="cont-header-left">
+          <span class="cont-badge">🔄 D type</span>
+          <div>
+            <div class="cont-title">연속가동 시책 설정</div>
+            <div class="cont-desc">현재월 + 과거월 조건을 모두 만족해야 지급되는 연속가동(D type) 기준을 설정합니다</div>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="closeCont()" style="color:#a07830;border-color:#e0c060;">✕ 닫기</button>
+      </div>
+      <div class="cont-body">
+        <!-- 설정 바 -->
+        <div class="cont-cfg-bar">
+          <label>패턴 수</label>
+          <select id="cpCount" onchange="renderContTable()">
+            <option value="1">1개</option>
+            <option value="2" selected>2개</option>
+            <option value="3">3개</option>
+            <option value="4">4개</option>
+          </select>
+          <label>평가월 수</label>
+          <select id="ccCount" onchange="renderContTable()">
+            <option value="1">1개월</option>
+            <option value="2" selected>2개월</option>
+            <option value="3">3개월</option>
+            <option value="4">4개월</option>
+          </select>
+          <span class="cfg-note">※ 평가월 수 = 조건을 평가할 개월 수. 각 월별 기간(from~to)과 조건값을 입력하세요.</span>
+        </div>
+        <!-- 패턴 테이블 -->
+        <div style="overflow-x:auto;" id="contTableWrap"></div>
+        <!-- 연속가동 안내 -->
+        <div style="margin-top:10px;padding:8px 12px;background:#fff8ec;border-radius:5px;border:1px solid #f0d080;font-size:11px;color:#a07830;line-height:1.7;">
+          <strong>💡 적용 방식</strong> &nbsp;·&nbsp;
+          각 패턴별로 설정된 <strong>모든 평가월 조건을 동시에 만족</strong>해야 해당 패턴의 지급기준이 적용됩니다. &nbsp;·&nbsp;
+          위 Grid의 지급 정보(지급방법·지급액 등)와 연계됩니다.
+        </div>
       </div>
     </div>
 
@@ -283,12 +408,109 @@ document.querySelectorAll('#rowAxisSelector .axis-chip').forEach(chip => {
     if (chip.classList.contains('active')) {
       if (!selectedAxes.includes(code)) selectedAxes.push(code);
       if (rowDataArr.length === 0) rowDataArr = [{}];
+      /* 연속가동 chip 켜질 때 패널 표시 */
+      if (code === 'ROW_05') showCont();
     } else {
       selectedAxes = selectedAxes.filter(c => !FIXED_AXES.includes(c) ? c !== code : true);
+      /* 연속가동 chip 꺼질 때 패널 숨김 */
+      if (code === 'ROW_05') document.getElementById('contSection').style.display = 'none';
     }
     rebuildGrid();
   });
 });
+
+/* ══ 연속가동 패널 제어 ══════════════════════════ */
+function showCont() {
+  const sec = document.getElementById('contSection');
+  sec.style.display = 'block';
+  renderContTable();
+  sec.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+function closeCont() {
+  /* 패널 닫기 = chip도 해제 */
+  document.getElementById('contSection').style.display = 'none';
+  const chip = document.querySelector('[data-code="ROW_05"]');
+  if (chip && chip.classList.contains('active')) {
+    chip.classList.remove('active');
+    selectedAxes = selectedAxes.filter(c => c !== 'ROW_05');
+    syncFromDOM();
+    rebuildGrid();
+  }
+}
+
+/* ══ 연속가동 패턴 테이블 렌더 ══════════════════ */
+const CONT_OPERANDS  = ['월초보험료','납기구분','계약건수','보험료구간','월초건수'];
+const CONT_OPERATORS = ['>=','<=','>','<','='];
+const CONT_LABELS    = ['①','②','③','④','⑤','⑥'];
+
+function contDefaultDates(monthOffset) {
+  const now = new Date();
+  const base = new Date(now.getFullYear(), now.getMonth() - monthOffset, 1);
+  const y  = base.getFullYear();
+  const m  = String(base.getMonth() + 1).padStart(2,'0');
+  const ld = new Date(y, base.getMonth() + 1, 0).getDate();
+  return { from:`${y}-${m}-01`, to:`${y}-${m}-${String(ld).padStart(2,'0')}` };
+}
+
+function renderContTable() {
+  const pCount = +document.getElementById('cpCount').value;
+  const cCount = +document.getElementById('ccCount').value;
+  const wrap   = document.getElementById('contTableWrap');
+
+  const opSel  = CONT_OPERANDS.map(o  => `<option>${o}</option>`).join('');
+  const opsSel = CONT_OPERATORS.map(op => `<option>${op}</option>`).join('');
+
+  /* 헤더 3행 */
+  let th1 = `<tr>
+    <th rowspan="3" style="width:52px;vertical-align:middle;background:#fff8ec;">패턴</th>`;
+  let th2 = '<tr>';
+  let th3 = '<tr>';
+
+  for (let c = 0; c < cCount; c++) {
+    const sep = c === 0 ? 'th-cond-sep' : '';
+    const d   = contDefaultDates(cCount - 1 - c); // 과거→현재 순서
+    const label = c === cCount - 1 ? '현재월 조건' : `${cCount - c - 1}개월 전 조건`;
+    th1 += `<th colspan="3" class="${sep}">${label}</th>`;
+    th2 += `<td colspan="3" class="${sep}" style="padding:5px 8px;background:#fff8ec;border:1px solid #e0c878;">
+      <div class="date-pair-cont">
+        <input type="date" value="${d.from}" style="flex:1;min-width:100px;">
+        <span class="tilde">~</span>
+        <input type="date" value="${d.to}" style="flex:1;min-width:100px;">
+      </div>
+    </td>`;
+    th3 += `
+      <td class="${sep}" style="background:#fff8ec;border:1px solid #e0c878;text-align:center;font-size:10px;font-weight:700;color:#7a5000;white-space:nowrap;padding:4px;">평가항목</td>
+      <td style="background:#fff8ec;border:1px solid #e0c878;text-align:center;font-size:10px;font-weight:700;color:#7a5000;white-space:nowrap;padding:4px;">연산자</td>
+      <td style="background:#fff8ec;border:1px solid #e0c878;text-align:center;font-size:10px;font-weight:700;color:#7a5000;white-space:nowrap;padding:4px;">기준값</td>`;
+  }
+  th1 += '</tr>'; th2 += '</tr>'; th3 += '</tr>';
+
+  /* 데이터 행 */
+  let rows = '';
+  for (let p = 0; p < pCount; p++) {
+    rows += `<tr><td class="td-pattern"><span class="pattern-badge">${CONT_LABELS[p] || (p+1)}</span></td>`;
+    for (let c = 0; c < cCount; c++) {
+      const sep = c === 0 ? 'td-cond-sep' : '';
+      rows += `
+        <td class="${sep}" style="min-width:110px;padding:4px 3px;">
+          <select>${opSel}</select>
+        </td>
+        <td style="width:58px;padding:4px 3px;text-align:center;">
+          <select>${opsSel}</select>
+        </td>
+        <td style="min-width:80px;padding:4px 3px;">
+          <input type="text" class="font-mono" style="text-align:right;" placeholder="0">
+        </td>`;
+    }
+    rows += '</tr>';
+  }
+
+  wrap.innerHTML = `
+    <table class="cont-table">
+      <thead>${th1}${th2}${th3}</thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
 
 /* 페이지 로드 시 기본 Grid 표시 (고정 Axis 포함) */
 rowDataArr = [{}];
