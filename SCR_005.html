@@ -17,7 +17,66 @@
 }
 .axis-chip:hover { border-color:var(--accent); color:var(--primary); }
 .axis-chip.active { border-color:#1a6ea8; background:#EBF5FB; color:#1a6ea8; font-weight:700; }
+.axis-chip.fixed-chip {
+  border-color:#1a6ea8; background:#EBF5FB; color:#1a6ea8; font-weight:700;
+  cursor:default; opacity:.85;
+}
 .chip-icon { font-size:13px; }
+
+/* ── 상품 선택 버튼 ─────────────────────────────── */
+.goods-pick-btn {
+  flex:0 0 26px; height:26px; padding:0; border:1px solid var(--border);
+  border-radius:3px; background:#f4f7fb; cursor:pointer; font-size:13px;
+  display:inline-flex; align-items:center; justify-content:center;
+  color:#1a6ea8; transition:background .15s;
+}
+.goods-pick-btn:hover { background:#d6eaf8; border-color:var(--accent); }
+
+/* ── 달력 버튼 ──────────────────────────────────── */
+.cal-btn {
+  flex:0 0 26px; height:26px; padding:0; border:1px solid var(--border);
+  border-radius:3px; background:#f4f7fb; cursor:pointer; font-size:13px;
+  display:inline-flex; align-items:center; justify-content:center;
+  color:#1a6ea8; transition:background .15s;
+}
+.cal-btn:hover { background:#d6eaf8; border-color:var(--accent); }
+
+/* ── 상품 선택 모달 ─────────────────────────────── */
+.modal-overlay {
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,.35);
+  z-index:9000; align-items:center; justify-content:center;
+}
+.modal-overlay.open { display:flex; }
+.modal-box {
+  background:#fff; border-radius:10px; box-shadow:0 8px 32px rgba(0,0,0,.18);
+  width:520px; max-height:80vh; display:flex; flex-direction:column;
+  overflow:hidden;
+}
+.modal-header {
+  padding:14px 18px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  background:#EBF5FB;
+}
+.modal-header .modal-title { font-weight:700; color:#1a6ea8; font-size:14px; }
+.modal-close { background:none; border:none; cursor:pointer; font-size:20px; color:#888; }
+.modal-close:hover { color:var(--danger); }
+.modal-body { padding:12px 16px; overflow-y:auto; flex:1; }
+.modal-search {
+  width:100%; height:32px; padding:0 10px; margin-bottom:10px;
+  border:1px solid var(--border); border-radius:5px; font-size:13px; box-sizing:border-box;
+}
+.modal-search:focus { outline:none; border-color:var(--accent); }
+.goods-list { list-style:none; margin:0; padding:0; }
+.goods-list li {
+  padding:8px 10px; border-radius:5px; cursor:pointer; font-size:13px;
+  border:1px solid transparent; margin-bottom:3px;
+}
+.goods-list li:hover { background:#EBF5FB; border-color:#c5dcf5; }
+.goods-list li .goods-code { font-size:11px; color:#888; margin-left:6px; }
+.modal-footer {
+  padding:10px 16px; border-top:1px solid var(--border);
+  text-align:right; background:#fafbfc;
+}
 
 /* ── Grid ──────────────────────────────────────── */
 .incv-grid { width:100%; border-collapse:collapse; font-size:12px; }
@@ -112,9 +171,13 @@ td.goods-cell { background:#FFFDF7; }
         <div class="card-title">행 기준 (Row Axis) 선택</div>
         <span class="text-muted text-sm">선택한 항목이 Grid 좌측 컬럼으로 추가됩니다 · 복수 선택 가능</span>
       </div>
+      <div style="margin-top:6px; font-size:11px; color:var(--text-muted); margin-bottom:4px;">
+        ※ <strong>상품구분</strong>과 <strong>업적기간</strong>은 기본 고정 Axis로 항상 포함됩니다.
+      </div>
       <div class="axis-selector" id="rowAxisSelector">
-        <label class="axis-chip" data-code="ROW_01"><span class="chip-icon">📦</span>상품구분</label>
-        <label class="axis-chip" data-code="ROW_02"><span class="chip-icon">📅</span>납기구분</label>
+        <label class="axis-chip fixed-chip" data-code="ROW_01" title="고정 Axis (항상 포함)"><span class="chip-icon">📦</span>상품구분 <span style="font-size:10px;opacity:.6;">고정</span></label>
+        <label class="axis-chip fixed-chip" data-code="ROW_PERIOD" title="고정 Axis (항상 포함)"><span class="chip-icon">📅</span>업적기간 <span style="font-size:10px;opacity:.6;">고정</span></label>
+        <label class="axis-chip" data-code="ROW_02"><span class="chip-icon">📋</span>납기구분</label>
         <label class="axis-chip" data-code="ROW_05"><span class="chip-icon">🔄</span>연속가동</label>
         <label class="axis-chip" data-code="ROW_MON"><span class="chip-icon">💵</span>월납보험료</label>
         <label class="axis-chip" data-code="ROW_TOT"><span class="chip-icon">💰</span>합계보험료</label>
@@ -153,18 +216,38 @@ document.getElementById('lnb').innerHTML = renderLNB('SCR_003');
 
 /* ══ 마스터 데이터 ════════════════════════════════ */
 const AXIS_DEFS = {
-  ROW_01:  { nm:'상품구분',   icon:'📦', hasOp: false }, // 항상 = (연산자 불필요)
-  ROW_02:  { nm:'납기구분',   icon:'📅', hasOp: true  }, // = / >=
-  ROW_05:  { nm:'연속가동',   icon:'🔄', hasOp: false }, // 항상 =
-  ROW_MON: { nm:'월납보험료', icon:'💵', hasOp: true  }, // = / >=
-  ROW_TOT: { nm:'합계보험료', icon:'💰', hasOp: true  }, // = / >=
+  ROW_01:    { nm:'상품구분',   icon:'📦', hasOp: false, fixed: true  },
+  ROW_PERIOD:{ nm:'업적기간',   icon:'📅', hasOp: false, fixed: true  },
+  ROW_02:    { nm:'납기구분',   icon:'📋', hasOp: true,  fixed: false },
+  ROW_05:    { nm:'연속가동',   icon:'🔄', hasOp: false, fixed: false },
+  ROW_MON:   { nm:'월납보험료', icon:'💵', hasOp: true,  fixed: false },
+  ROW_TOT:   { nm:'합계보험료', icon:'💰', hasOp: true,  fixed: false },
 };
 
+/* 샘플 상품 목록 (실제 연동 전 mock 데이터) */
+const GOODS_MASTER = [
+  { code:'G001', nm:'종신보험 (무배당)' },
+  { code:'G002', nm:'종신보험 (배당형)' },
+  { code:'G003', nm:'정기보험 (20년납)' },
+  { code:'G004', nm:'변액종신보험' },
+  { code:'G005', nm:'CI보험' },
+  { code:'G006', nm:'어린이보험' },
+  { code:'G007', nm:'연금보험 (확정형)' },
+  { code:'G008', nm:'연금보험 (변액)' },
+  { code:'G009', nm:'실손의료비보험' },
+  { code:'G010', nm:'암보험' },
+];
+
 /* ══ 상태 변수 ════════════════════════════════════ */
-let selectedAxes = [];
-let customCols   = [];
-let colCounter   = 1;
-let rowDataArr   = [];
+/* 고정 Axis(상품구분, 업적기간)는 항상 앞에 포함 */
+const FIXED_AXES   = ['ROW_01', 'ROW_PERIOD'];
+let selectedAxes   = [...FIXED_AXES];   // 고정 포함 시작
+let customCols     = [];
+let colCounter     = 1;
+let rowDataArr     = [];
+
+/* 상품 선택 모달 상태 */
+let _goodsTargetInput = null;
 
 /* ══ DOM → rowDataArr 동기화 ═════════════════════ */
 function syncFromDOM() {
@@ -193,6 +276,7 @@ function syncFromDOM() {
 document.querySelectorAll('#rowAxisSelector .axis-chip').forEach(chip => {
   chip.addEventListener('click', (e) => {
     e.preventDefault();
+    if (chip.classList.contains('fixed-chip')) return; // 고정 Axis는 토글 불가
     syncFromDOM();
     chip.classList.toggle('active');
     const code = chip.dataset.code;
@@ -200,11 +284,15 @@ document.querySelectorAll('#rowAxisSelector .axis-chip').forEach(chip => {
       if (!selectedAxes.includes(code)) selectedAxes.push(code);
       if (rowDataArr.length === 0) rowDataArr = [{}];
     } else {
-      selectedAxes = selectedAxes.filter(c => c !== code);
+      selectedAxes = selectedAxes.filter(c => !FIXED_AXES.includes(c) ? c !== code : true);
     }
     rebuildGrid();
   });
 });
+
+/* 페이지 로드 시 기본 Grid 표시 (고정 Axis 포함) */
+rowDataArr = [{}];
+rebuildGrid();
 
 /* ══ 사용자 정의 열 ══════════════════════════════ */
 function addCustomCol() {
@@ -253,8 +341,12 @@ function rebuildGrid() {
 
   /* 헤더 1행: 그룹 */
   let h1 = '';
-  if (selectedAxes.length > 0)
-    h1 += `<th colspan="${selectedAxes.length}" class="th-axis">행 기준 (Axis)</th>`;
+  if (selectedAxes.length > 0) {
+    /* 업적기간(ROW_PERIOD)은 from/to 2컬럼 차지 */
+    const axisColCount = selectedAxes.reduce((acc, code) =>
+      acc + (code === 'ROW_PERIOD' ? 1 : 1), 0);
+    h1 += `<th colspan="${axisColCount}" class="th-axis">행 기준 (Axis)</th>`;
+  }
   if (customCols.length > 0)
     h1 += `<th colspan="${customCols.length}" style="background:#EBF5FB;color:#1a6ea8;">사용자 정의</th>`;
   h1 += `<th colspan="7" class="th-pay">지급 정보</th>`;
@@ -263,7 +355,11 @@ function rebuildGrid() {
   /* 헤더 2행: 개별 컬럼명 */
   let h2 = '';
   selectedAxes.forEach(code => {
-    h2 += `<th class="th-axis">${AXIS_DEFS[code].icon} ${AXIS_DEFS[code].nm}</th>`;
+    if (code === 'ROW_PERIOD') {
+      h2 += `<th class="th-axis" style="min-width:240px;">📅 업적기간</th>`;
+    } else {
+      h2 += `<th class="th-axis">${AXIS_DEFS[code].icon} ${AXIS_DEFS[code].nm}</th>`;
+    }
   });
   customCols.forEach(col => {
     h2 += `<th>
@@ -288,9 +384,40 @@ function rebuildGrid() {
 
     /* Axis 열 */
     selectedAxes.forEach(code => {
-      const v  = (rd.axes && rd.axes[code])           || '';
-      const op = (rd.axes && rd.axes[code + '_op'])   || '=';
-      if (AXIS_DEFS[code].hasOp) {
+      const v  = (rd.axes && rd.axes[code])         || '';
+      const op = (rd.axes && rd.axes[code + '_op']) || '=';
+
+      if (code === 'ROW_01') {
+        /* 상품구분: 텍스트 + 상품 선택 버튼 */
+        cells += `<td style="padding:2px 3px; min-width:160px;">
+          <div style="display:flex;gap:3px;align-items:center;">
+            <input type="text" class="axis-input" data-axis="${code}"
+                   value="${v}" placeholder="상품 선택..."
+                   style="flex:1;" readonly>
+            <button class="goods-pick-btn" title="상품 선택"
+                    onclick="openGoodsPicker(this.previousElementSibling)">🔍</button>
+          </div>
+        </td>`;
+
+      } else if (code === 'ROW_PERIOD') {
+        /* 업적기간: from ~ to 날짜 각각 달력 버튼 */
+        const vFrom = (rd.axes && rd.axes['ROW_PERIOD_FROM']) || '';
+        const vTo   = (rd.axes && rd.axes['ROW_PERIOD_TO'])   || '';
+        cells += `<td style="padding:2px 3px; min-width:240px;">
+          <div style="display:flex;gap:4px;align-items:center;">
+            <input type="date" class="axis-input" data-axis="ROW_PERIOD_FROM"
+                   value="${vFrom}" style="flex:1;min-width:110px;cursor:pointer;"
+                   title="시작월">
+            <button class="cal-btn" title="달력" onclick="this.previousElementSibling.showPicker()">📅</button>
+            <span style="color:#888;font-size:11px;">~</span>
+            <input type="date" class="axis-input" data-axis="ROW_PERIOD_TO"
+                   value="${vTo}" style="flex:1;min-width:110px;cursor:pointer;"
+                   title="종료월">
+            <button class="cal-btn" title="달력" onclick="this.previousElementSibling.showPicker()">📅</button>
+          </div>
+        </td>`;
+
+      } else if (AXIS_DEFS[code].hasOp) {
         /* 연산자 선택 + 값 입력 (납기구분, 월납보험료, 합계보험료) */
         cells += `<td style="padding:2px 3px; min-width:110px;">
           <div style="display:flex;gap:3px;align-items:center;">
@@ -307,7 +434,7 @@ function rebuildGrid() {
           </div>
         </td>`;
       } else {
-        /* 연산자 없음 (상품구분, 연속가동) */
+        /* 연산자 없음 (연속가동 등) */
         cells += `<td><input type="text" class="axis-input" data-axis="${code}"
                        value="${v}" placeholder="값 입력"></td>`;
       }
@@ -383,6 +510,66 @@ function adjustPayAmt(sel) {
   sel.closest('tr').querySelector('.pay-amt').placeholder =
     sel.value === '비율' ? '%' : '원';
 }
+
+/* ══ 상품 선택 모달 ══════════════════════════════ */
+function openGoodsPicker(inputEl) {
+  _goodsTargetInput = inputEl;
+  const modal = document.getElementById('goodsModal');
+  modal.classList.add('open');
+  const search = document.getElementById('goodsSearch');
+  search.value = '';
+  renderGoodsList('');
+  search.focus();
+}
+function closeGoodsPicker() {
+  document.getElementById('goodsModal').classList.remove('open');
+  _goodsTargetInput = null;
+}
+function renderGoodsList(q) {
+  const ul = document.getElementById('goodsList');
+  const filtered = GOODS_MASTER.filter(g =>
+    !q || g.nm.includes(q) || g.code.includes(q));
+  if (filtered.length === 0) {
+    ul.innerHTML = '<li style="color:#aaa;cursor:default;">검색 결과 없음</li>';
+    return;
+  }
+  ul.innerHTML = filtered.map(g =>
+    `<li onclick="selectGoods('${g.code}','${g.nm}')">
+       ${g.nm}<span class="goods-code">[${g.code}]</span>
+     </li>`
+  ).join('');
+}
+function selectGoods(code, nm) {
+  if (_goodsTargetInput) {
+    _goodsTargetInput.value = nm;
+    _goodsTargetInput.dataset.goodsCode = code;
+  }
+  closeGoodsPicker();
+}
+document.addEventListener('input', function(e) {
+  if (e.target && e.target.id === 'goodsSearch') renderGoodsList(e.target.value.trim());
+});
+/* ESC 키로 모달 닫기 */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeGoodsPicker();
+});
 </script>
+<!-- ══ 상품 선택 모달 ══════════════════════════════ -->
+<div class="modal-overlay" id="goodsModal" onclick="if(event.target===this)closeGoodsPicker()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title">📦 상품 선택</span>
+      <button class="modal-close" onclick="closeGoodsPicker()">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="text" class="modal-search" id="goodsSearch" placeholder="상품명 또는 코드 검색...">
+      <ul class="goods-list" id="goodsList"></ul>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" onclick="closeGoodsPicker()">닫기</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
